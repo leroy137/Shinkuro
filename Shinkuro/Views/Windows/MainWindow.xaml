@@ -6,8 +6,40 @@
         xmlns:local="clr-namespace:Shinkuro"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="Shinkuro.MainWindow"
         mc:Ignorable="d"
-        Title="{Binding Title}" Height="450" Width="800">
+        Title="Shinkuro" Height="450" Width="800" WindowState="Maximized">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Menu FontSize="12" Grid.Row="0" >
+            <MenuItem Header="Меню" >
+                <MenuItem Header="Начать новое соревнование">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="ContentPaste" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Открыть соревнование">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="FolderOpen" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Выход" Command="{Binding Path=CloseApplicationCommand}">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="ExitToApp" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Сервисы">
+                <MenuItem Header="Менеджер фигур">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="Shape" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Справка">
+                <MenuItem Header="О программе"></MenuItem>
+            </MenuItem>
+        </Menu>
     </Grid>
 </Window>
