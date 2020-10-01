@@ -1,0 +1,55 @@
+﻿<Window x:Class="Shinkuro.Views.Windows.FigureCreatorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Shinkuro.Views.Windows"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:fa="http://schemas.fontawesome.com/icons/"
+        mc:Ignorable="d"
+        Title="Создание фигуры" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Height="550" Width="450">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Margin="10">
+            <TextBlock FontSize="16" FontWeight="DemiBold">Название:</TextBlock>
+            <TextBox>
+                
+            </TextBox>
+        </StackPanel>
+        <StackPanel  Grid.Row="1" Margin="10">
+            <TextBlock FontSize="16" FontWeight="DemiBold">Коэффициент сложности:</TextBlock>
+            <TextBox></TextBox>
+        </StackPanel>
+        <StackPanel  Grid.Row="2" Margin="10">
+            <TextBlock FontSize="16" FontWeight="DemiBold">Описание:</TextBlock>
+            <TextBox FontSize="14" VerticalAlignment="Stretch" 
+                                 Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" 
+                                 TextWrapping="Wrap" 
+                                 Padding="0" 
+                                 Height="300">
+            </TextBox>
+        </StackPanel>
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Width="130" Margin="10" Grid.Column="0">
+                Отмена
+            </Button>
+            <Button Width="130" Margin="10" Grid.Column="2">
+                <StackPanel Orientation="Horizontal">
+                    <fa:FontAwesome FontSize="14" VerticalAlignment="Center" Margin="0 0 10 0" Icon="Solid_Check"></fa:FontAwesome>
+                    <TextBlock>Добавить</TextBlock>
+                </StackPanel>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

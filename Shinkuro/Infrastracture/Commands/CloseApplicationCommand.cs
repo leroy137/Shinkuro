@@ -15,7 +15,17 @@ namespace Shinkuro.Infrastracture.Commands
 
         public override void Execute(object parameter)
         {
-            Application.Current.Shutdown();
+            try
+            {
+                var result = MessageBox.Show("Вы действительно хотите выйти?", "Выход", MessageBoxButton.YesNo);
+
+                if (result == MessageBoxResult.Yes) // если да то закрываем приложение
+                    Application.Current.Shutdown();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Произошла ошибка!!!");
+            }
         }
     }
 }
