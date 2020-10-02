@@ -4,11 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Shinkuro"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="Shinkuro.MainWindow"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="Shinkuro.MainWindow"
         mc:Ignorable="d"
         Title="Shinkuro" Height="450" Width="800" WindowState="Maximized">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
@@ -16,24 +17,24 @@
             <MenuItem Header="Меню" >
                 <MenuItem Header="Начать новое соревнование">
                     <MenuItem.Icon>
-                        <materialDesign:PackIcon Kind="ContentPaste" />
+                        <md:PackIcon Kind="ContentPaste" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Открыть соревнование">
                     <MenuItem.Icon>
-                        <materialDesign:PackIcon Kind="FolderOpen" />
+                        <md:PackIcon Kind="FolderOpen" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Выход" Command="{Binding Path=CloseApplicationCommand}">
                     <MenuItem.Icon>
-                        <materialDesign:PackIcon Kind="ExitToApp" />
+                        <md:PackIcon Kind="ExitToApp" />
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Сервисы">
-                <MenuItem Header="Менеджер фигур">
+                <MenuItem Header="Менеджер фигур" Command="{Binding Path=OpenFigureManagerCommand}">
                     <MenuItem.Icon>
-                        <materialDesign:PackIcon Kind="Shape" />
+                        <md:PackIcon Kind="Shape" />
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
@@ -41,5 +42,77 @@
                 <MenuItem Header="О программе"></MenuItem>
             </MenuItem>
         </Menu>
+        <Grid Grid.Row="1" Background="#FF5B25BB" Height="3">
+            
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Width="240" Background="#FFF1F1F1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Button Height="50"  Style="{StaticResource MaterialDesignFlatButton}" 
+                        Grid.Row="0" Cursor="Hand">
+                    <StackPanel Orientation="Horizontal">
+                        <md:PackIcon Margin="0 0 10 0" Kind="Home" VerticalAlignment="Center" Foreground="{Binding ElementName=txtButtonHomeName, Path=Foreground}" />
+                        <TextBlock FontSize="16" Name="txtButtonHomeName" VerticalAlignment="Center" Foreground="#FF5B25BB">Главная</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Height="50"  Style="{StaticResource MaterialDesignFlatButton}" 
+                        Grid.Row="1" Cursor="Hand">
+                    <StackPanel Orientation="Horizontal">
+                        <md:PackIcon Margin="0 0 10 0" Kind="People" VerticalAlignment="Center" Foreground="{Binding ElementName=txtButtonPatricipantgName, Path=Foreground}" />
+                        <TextBlock FontSize="16" Name="txtButtonPatricipantgName" VerticalAlignment="Center" Foreground="#FF5B25BB">Участники</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Height="50"  Style="{StaticResource MaterialDesignFlatButton}" 
+                        Grid.Row="2" Cursor="Hand">
+                    <StackPanel Orientation="Horizontal">
+                        <md:PackIcon Margin="0 0 10 0" Kind="Flag" VerticalAlignment="Center" Foreground="{Binding ElementName=txtButtonJudgeName, Path=Foreground}" />
+                        <TextBlock FontSize="16" Name="txtButtonJudgeName" VerticalAlignment="Center" Foreground="#FF5B25BB">Судейство</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Height="50"  Style="{StaticResource MaterialDesignFlatButton}" 
+                        Grid.Row="3" Cursor="Hand">
+                    <StackPanel Orientation="Horizontal">
+                        <md:PackIcon Margin="0 0 10 0" Kind="Shape" VerticalAlignment="Center" Foreground="{Binding ElementName=txtButtonCompetitionFigureName, Path=Foreground}" />
+                        <TextBlock FontSize="16" Name="txtButtonCompetitionFigureName" VerticalAlignment="Center" Foreground="#FF5B25BB">Соревнования фигур</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Height="50"  Style="{StaticResource MaterialDesignFlatButton}" 
+                        Grid.Row="4" Cursor="Hand">
+                    <StackPanel Orientation="Horizontal">
+                        <md:PackIcon Margin="0 0 10 0" Kind="HumanQueue" VerticalAlignment="Center" Foreground="{Binding ElementName=txtButtonCompetitionCommandName, Path=Foreground}" />
+                        <TextBlock FontSize="16" Name="txtButtonCompetitionCommandName" VerticalAlignment="Center" Foreground="#FF5B25BB" TextWrapping="WrapWithOverflow">Команды</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Height="50"  Style="{StaticResource MaterialDesignFlatButton}" Grid.Row="5" Cursor="Hand">
+                    <StackPanel Orientation="Horizontal">
+                        <md:PackIcon Margin="0 0 10 0" Kind="Settings" VerticalAlignment="Center" Foreground="{Binding ElementName=txtButtonSettingName, Path=Foreground}" />
+                        <TextBlock FontSize="16" Name="txtButtonSettingName" VerticalAlignment="Center" Foreground="#FF5B25BB">Настройки</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Height="50" Command="{Binding Path=CloseApplicationCommand}"  Style="{StaticResource MaterialDesignFlatButton}" Grid.Row="8" Cursor="Hand">
+                    <StackPanel Orientation="Horizontal">
+                        <md:PackIcon Margin="0 0 10 0" Kind="ExitToApp" VerticalAlignment="Center" Foreground="{Binding ElementName=txtButtonExitName, Path=Foreground}" />
+                        <TextBlock FontSize="16" Name="txtButtonExitName" VerticalAlignment="Center" Foreground="#FF5B25BB">Выход</TextBlock>
+                    </StackPanel>
+                </Button>
+            </Grid>
+            <Grid Grid.Column="1">
+                
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

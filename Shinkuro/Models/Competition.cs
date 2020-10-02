@@ -11,7 +11,6 @@ namespace Shinkuro.Models
         DateTime? _finishDate;
         String _description;
 
-        public Int32 Id { get; set; }
         // название соревнования
         public String Name
         {

@@ -19,6 +19,8 @@ namespace Shinkuro.ViewModels
         // закрытие приложения
         public ICommand CloseApplicationCommand { get; private set; } = new CloseApplicationCommand();
 
+        public ICommand OpenFigureManagerCommand { get; private set; } = new OpenFigureManagerCommand();
+
         #endregion
 
     }
