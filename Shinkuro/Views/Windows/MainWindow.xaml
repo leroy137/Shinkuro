@@ -31,7 +31,7 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Сервисы">
-                <MenuItem Header="Менеджер фигур">
+                <MenuItem Header="Менеджер фигур" Command="{Binding Path=OpenFigureManagerCommand}">
                     <MenuItem.Icon>
                         <materialDesign:PackIcon Kind="Shape" />
                     </MenuItem.Icon>
