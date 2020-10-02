@@ -56,8 +56,8 @@
                 <Button Width="130" Margin="10">Назад</Button>
             </StackPanel>
         </Grid>
-        <Grid Grid.Column="1">
-            <GroupBox Header="Выбранная фигура" FontSize="16" Margin="10">
+        <Grid Grid.Column="1" >
+            <GroupBox Header="Выбранная фигура" FontSize="16" Margin="10 10 10 62">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"></RowDefinition>
