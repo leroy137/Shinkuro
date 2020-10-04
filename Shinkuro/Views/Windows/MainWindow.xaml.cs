@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Shinkuro.ViewModels;
+using Shinkuro.Services.Navigation;
 
 namespace Shinkuro
 {
@@ -21,10 +22,12 @@ namespace Shinkuro
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
             this.DataContext = new MainCompetitionViewModel();
+            CompetitionNavigator.Service = MainFrame.NavigationService;
         }
     }
 }

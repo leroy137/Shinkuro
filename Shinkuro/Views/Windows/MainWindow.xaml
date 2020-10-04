@@ -56,13 +56,14 @@
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Button Height="50"  Style="{StaticResource MaterialDesignFlatButton}" 
+                <Button Height="50"  Style="{StaticResource MaterialDesignFlatButton}"
+                        Command="{Binding GoToHomePageCommand}"
                         Grid.Row="0" Cursor="Hand">
                     <StackPanel Orientation="Horizontal">
                         <md:PackIcon Margin="0 0 10 0" Kind="Home" VerticalAlignment="Center" Foreground="{Binding ElementName=txtButtonHomeName, Path=Foreground}" />
@@ -97,7 +98,9 @@
                         <TextBlock FontSize="16" Name="txtButtonCompetitionCommandName" VerticalAlignment="Center" Foreground="#FF5B25BB" TextWrapping="WrapWithOverflow">Команды</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Height="50"  Style="{StaticResource MaterialDesignFlatButton}" Grid.Row="5" Cursor="Hand">
+                <Button Height="50"  Style="{StaticResource MaterialDesignFlatButton}"
+                        Command="{Binding GoToSettingsPageCommand}"
+                        Grid.Row="5" Cursor="Hand">
                     <StackPanel Orientation="Horizontal">
                         <md:PackIcon Margin="0 0 10 0" Kind="Settings" VerticalAlignment="Center" Foreground="{Binding ElementName=txtButtonSettingName, Path=Foreground}" />
                         <TextBlock FontSize="16" Name="txtButtonSettingName" VerticalAlignment="Center" Foreground="#FF5B25BB">Настройки</TextBlock>
@@ -111,7 +114,9 @@
                 </Button>
             </Grid>
             <Grid Grid.Column="1">
-                
+                <Frame x:Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden">
+                    
+                </Frame>
             </Grid>
         </Grid>
     </Grid>
