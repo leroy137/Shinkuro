@@ -13,12 +13,12 @@ namespace Shinkuro.Services.Navigation
         private readonly Dictionary<string, Page> _pagesResolvers = new Dictionary<string, Page>();
         private readonly Dictionary<string, Func<INotifyPropertyChanged>> _vmResolvers = new Dictionary<string, Func<INotifyPropertyChanged>>();
 
-        public String HomeAlias => "Home";
-        public String PatricipantsAlias => "Patricipants";
-        public String JudgeAlias => "Judge";
-        public String CompetitionCommandAlias => "CompetitionCommand";
-        public String CompetitionFigureAlias => "CompetitionFigure";
-        public String SettingsAlias => "Settings";
+        public static String HomeAlias => "Home";
+        public static String PatricipantsAlias => "Patricipants";
+        public static String JudgeAlias => "Judge";
+        public static String CompetitionCommandAlias => "CompetitionCommand";
+        public static String CompetitionFigureAlias => "CompetitionFigure";
+        public static String SettingsAlias => "Settings";
 
 
         public CompetitionPagesResolver()
@@ -33,6 +33,10 @@ namespace Shinkuro.Services.Navigation
 
             // view models
             _vmResolvers.Add(HomeAlias, () => new HomePageViewModel());
+            _vmResolvers.Add(PatricipantsAlias, () => new PatricipantPageViewModel());
+            _vmResolvers.Add(JudgeAlias, () => new JudgePageViewModel());
+            _vmResolvers.Add(CompetitionCommandAlias, () => new CompetitionCommandPageViewModel());
+            _vmResolvers.Add(CompetitionFigureAlias, () => new CompetitionFigurePageViewModel());
             _vmResolvers.Add(SettingsAlias, () => new SettingsPageViewModel());
         }
 

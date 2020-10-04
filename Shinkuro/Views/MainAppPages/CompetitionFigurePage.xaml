@@ -9,6 +9,6 @@
       Title="CompetitionFigurePage">
 
     <Grid>
-        
+        <TextBlock>Соревнования фигур</TextBlock>
     </Grid>
 </Page>

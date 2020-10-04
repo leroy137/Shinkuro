@@ -9,6 +9,6 @@
       Title="CompetitionCommandPage">
 
     <Grid>
-        
+        <TextBlock>Команды соревнования</TextBlock>
     </Grid>
 </Page>

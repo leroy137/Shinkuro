@@ -9,6 +9,6 @@
       Title="PatricipantPage">
 
     <Grid>
-        
+        <TextBlock>Участники</TextBlock>
     </Grid>
 </Page>
