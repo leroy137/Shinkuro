@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Shinkuro.ViewModels
 {
-    internal class MainWindowViewModel :ViewModelBase
+    internal class MainWindowViewModel : ViewModelBase
     {
         private String _title;
 
@@ -21,6 +21,15 @@ namespace Shinkuro.ViewModels
             }
         }
 
+        public MainWindowViewModel()
+        {
+
+
+
+        }
+
+
+        
 
     }
 }

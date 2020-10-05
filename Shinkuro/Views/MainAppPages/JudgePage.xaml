@@ -9,6 +9,6 @@
       Title="JudgePage">
 
     <Grid>
-        
+        <TextBlock>Судьи</TextBlock>
     </Grid>
 </Page>

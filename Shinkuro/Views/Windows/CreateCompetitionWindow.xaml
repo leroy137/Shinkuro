@@ -26,7 +26,7 @@
             <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="10 10 5 10">
                     <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Trophy" Foreground="{Binding ElementName=NameTextBox, Path=BorderBrush}" />
             </TextBlock>
-            <TextBox VerticalContentAlignment="Center" md:HintAssist.Hint="Название соревнования" md:TextFieldAssist.HasClearButton="True" ToolTip="Введите название фигуры" Padding="5 0" Grid.Column="1" FontSize="16" Margin="5 10 10 10"></TextBox>
+            <TextBox VerticalContentAlignment="Center" md:HintAssist.Hint="Название соревнования" md:TextFieldAssist.HasClearButton="True" Padding="5 0" Grid.Column="1" FontSize="16" Margin="5 10 10 10"></TextBox>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -65,7 +65,7 @@
             <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="10 10 5 10">
                     <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Account" Foreground="{Binding ElementName=NameTextBox, Path=BorderBrush}" />
             </TextBlock>
-            <TextBox VerticalContentAlignment="Center" md:HintAssist.Hint="Организатор" md:TextFieldAssist.HasClearButton="True" ToolTip="Введите название фигуры" Padding="5 0" Grid.Column="1" FontSize="16" Margin="5 10 10 10"></TextBox>
+            <TextBox VerticalContentAlignment="Center" md:HintAssist.Hint="Организатор" md:TextFieldAssist.HasClearButton="True" Padding="5 0" Grid.Column="1" FontSize="16" Margin="5 10 10 10"></TextBox>
         </Grid>
         <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
@@ -75,7 +75,7 @@
             <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="10 10 5 10">
                     <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Place" Foreground="{Binding ElementName=NameTextBox, Path=BorderBrush}" />
             </TextBlock>
-            <TextBox VerticalContentAlignment="Center" md:HintAssist.Hint="Место проведения" md:TextFieldAssist.HasClearButton="True" ToolTip="Введите название фигуры" Padding="5 0" Grid.Column="1" FontSize="16" Margin="5 10 10 10"></TextBox>
+            <TextBox VerticalContentAlignment="Center" md:HintAssist.Hint="Место проведения" md:TextFieldAssist.HasClearButton="True" Padding="5 0" Grid.Column="1" FontSize="16" Margin="5 10 10 10"></TextBox>
         </Grid>
         <Grid Grid.Row="5">
             <Grid.ColumnDefinitions>
@@ -85,7 +85,7 @@
             <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="10 10 5 10">
                     <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Phone" Foreground="{Binding ElementName=NameTextBox, Path=BorderBrush}" />
             </TextBlock>
-            <TextBox VerticalContentAlignment="Center" md:HintAssist.Hint="Контакты" md:TextFieldAssist.HasClearButton="True" ToolTip="Введите название фигуры" Padding="5 0" Grid.Column="1" FontSize="16" Margin="5 10 10 10"></TextBox>
+            <TextBox VerticalContentAlignment="Center" md:HintAssist.Hint="Контакты" md:TextFieldAssist.HasClearButton="True" Padding="5 0" Grid.Column="1" FontSize="16" Margin="5 10 10 10"></TextBox>
         </Grid>
         <Grid Grid.Row="7">
             <Grid.ColumnDefinitions>
