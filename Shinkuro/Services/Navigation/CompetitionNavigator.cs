@@ -55,7 +55,6 @@ namespace Shinkuro.Services.Navigation
             }
 
             var page = Instance._resolver.GetPageInstance(uri);
-
             Navigate(page, context);
         }
 

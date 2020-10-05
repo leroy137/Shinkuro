@@ -16,6 +16,7 @@ namespace Shinkuro.ViewModels
     internal class MainCompetitionViewModel : ViewModelBase
     {
 
+        public String CurrentCompetitionURI { get; set; }
         #region Команды
         // закрытие приложения
         public ICommand CloseApplicationCommand { get; private set; } = new CloseApplicationCommand();
@@ -44,18 +45,19 @@ namespace Shinkuro.ViewModels
 
         private void InitializeCommands()
         {
-            GoToHomePageCommand = new RelayCommand(GoToHomePageCommandExecute);
-            GoToSettingsPageCommand = new RelayCommand(GoToSettingsPageCommandExecute);
-            GoToPatricipantsPageCommand = new RelayCommand(GoToPatricipantsPageCommandExecute);
-            GoToJudgePageCommand = new RelayCommand(GoToJudgePageCommandExecute);
-            GoToCompetitionCommandPageCommand = new RelayCommand(GoToCompetitionCommandPageCommandExecute);
-            GoToCompetitionFigurePageCommand = new RelayCommand(GoToCompetitionFigurePageCommandExecute);
+            GoToHomePageCommand = new RelayCommand(GoToHomePageCommandExecute,GoToHomePageCommandCanExecute);
+            GoToSettingsPageCommand = new RelayCommand(GoToSettingsPageCommandExecute,GoToSettingsPageCommandCanExecute);
+            GoToPatricipantsPageCommand = new RelayCommand(GoToPatricipantsPageCommandExecute, GoToPatricipantsPageCommandCanExecute);
+            GoToJudgePageCommand = new RelayCommand(GoToJudgePageCommandExecute, GoToJudgePageCommandCanExecute);
+            GoToCompetitionCommandPageCommand = new RelayCommand(GoToCompetitionCommandPageCommandExecute, GoToCompetitionCommandPageCommandCanExecute);
+            GoToCompetitionFigurePageCommand = new RelayCommand(GoToCompetitionFigurePageCommandExecute,GoToCompetitionFigurePageCommandCanExecute);
         }
 
         private void GoToHomePageCommandExecute(object viewModel)
         {
             try
             {
+                CurrentCompetitionURI = CompetitionPagesResolver.HomeAlias;
                 CompetitionNavigator.Navigate(CompetitionPagesResolver.HomeAlias, HomePageViewModel);
             }
             catch(Exception ex)
@@ -68,6 +70,7 @@ namespace Shinkuro.ViewModels
         {
             try
             {
+                CurrentCompetitionURI = CompetitionPagesResolver.SettingsAlias;
                 CompetitionNavigator.Navigate(CompetitionPagesResolver.SettingsAlias, SettingsPageViewModel);
             }
             catch(Exception ex)
@@ -80,6 +83,7 @@ namespace Shinkuro.ViewModels
         {
             try
             {
+                CurrentCompetitionURI = CompetitionPagesResolver.PatricipantsAlias;
                 CompetitionNavigator.Navigate(CompetitionPagesResolver.PatricipantsAlias, SettingsPageViewModel);
             }
             catch (Exception ex)
@@ -92,6 +96,7 @@ namespace Shinkuro.ViewModels
         {
             try
             {
+                CurrentCompetitionURI = CompetitionPagesResolver.JudgeAlias;
                 CompetitionNavigator.Navigate(CompetitionPagesResolver.JudgeAlias, SettingsPageViewModel);
             }
             catch (Exception ex)
@@ -104,6 +109,7 @@ namespace Shinkuro.ViewModels
         {
             try
             {
+                CurrentCompetitionURI = CompetitionPagesResolver.CompetitionCommandAlias;
                 CompetitionNavigator.Navigate(CompetitionPagesResolver.CompetitionCommandAlias, SettingsPageViewModel);
             }
             catch (Exception ex)
@@ -116,6 +122,7 @@ namespace Shinkuro.ViewModels
         {
             try
             {
+                CurrentCompetitionURI = CompetitionPagesResolver.CompetitionFigureAlias;
                 CompetitionNavigator.Navigate(CompetitionPagesResolver.CompetitionFigureAlias, SettingsPageViewModel);
             }
             catch (Exception ex)
@@ -124,7 +131,35 @@ namespace Shinkuro.ViewModels
             }
         }
 
+        private bool GoToHomePageCommandCanExecute(object viewModel)
+        {
+            return CompetitionPagesResolver.HomeAlias != CurrentCompetitionURI;
+        }
 
+        private bool GoToSettingsPageCommandCanExecute(object viewModel)
+        {
+            return CompetitionPagesResolver.SettingsAlias != CurrentCompetitionURI;
+        }
+
+        private bool GoToPatricipantsPageCommandCanExecute(object viewModel)
+        {
+            return CompetitionPagesResolver.PatricipantsAlias != CurrentCompetitionURI;
+        }
+
+        private bool GoToJudgePageCommandCanExecute(object viewModel)
+        {
+            return CompetitionPagesResolver.JudgeAlias != CurrentCompetitionURI;
+        }
+
+        private bool GoToCompetitionCommandPageCommandCanExecute(object viewModel)
+        {
+            return CompetitionPagesResolver.CompetitionCommandAlias != CurrentCompetitionURI;
+        }
+
+        private bool GoToCompetitionFigurePageCommandCanExecute(object viewModel)
+        {
+            return CompetitionPagesResolver.CompetitionFigureAlias != CurrentCompetitionURI;
+        }
 
     }
 }

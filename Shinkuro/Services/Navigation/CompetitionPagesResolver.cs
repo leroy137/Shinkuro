@@ -11,7 +11,7 @@ namespace Shinkuro.Services.Navigation
     class CompetitionPagesResolver : IPageResolver
     {
         private readonly Dictionary<string, Page> _pagesResolvers = new Dictionary<string, Page>();
-        private readonly Dictionary<string, Func<INotifyPropertyChanged>> _vmResolvers = new Dictionary<string, Func<INotifyPropertyChanged>>();
+        //private readonly Dictionary<string, Func<INotifyPropertyChanged>> _vmResolvers = new Dictionary<string, Func<INotifyPropertyChanged>>();
 
         public static String HomeAlias => "Home";
         public static String PatricipantsAlias => "Patricipants";
@@ -31,13 +31,13 @@ namespace Shinkuro.Services.Navigation
             _pagesResolvers.Add(CompetitionFigureAlias, new CompetitionFigurePage());
             _pagesResolvers.Add(SettingsAlias, new SettingsPage());
 
-            // view models
-            _vmResolvers.Add(HomeAlias, () => new HomePageViewModel());
-            _vmResolvers.Add(PatricipantsAlias, () => new PatricipantPageViewModel());
-            _vmResolvers.Add(JudgeAlias, () => new JudgePageViewModel());
-            _vmResolvers.Add(CompetitionCommandAlias, () => new CompetitionCommandPageViewModel());
-            _vmResolvers.Add(CompetitionFigureAlias, () => new CompetitionFigurePageViewModel());
-            _vmResolvers.Add(SettingsAlias, () => new SettingsPageViewModel());
+            //// view models
+            //_vmResolvers.Add(HomeAlias, () => new HomePageViewModel());
+            //_vmResolvers.Add(PatricipantsAlias, () => new PatricipantPageViewModel());
+            //_vmResolvers.Add(JudgeAlias, () => new JudgePageViewModel());
+            //_vmResolvers.Add(CompetitionCommandAlias, () => new CompetitionCommandPageViewModel());
+            //_vmResolvers.Add(CompetitionFigureAlias, () => new CompetitionFigurePageViewModel());
+            //_vmResolvers.Add(SettingsAlias, () => new SettingsPageViewModel());
         }
 
         public Page GetPageInstance(string alias)
@@ -50,14 +50,14 @@ namespace Shinkuro.Services.Navigation
             return _pagesResolvers[HomeAlias];
         }
 
-        public INotifyPropertyChanged GetViewModelInstance(string alias)
-        {
-            if (_vmResolvers.ContainsKey(alias))
-            {
-                return _vmResolvers[alias]();
-            }
+        //public INotifyPropertyChanged GetViewModelInstance(string alias)
+        //{
+        //    if (_vmResolvers.ContainsKey(alias))
+        //    {
+        //        return _vmResolvers[alias]();
+        //    }
 
-            return _vmResolvers[HomeAlias]();
-        }
+        //    return _vmResolvers[HomeAlias]();
+        //}
     }
 }
