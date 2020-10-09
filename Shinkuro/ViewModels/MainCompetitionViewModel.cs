@@ -19,6 +19,7 @@ namespace Shinkuro.ViewModels
         public String CurrentCompetitionURI { get; set; }
         #region Команды
         // закрытие приложения
+                
         public ICommand CloseApplicationCommand { get; private set; } = new CloseApplicationCommand();
 
         public ICommand OpenFigureManagerCommand { get; private set; } = new OpenFigureManagerCommand();
@@ -160,6 +161,5 @@ namespace Shinkuro.ViewModels
         {
             return CompetitionPagesResolver.CompetitionFigureAlias != CurrentCompetitionURI;
         }
-
     }
 }
