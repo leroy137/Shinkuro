@@ -99,8 +99,8 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Width="120" Grid.Column="0" Margin="10">Сбросить</Button>
-            <Button Width="120" Grid.Column="2" Margin="10">Изменить</Button>
+            <Button FontSize="14" Width="100" Grid.Column="0" Margin="10">Сбросить</Button>
+            <Button FontSize="14" Width="100" Grid.Column="2" Margin="10">Изменить</Button>
         </Grid>
     </Grid>
 </Page>
