@@ -19,7 +19,7 @@ namespace Shinkuro.Services.Navigation
         public static String CompetitionCommandAlias => "CompetitionCommand";
         public static String CompetitionFigureAlias => "CompetitionFigure";
         public static String SettingsAlias => "Settings";
-
+        public static String GroupsAlias => "Groups";
 
         public CompetitionPagesResolver()
         {
@@ -30,6 +30,7 @@ namespace Shinkuro.Services.Navigation
             _pagesResolvers.Add(CompetitionCommandAlias, new CompetitionCommandPage());
             _pagesResolvers.Add(CompetitionFigureAlias, new CompetitionFigurePage());
             _pagesResolvers.Add(SettingsAlias, new SettingsPage());
+            _pagesResolvers.Add(GroupsAlias, new GroupsPage());
 
             //// view models
             //_vmResolvers.Add(HomeAlias, () => new HomePageViewModel());
