@@ -17,28 +17,39 @@ namespace Shinkuro.ViewModels
     {
 
         public String CurrentCompetitionURI { get; set; }
+
         #region Команды
         // закрытие приложения
+                
         public ICommand CloseApplicationCommand { get; private set; } = new CloseApplicationCommand();
-
         public ICommand OpenFigureManagerCommand { get; private set; } = new OpenFigureManagerCommand();
-
         public ICommand GoToHomePageCommand { get; set; }
         public ICommand GoToSettingsPageCommand { get; set; }
+        public ICommand GoToGroupsPageCommand { get; set; }
         public ICommand GoToPatricipantsPageCommand { get; set; }
         public ICommand GoToJudgePageCommand { get; set; }
         public ICommand GoToCompetitionCommandPageCommand { get; set; }
         public ICommand GoToCompetitionFigurePageCommand { get; set; }
+
         #endregion
 
         public ViewModelBase HomePageViewModel { get; private set; }
+        public ViewModelBase PatricipantsPageViewModel { get; private set; }
+        public ViewModelBase JudgePageViewModel { get; private set; }        
+        public ViewModelBase GroupsPageViewModel { get; private set; }
+        public ViewModelBase CompetitionFigurePageViewModel { get; private set; }
+        public ViewModelBase CompetitionCommandPageViewModel { get; private set; }
         public ViewModelBase SettingsPageViewModel { get; private set; }
-
 
         public MainCompetitionViewModel()
         {
             HomePageViewModel = new HomePageViewModel();
             SettingsPageViewModel = new SettingsPageViewModel();
+            JudgePageViewModel = new JudgePageViewModel();
+            GroupsPageViewModel = new GroupsPageViewModel();
+            CompetitionCommandPageViewModel = new CompetitionCommandPageViewModel();
+            CompetitionFigurePageViewModel = new CompetitionFigurePageViewModel();
+            PatricipantsPageViewModel = new PatricipantPageViewModel();
 
             InitializeCommands();
         }
@@ -51,6 +62,7 @@ namespace Shinkuro.ViewModels
             GoToJudgePageCommand = new RelayCommand(GoToJudgePageCommandExecute, GoToJudgePageCommandCanExecute);
             GoToCompetitionCommandPageCommand = new RelayCommand(GoToCompetitionCommandPageCommandExecute, GoToCompetitionCommandPageCommandCanExecute);
             GoToCompetitionFigurePageCommand = new RelayCommand(GoToCompetitionFigurePageCommandExecute,GoToCompetitionFigurePageCommandCanExecute);
+            GoToGroupsPageCommand = new RelayCommand(GoToGroupsPageCommandExecute, GoToGroupsPageCommandCanExecute);
         }
 
         private void GoToHomePageCommandExecute(object viewModel)
@@ -84,7 +96,7 @@ namespace Shinkuro.ViewModels
             try
             {
                 CurrentCompetitionURI = CompetitionPagesResolver.PatricipantsAlias;
-                CompetitionNavigator.Navigate(CompetitionPagesResolver.PatricipantsAlias, SettingsPageViewModel);
+                CompetitionNavigator.Navigate(CompetitionPagesResolver.PatricipantsAlias, PatricipantsPageViewModel);
             }
             catch (Exception ex)
             {
@@ -97,7 +109,7 @@ namespace Shinkuro.ViewModels
             try
             {
                 CurrentCompetitionURI = CompetitionPagesResolver.JudgeAlias;
-                CompetitionNavigator.Navigate(CompetitionPagesResolver.JudgeAlias, SettingsPageViewModel);
+                CompetitionNavigator.Navigate(CompetitionPagesResolver.JudgeAlias, JudgePageViewModel);
             }
             catch (Exception ex)
             {
@@ -110,7 +122,7 @@ namespace Shinkuro.ViewModels
             try
             {
                 CurrentCompetitionURI = CompetitionPagesResolver.CompetitionCommandAlias;
-                CompetitionNavigator.Navigate(CompetitionPagesResolver.CompetitionCommandAlias, SettingsPageViewModel);
+                CompetitionNavigator.Navigate(CompetitionPagesResolver.CompetitionCommandAlias, CompetitionCommandPageViewModel);
             }
             catch (Exception ex)
             {
@@ -123,7 +135,20 @@ namespace Shinkuro.ViewModels
             try
             {
                 CurrentCompetitionURI = CompetitionPagesResolver.CompetitionFigureAlias;
-                CompetitionNavigator.Navigate(CompetitionPagesResolver.CompetitionFigureAlias, SettingsPageViewModel);
+                CompetitionNavigator.Navigate(CompetitionPagesResolver.CompetitionFigureAlias, CompetitionFigurePageViewModel);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.StackTrace);
+            }
+        }
+
+        private void GoToGroupsPageCommandExecute(object viewModel)
+        {
+            try
+            {
+                CurrentCompetitionURI = CompetitionPagesResolver.GroupsAlias;
+                CompetitionNavigator.Navigate(CompetitionPagesResolver.GroupsAlias, GroupsPageViewModel);
             }
             catch (Exception ex)
             {
@@ -135,6 +160,7 @@ namespace Shinkuro.ViewModels
         {
             return CompetitionPagesResolver.HomeAlias != CurrentCompetitionURI;
         }
+
 
         private bool GoToSettingsPageCommandCanExecute(object viewModel)
         {
@@ -159,6 +185,11 @@ namespace Shinkuro.ViewModels
         private bool GoToCompetitionFigurePageCommandCanExecute(object viewModel)
         {
             return CompetitionPagesResolver.CompetitionFigureAlias != CurrentCompetitionURI;
+        }
+
+        private bool GoToGroupsPageCommandCanExecute(object viewModel)
+        {
+            return CompetitionPagesResolver.GroupsAlias != CurrentCompetitionURI;
         }
 
     }

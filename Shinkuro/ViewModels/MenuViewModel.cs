@@ -1,8 +1,10 @@
 ﻿using Shinkuro.ViewModels.Base;
 using System;
-using System.Collections.Generic;
-using System.Text;
-
+using Shinkuro.Infrastracture.Commands;
+using Shinkuro.Infrastracture.Commands.Base;
+using Shinkuro.Services.Navigation;
+using System.Windows.Input;
+using System.Windows;
 namespace Shinkuro.ViewModels
 {
     internal class MenuViewModel : ViewModelBase

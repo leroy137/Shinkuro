@@ -26,13 +26,13 @@
             <Grid Grid.Column="1">
                 <StackPanel>
                     <TextBlock Margin="10" FontSize="18" FontWeight="DemiBold">Начало работы:</TextBlock>
-                    <Button Margin="10" Height="50">
+                    <Button  Command="{Binding Path=CreateCompetitionCommand}" Margin="10" Height="50" Cursor="Hand">
                         <StackPanel Orientation="Horizontal" >
                             <fa:FontAwesome VerticalAlignment="Center" Margin="0 0 15 0" FontSize="16" Foreground="White" Icon="Solid_Plus"></fa:FontAwesome>
                             <TextBlock FontSize="16">Начать соревнование</TextBlock>
                         </StackPanel>
                     </Button>
-                    <Button Margin="10" Height="50">
+                    <Button  Command="{Binding Path=OpenCompetitionCommand}" Margin="10" Height="50">
                         <StackPanel Orientation="Horizontal" >
                             <fa:FontAwesome VerticalAlignment="Center" Margin="0 0 15 0" FontSize="16" Foreground="White" Icon="Regular_FolderOpen"></fa:FontAwesome>
                             <TextBlock FontSize="16">Открыть соревнование</TextBlock>

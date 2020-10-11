@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -13,22 +11,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Shinkuro.ViewModels;
-using Shinkuro.Views;
+using Shinkuro.Services.Navigation;
 using Shinkuro.ViewModels.Base;
 
-namespace Shinkuro
+namespace Shinkuro.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Логика взаимодействия для MainCompetitionView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainCompetitionView : UserControl
     {
-        public MainWindow()
+
+        public MainCompetitionView()
         {
             InitializeComponent();
-            MainCompetitionView mainCompetitionView = new MainCompetitionView();
-            mainCompetitionView.DataContext = new MainCompetitionViewModel();
-            cp.Content = mainCompetitionView;
+            CompetitionNavigator.Service = MainFrame.NavigationService;
         }
     }
 }

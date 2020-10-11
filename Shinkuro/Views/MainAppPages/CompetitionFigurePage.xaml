@@ -8,7 +8,21 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CompetitionFigurePage">
 
-    <Grid>
-        <TextBlock>Соревнования фигур</TextBlock>
+    <Grid Style="{StaticResource CompetitionPagePanel}">
+        <TabControl Margin="5">
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock>Группы</TextBlock>
+                </TabItem.Header>
+                <Grid>
+                    
+                </Grid>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock>Соревнование</TextBlock>
+                </TabItem.Header>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Page>
