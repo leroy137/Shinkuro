@@ -83,7 +83,7 @@
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Margin="5" FontSize="16" FontWeight="DemiBold">
+                        <TextBlock VerticalAlignment="Bottom" Grid.Column="0" Margin="5" FontSize="14" FontWeight="DemiBold">
                             Фигуры
                         </TextBlock>
                         <Button ToolTip="Добавить фигуру" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
@@ -94,7 +94,7 @@
                         </Button>
                     </Grid>
                     <Grid Grid.Row="1">
-                        <DataGrid Margin="5 2 5 5" MinHeight="240"  FontSize="11" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
+                        <DataGrid Margin="5 0 5 5" MinHeight="240"  FontSize="11" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Название" Width="*"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Сложность" Width="auto"></DataGridTextColumn>
@@ -116,7 +116,7 @@
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Margin="5" FontSize="16" FontWeight="DemiBold">
+                        <TextBlock VerticalAlignment="Bottom" Grid.Column="0" Margin="5" FontSize="14" FontWeight="DemiBold">
                             Судейская бригада
                         </TextBlock>
                         <Button ToolTip="Добавить судью" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
@@ -127,7 +127,7 @@
                         </Button>
                     </Grid>
                     <Grid Grid.Row="1">
-                        <DataGrid Margin="5 2 5 5" MinHeight="240"  FontSize="11" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
+                        <DataGrid Margin="5 0 5 5" MinHeight="240"  FontSize="11" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Фамилия ИО" Width="*"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Город" Width="auto"></DataGridTextColumn>
@@ -149,7 +149,7 @@
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Margin="5" FontSize="16" FontWeight="DemiBold">
+                    <TextBlock Grid.Column="0" Margin="5" VerticalAlignment="Bottom" FontSize="14" FontWeight="DemiBold">
                         Участники
                     </TextBlock>
                     <Button ToolTip="Добавить участника" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
@@ -160,7 +160,7 @@
                     </Button>
                 </Grid>
                 <Grid Grid.Row="1">
-                    <DataGrid Margin="5 2 5 5" MinHeight="300"  FontSize="11" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
+                    <DataGrid Margin="5 0 5 5" MinHeight="300"  FontSize="11" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Фамилия ИО" Width="auto"></DataGridTextColumn>
                             <DataGridTextColumn Header="Год рождения" Width="auto"></DataGridTextColumn>
