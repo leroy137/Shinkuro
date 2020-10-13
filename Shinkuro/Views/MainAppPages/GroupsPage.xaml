@@ -3,25 +3,172 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes" 
       xmlns:local="clr-namespace:Shinkuro.Views.MainAppPages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="650" d:DesignWidth="800"
       Title="GroupsPage">
-
     <Grid Style="{StaticResource CompetitionPagePanel}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="430"></ColumnDefinition>
             <ColumnDefinition Width="auto"></ColumnDefinition>
-            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="1" Background="#FF5B25BB" Width="1" Margin="5">
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Margin="5" Style="{StaticResource HeaderPageCompetition}">
+                    Группы
+                </TextBlock>
+                <Button ToolTip="Добавить группу" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                    <md:PackIcon Kind="Plus" Height="16"></md:PackIcon>
+                </Button>
+                <Button ToolTip="Просмотр информации о группе" Grid.Column="3" VerticalAlignment="Bottom"  Padding="0" Height="22" Width="22" Margin="5">
+                    <md:PackIcon Kind="Eye" Height="14"></md:PackIcon>
+                </Button>
+                <Button ToolTip="Изменить группу" Grid.Column="2" VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                    <md:PackIcon Kind="Pen" Height="14"></md:PackIcon>
+                </Button>
+                <Button ToolTip="Удалить группу" Grid.Column="1"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                    <md:PackIcon Kind="Delete" Height="14"></md:PackIcon>
+                </Button>
+            </Grid>
+            <Grid Grid.Row="1">
+                <DataGrid Margin="5 0 5 5" Height="238"  FontSize="11" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Название группы" Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Год начало" Width="auto"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Год окончание" Width="auto"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+            <Grid Grid.Row="2">
+
+            </Grid>
         </Grid>
-        <Grid Grid.Column="2" Margin="5" Style="{StaticResource CompetitionPageSidebar}">
+        <Grid Grid.Column="1" Background="#FF5B25BB" Width="1" Margin="5"></Grid>
+        <Grid Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Margin="5" FontSize="16" FontWeight="DemiBold">
+                            Фигуры
+                        </TextBlock>
+                        <Button ToolTip="Добавить фигуру" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                            <md:PackIcon Kind="Plus" Height="16"></md:PackIcon>
+                        </Button>
+                        <Button ToolTip="Открепить фигуру" Grid.Column="3" VerticalAlignment="Bottom"  Padding="0" Height="22" Width="22" Margin="5">
+                            <md:PackIcon Kind="BlockHelper" Height="14"></md:PackIcon>
+                        </Button>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <DataGrid Margin="5 2 5 5" MinHeight="240"  FontSize="11" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Название" Width="*"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Сложность" Width="auto"></DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Column="1" Width="5"></Grid>
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Margin="5" FontSize="16" FontWeight="DemiBold">
+                            Судейская бригада
+                        </TextBlock>
+                        <Button ToolTip="Добавить судью" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                            <md:PackIcon Kind="Plus" Height="16"></md:PackIcon>
+                        </Button>
+                        <Button ToolTip="Открепить судью" Grid.Column="3" VerticalAlignment="Bottom"  Padding="0" Height="22" Width="22" Margin="5">
+                            <md:PackIcon Kind="BlockHelper" Height="14"></md:PackIcon>
+                        </Button>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <DataGrid Margin="5 2 5 5" MinHeight="240"  FontSize="11" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Фамилия ИО" Width="*"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Город" Width="auto"></DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Margin="5" FontSize="16" FontWeight="DemiBold">
+                        Участники
+                    </TextBlock>
+                    <Button ToolTip="Добавить участника" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                        <md:PackIcon Kind="Plus" Height="16"></md:PackIcon>
+                    </Button>
+                    <Button ToolTip="Открепить участника" Grid.Column="3" VerticalAlignment="Bottom"  Padding="0" Height="22" Width="22" Margin="5">
+                        <md:PackIcon Kind="BlockHelper" Height="14"></md:PackIcon>
+                    </Button>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <DataGrid Margin="5 2 5 5" MinHeight="300"  FontSize="11" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Фамилия ИО" Width="auto"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Год рождения" Width="auto"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Город" Width="auto"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </Grid>
         </Grid>
     </Grid>
 </Page>

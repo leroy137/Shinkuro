@@ -5,6 +5,7 @@
     <Style TargetType="TextBlock" x:Key="HeaderPageCompetition">
         <Setter Property="FontSize" Value="18"></Setter>
         <Setter Property="FontWeight" Value="DemiBold"></Setter>
+        <Setter Property="VerticalAlignment" Value="Bottom"></Setter>
     </Style>
     
 </ResourceDictionary>
