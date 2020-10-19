@@ -31,8 +31,8 @@
             <TextBox Grid.Column="0" Width="200" md:HintAssist.Hint="Номер #" Grid.Row="3" Margin="5 10" Padding="5 0" ></TextBox>
             <TextBox Grid.Column="2" Width="200" md:HintAssist.Hint="Год рождения" Grid.Row="3" Margin="5 10" Padding="5 0" ></TextBox>
         </Grid>
-        <TextBox md:HintAssist.Hint="Разряд" Grid.Row="5" Margin="5" Padding="5 0" ></TextBox>
-        <Grid Grid.Row="7" Margin="5">
+        <TextBox md:HintAssist.Hint="Разряд" Grid.Row="5" Margin="5 10" Padding="5 0" ></TextBox>
+        <Grid Grid.Row="7"  Margin="5 10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
