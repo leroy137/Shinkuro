@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Shinkuro.Views.Windows"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Начать соревнование" Height="600" Width="600">
+        Title="Начать соревнование" ResizeMode="NoResize" Height="600" Width="600">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
