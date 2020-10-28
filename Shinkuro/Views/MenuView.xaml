@@ -23,7 +23,7 @@
             <Grid Grid.Column="0">
                 <StackPanel>
                     <TextBlock Margin="10" FontSize="18" FontWeight="DemiBold" Foreground="#FF373738">Последние соревнования</TextBlock>
-                    <ListBox Margin="10">
+                    <ListBox Margin="10" ItemsSource="{Binding Competitions}">
                         
                     </ListBox>
                 </StackPanel>

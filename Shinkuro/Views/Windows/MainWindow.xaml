@@ -7,8 +7,8 @@
         xmlns:view="clr-namespace:Shinkuro.Views"
         xmlns:vm="clr-namespace:Shinkuro.ViewModels"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="Shinkuro.MainWindow"
-        mc:Ignorable="d"
-        Title="Shinkuro" Height="450" Width="800" >
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        Title="Shinkuro" Height="450" Width="800">
     <Grid>
         <ContentPresenter x:Name="cp"></ContentPresenter>
     </Grid>
