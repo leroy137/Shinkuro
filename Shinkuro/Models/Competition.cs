@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace Shinkuro.Models
 {
-    internal class Competition
+    internal class Competition : IEquatable<Competition>
     {
         string _name;
         DateTime? _startDate;
@@ -63,6 +64,49 @@ namespace Shinkuro.Models
             Place = place;
             Organizator = organizator;
             Contacts = contacts;
+        }
+
+        public bool Equals([AllowNull] Competition other)
+        {
+            if (other == null)
+                return false;
+
+            if (Object.ReferenceEquals(this, other))
+                return true;
+
+            if (this.Name != other.Name)
+                return false;
+
+            if (this.StartDate != other.StartDate)
+                return false;
+
+            if (this.FinishDate != other.FinishDate)
+                return false;
+
+            if (this.Description != other.Description)
+                return false;
+
+            if (this.Organizator != other.Organizator)
+                return false;
+
+            if (this.Place != other.Place)
+                return false;
+
+            if (this.Contacts != other.Contacts)
+                return false;
+
+            return true;
+        }
+
+        public void UpdateCompetition(Competition competition)
+        {
+            this.Name = competition.Name;
+            this.StartDate = competition.StartDate;
+            this.FinishDate = competition.FinishDate;
+            this.Description = competition.Description;
+            this.Organizator = competition.Organizator;
+            this.Place = competition.Place;
+            this.Contacts = competition.Contacts;
         }
     }
 }
