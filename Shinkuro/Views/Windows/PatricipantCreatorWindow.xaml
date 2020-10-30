@@ -18,20 +18,83 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBox md:HintAssist.Hint="Фамилия" Grid.Row="0" Margin="5 10" Padding="5 0" ></TextBox>
-        <TextBox md:HintAssist.Hint="Имя" Grid.Row="1" Margin="5 10" Padding="5 0" ></TextBox>
-        <TextBox md:HintAssist.Hint="Отчество" Grid.Row="2" Margin="5 10" Padding="5 0" ></TextBox>
-        <TextBox md:HintAssist.Hint="Город" Grid.Row="3" Margin="5 10" Padding="5 0" ></TextBox>
-        <Grid Grid.Row="4">
+        <Grid Grid.Row="0" Margin="5 10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBox Grid.Column="0" Width="200" md:HintAssist.Hint="Номер #" Grid.Row="3" Margin="5 10" Padding="5 0" ></TextBox>
-            <TextBox Grid.Column="2" Width="200" md:HintAssist.Hint="Год рождения" Grid.Row="3" Margin="5 10" Padding="5 0" ></TextBox>
+            <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
+                <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Account" />
+            </TextBlock>
+            <TextBox md:HintAssist.Hint="Фамилия" Grid.Column="1"  Padding="5 0" ></TextBox>
         </Grid>
-        <TextBox md:HintAssist.Hint="Разряд" Grid.Row="5" Margin="5 10" Padding="5 0" ></TextBox>
+        <Grid Grid.Row="1" Margin="5 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
+                <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Account" />
+            </TextBlock>
+            <TextBox md:HintAssist.Hint="Имя" Grid.Column="1" Padding="5 0" ></TextBox>
+        </Grid>
+        <Grid Grid.Row="2" Margin="5 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
+                <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Account" />
+            </TextBlock>
+            <TextBox md:HintAssist.Hint="Отчество" Grid.Column="1" Padding="5 0" ></TextBox>
+        </Grid>
+        <Grid Grid.Row="3" Margin="5 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
+                <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Place" />
+            </TextBlock>
+            <TextBox md:HintAssist.Hint="Город" Grid.Column="1" Padding="5 0" ></TextBox>
+        </Grid>
+        <Grid Grid.Row="4" Margin="5 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="50"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock VerticalAlignment="Center" Grid.Column="0" >
+                    <md:PackIcon Kind="MusicAccidentalSharp" Grid.Column="0" Margin="5 0" />
+                </TextBlock>
+                <TextBox Grid.Column="1" Width="150" md:HintAssist.Hint="Номер #" Padding="5 0" ></TextBox>
+            </Grid>
+            <Grid Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
+                    <md:PackIcon Grid.Column="0" Kind="Calendar" />
+                </TextBlock>
+                <TextBox Grid.Column="1" md:HintAssist.Hint="Год рождения" Grid.Row="3" Padding="5 0" ></TextBox>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="5" Margin="5 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
+                    <md:PackIcon Grid.Column="0" Kind="Rank" />
+            </TextBlock>
+            <TextBox md:HintAssist.Hint="Разряд" Grid.Column="1" Padding="5 0" ></TextBox>
+        </Grid>
         <Grid Grid.Row="7"  Margin="5 10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"></ColumnDefinition>

@@ -36,7 +36,7 @@
                 <Button Command="{Binding CreatePatricipantCommand}" ToolTip="Добавить участника" Grid.Column="4" VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
                     <md:PackIcon Kind="Plus" Height="16"></md:PackIcon>
                 </Button>
-                <Button Command="{Binding ViewePatricipantCommand}" ToolTip="Просмотр участника" Grid.Column="3"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                <Button Command="{Binding ViewPatricipantCommand}" ToolTip="Просмотр участника" Grid.Column="3"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
                     <md:PackIcon Kind="Eye" Height="14"></md:PackIcon>
                 </Button>
                 <Button Command="{Binding EditPatricipantCommand}" ToolTip="Изменить участника" Grid.Column="2"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
