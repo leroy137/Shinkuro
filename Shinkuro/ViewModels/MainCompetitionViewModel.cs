@@ -7,6 +7,8 @@ using Shinkuro.Infrastracture.Commands.Base;
 using Shinkuro.Services.Navigation;
 using System.Windows.Input;
 using System.Windows;
+using Shinkuro.Models;
+using Shinkuro.Services.Interfaces;
 
 namespace Shinkuro.ViewModels
 {
@@ -18,9 +20,14 @@ namespace Shinkuro.ViewModels
 
         public String CurrentCompetitionURI { get; set; }
 
+        public ApplicationCoreContext MainContext { get; set; }
+        public Window Owner { get; set; }
+
+        public Competition Competition { get; set; }
+
         #region Команды
         // закрытие приложения
-                
+
         public ICommand CloseApplicationCommand { get; private set; } = new CloseApplicationCommand();
         public ICommand OpenFigureManagerCommand { get; private set; } = new OpenFigureManagerCommand();
         public ICommand GoToHomePageCommand { get; set; }
@@ -41,17 +48,25 @@ namespace Shinkuro.ViewModels
         public ViewModelBase CompetitionCommandPageViewModel { get; private set; }
         public ViewModelBase SettingsPageViewModel { get; private set; }
 
-        public MainCompetitionViewModel()
+        public MainCompetitionViewModel(ApplicationCoreContext context, Window owner)
+        {
+            Owner = owner;
+            MainContext = context;
+            Competition = context.CurrentCompetition;
+            owner.WindowState = WindowState.Maximized;
+            InitializeModelViews();
+            InitializeCommands();
+        }
+
+        private void InitializeModelViews()
         {
             HomePageViewModel = new HomePageViewModel();
-            SettingsPageViewModel = new SettingsPageViewModel();
+            SettingsPageViewModel = new SettingsPageViewModel(Competition);
             JudgePageViewModel = new JudgePageViewModel();
             GroupsPageViewModel = new GroupsPageViewModel();
             CompetitionCommandPageViewModel = new CompetitionCommandPageViewModel();
             CompetitionFigurePageViewModel = new CompetitionFigurePageViewModel();
             PatricipantsPageViewModel = new PatricipantPageViewModel();
-
-            InitializeCommands();
         }
 
         private void InitializeCommands()

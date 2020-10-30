@@ -22,6 +22,5 @@ namespace Shinkuro.ViewModels.Base
             OnPropertyChanged(prop);
             return true;
         }
-
     }
 }
