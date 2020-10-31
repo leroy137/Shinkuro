@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Shinkuro.Views.Windows"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Создание участника" x:Name="windowCreator" Height="550" Width="450" WindowStartupLocation="CenterScreen">
+        Title="Создание участника" ResizeMode="NoResize" x:Name="windowCreator" Height="550" Width="450" WindowStartupLocation="CenterScreen">
     <Grid TextBlock.FontSize="14">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
