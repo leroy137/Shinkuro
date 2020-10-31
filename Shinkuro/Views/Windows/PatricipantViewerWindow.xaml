@@ -4,9 +4,105 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Shinkuro.Views.Windows"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="PatricipantViewerWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="Участник" Height="550" Width="450" WindowStartupLocation="CenterScreen" Name="windowView">
+    <Grid TextBlock.FontSize="14">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Margin="5 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
+                <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Account" />
+            </TextBlock>
+            <TextBox ToolTip="Фамилия" IsReadOnly="True" Text="{Binding Path=Patricipant.Firstname}"  md:HintAssist.Hint="Фамилия" Grid.Column="1"  Padding="5 0" ></TextBox>
+        </Grid>
+        <Grid Grid.Row="1" Margin="5 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
+                <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Account" />
+            </TextBlock>
+            <TextBox ToolTip="Имя" IsReadOnly="True" Text="{Binding Path=Patricipant.Surname}" md:HintAssist.Hint="Имя" Grid.Column="1" Padding="5 0" ></TextBox>
+        </Grid>
+        <Grid Grid.Row="2" Margin="5 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
+                <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Account" />
+            </TextBlock>
+            <TextBox ToolTip="Отчество" IsReadOnly="True" Text="{Binding Path=Patricipant.Lastname}" md:HintAssist.Hint="Отчество" Grid.Column="1" Padding="5 0" ></TextBox>
+        </Grid>
+        <Grid Grid.Row="3" Margin="5 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
+                <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Place" />
+            </TextBlock>
+            <TextBox ToolTip="Город" IsReadOnly="True" Text="{Binding Path=Patricipant.City}" md:HintAssist.Hint="Город" Grid.Column="1" Padding="5 0" ></TextBox>
+        </Grid>
+        <Grid Grid.Row="4" Margin="5 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="50"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock VerticalAlignment="Center" Grid.Column="0" >
+                    <md:PackIcon Kind="MusicAccidentalSharp" Grid.Column="0" Margin="5 0" />
+                </TextBlock>
+                <TextBox ToolTip="Номер #" IsReadOnly="True" Text="{Binding Path=Patricipant.Number}" Grid.Column="1" Width="150" md:HintAssist.Hint="Номер #" Padding="5 0" ></TextBox>
+            </Grid>
+            <Grid Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
+                    <md:PackIcon Grid.Column="0" Kind="Calendar" />
+                </TextBlock>
+                <TextBox ToolTip="Год рождения" IsReadOnly="True" Text="{Binding Path=Patricipant.Year}" Grid.Column="1" md:HintAssist.Hint="Год рождения" Grid.Row="3" Padding="5 0" ></TextBox>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="5" Margin="5 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
+                    <md:PackIcon Grid.Column="0" Kind="Rank" />
+            </TextBlock>
+            <TextBox ToolTip="Разряд" IsReadOnly="True" Text="{Binding Path=Patricipant.Rank}" md:HintAssist.Hint="Разряд" Grid.Column="1" Padding="5 0" ></TextBox>
+        </Grid>
+        <Grid Grid.Row="7" Margin="5 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnClose" Click="btnClose_Click" Grid.Column="0">Назад</Button>
+        </Grid>
     </Grid>
 </Window>
+

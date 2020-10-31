@@ -7,7 +7,7 @@ namespace Shinkuro.Models
     /// <summary>
     /// класс соревнования по фигурам
     /// </summary>
-    internal class Group
+    public class Group
     {
 
         /// <summary>

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Shinkuro.Models
 {
-    class Figure
+    public class Figure
     {
         private String _name;
         private double _compexity;

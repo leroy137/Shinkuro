@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Shinkuro.Models
 {
-    internal class Competition : IEquatable<Competition>
+    public class Competition : IEquatable<Competition>
     {
         string _name;
         DateTime? _startDate;

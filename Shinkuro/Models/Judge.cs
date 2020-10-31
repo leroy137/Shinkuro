@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Shinkuro.Models
 {
-    internal class Judge
+    public class Judge
     {
 
         int _number;
@@ -70,7 +70,7 @@ namespace Shinkuro.Models
                 if (value.Length > maxSizeField)
                     throw new Exception($"Превышен лимит символов для ОТЧЕСТВО участника в {maxSizeField} символов!");
 
-                _surname = value;
+                _lastname = value;
             }
         }
 
