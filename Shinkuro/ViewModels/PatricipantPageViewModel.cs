@@ -18,8 +18,6 @@ namespace Shinkuro.ViewModels
         private String _yearPatricipantFilter;
         private bool _completePatricipants;
 
-        private Patricipant _selectedPatricipant;
-
         public ApplicationCoreContext Context { get; set; }
 
         public String FIOPatricipantFilter 
@@ -77,7 +75,10 @@ namespace Shinkuro.ViewModels
         {
             try
             {
-                
+                FIOPatricipantFilter = "";
+                CityPatricipantFilter = "";
+                YearPatricipantFilter = "";
+                CompletePatricipant = false;
             }
             catch (Exception ex)
             {
@@ -87,7 +88,7 @@ namespace Shinkuro.ViewModels
 
         private bool ResetFilterCommandCanExecute(object obj)
         {
-            return true;
+            return !String.IsNullOrEmpty(FIOPatricipantFilter) || !String.IsNullOrEmpty(CityPatricipantFilter) || !String.IsNullOrEmpty(YearPatricipantFilter) || CompletePatricipant != false;
         }
 
 
@@ -95,17 +96,17 @@ namespace Shinkuro.ViewModels
         {
             try
             {
-
+                Patricipants = Context.Patricipants;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошика!");
+                MessageBox.Show(ex.Message, "Ошибка!");
             }
         }
 
         private bool UpdateListPatricipantrCommandCanExecute(object obj)
         {
-            return true;
+            return Patricipants.Count != Context.Patricipants.Count;
         }
 
         private void DeletePatricipantCommandExecute(object obj)
@@ -117,7 +118,7 @@ namespace Shinkuro.ViewModels
 
                 var result = MessageBox.Show($"Удалить участника {SelectedPatricipant.Firstname} {SelectedPatricipant.Surname} (город {SelectedPatricipant.City})?", "Удаление участника", MessageBoxButton.YesNo);
 
-                if (result == MessageBoxResult.Yes) // если да то удаляем фигуру
+                if (result == MessageBoxResult.Yes) // если да то удаляем
                 {
                     String city = SelectedPatricipant.City;
                     String firstname = SelectedPatricipant.City;
@@ -141,11 +142,22 @@ namespace Shinkuro.ViewModels
         {
             try
             {
+                if (SelectedPatricipant == null)
+                    throw new Exception("Участник для изменения не выбран!");
+
+                PatricipantEditorWindow patricipantEditorWindow = new PatricipantEditorWindow(SelectedPatricipant);
+                patricipantEditorWindow.ShowDialog();
+                if(patricipantEditorWindow.DialogResult==true)
+                {
+                    Patricipant edit = patricipantEditorWindow.PatricipantEdit;
+                    ApplicationCoreContext.UpdatePatricipant(SelectedPatricipant, edit);
+                    MessageBox.Show("Участник успешно изменен!", "Изменение участника");
+                }
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошика!");
+                MessageBox.Show(ex.Message, "Ошибка!");
             }
         }
 
@@ -182,6 +194,9 @@ namespace Shinkuro.ViewModels
         {
             try
             {
+                if (SelectedPatricipant == null)
+                    throw new Exception("Участник для просмотра не выбран!"); 
+
                 PatricipantViewerWindow patricipantViewerWindow = new PatricipantViewerWindow(SelectedPatricipant);
                 patricipantViewerWindow.ShowDialog();
             }

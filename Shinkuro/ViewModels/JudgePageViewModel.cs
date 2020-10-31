@@ -27,7 +27,7 @@ namespace Shinkuro.ViewModels
             set { Set<String>(ref _searchTextJudge, value); }
         }
 
-        public String CityPatricipantFilter
+        public String CityJudgeFilter
         {
             get { return _cityJudgeFilter; }
             set { Set<String>(ref _cityJudgeFilter, value); }
@@ -74,7 +74,9 @@ namespace Shinkuro.ViewModels
         {
             try
             {
-
+                FIOJudgeFilter = "";
+                CityJudgeFilter = "";
+                CompleteJudge = false;
             }
             catch (Exception ex)
             {
@@ -84,7 +86,7 @@ namespace Shinkuro.ViewModels
 
         private bool ResetFilterCommandCanExecute(object obj)
         {
-            return true;
+            return !String.IsNullOrEmpty(FIOJudgeFilter) || !String.IsNullOrEmpty(CityJudgeFilter)  || CompleteJudge != false;
         }
 
 
@@ -102,7 +104,7 @@ namespace Shinkuro.ViewModels
 
         private bool UpdateListJudgesCommandCanExecute(object obj)
         {
-            return true;
+            return Context.Judges.Count != Judges.Count;
         }
 
         private void DeleteJudgeCommandExecute(object obj)

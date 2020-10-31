@@ -16,5 +16,16 @@ namespace Shinkuro.Models
             Patricipants = new ObservableCollection<Patricipant>();
             Judges = new ObservableCollection<Judge>();
         }
+
+        public static void UpdatePatricipant(Patricipant destination, Patricipant source)
+        {
+            destination.Firstname = source.Firstname;
+            destination.Surname = source.Surname;
+            destination.Lastname = source.Lastname;
+            destination.Number = source.Number;
+            destination.City = source.City;
+            destination.Rank = source.Rank;
+            destination.Year = source.Year;
+        }
     }
 }
