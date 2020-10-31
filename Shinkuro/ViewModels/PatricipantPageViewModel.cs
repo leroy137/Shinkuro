@@ -55,6 +55,7 @@ namespace Shinkuro.ViewModels
         public ICommand EditPatricipantCommand { get; set; }
         public ICommand ViewPatricipantCommand { get; set; }
 
+        public ObservableCollection<Patricipant> Patricipants { get; set; }
 
         public PatricipantPageViewModel()
         {
@@ -69,6 +70,7 @@ namespace Shinkuro.ViewModels
         public PatricipantPageViewModel(ApplicationCoreContext context) : this()
         {
             Context = context;
+            Patricipants = context.Patricipants;
         }
 
         private void ResetFilterCommandExecute(object obj)
@@ -110,11 +112,23 @@ namespace Shinkuro.ViewModels
         {
             try
             {
+                if (SelectedPatricipant == null)
+                    throw new Exception("Участник для удаления не выбран!");
 
+                var result = MessageBox.Show($"Удалить участника {SelectedPatricipant.Firstname} {SelectedPatricipant.Surname} (город {SelectedPatricipant.City})?", "Удаление участника", MessageBoxButton.YesNo);
+
+                if (result == MessageBoxResult.Yes) // если да то удаляем фигуру
+                {
+                    String city = SelectedPatricipant.City;
+                    String firstname = SelectedPatricipant.City;
+                    String surname = SelectedPatricipant.City;
+                    Context.Patricipants.Remove(SelectedPatricipant);
+                    MessageBox.Show($"Участник {firstname} {surname} (город {city}) удален!");
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошика!");
+                MessageBox.Show(ex.Message, "Ошибка!");
             }
         }
 
@@ -148,12 +162,14 @@ namespace Shinkuro.ViewModels
                 patricipantCreatorWindow.ShowDialog();
                 if(patricipantCreatorWindow.DialogResult == true)
                 {
-
+                    Patricipant patricipantNew = patricipantCreatorWindow.PatricipantNew;
+                    Context.Patricipants.Add(patricipantNew);
+                    MessageBox.Show("Участник успешно добавлен!");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошика!");
+                MessageBox.Show(ex.Message, "Ошибка!");
             }
         }
 
@@ -166,11 +182,12 @@ namespace Shinkuro.ViewModels
         {
             try
             {
-
+                PatricipantViewerWindow patricipantViewerWindow = new PatricipantViewerWindow(SelectedPatricipant);
+                patricipantViewerWindow.ShowDialog();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошика!");
+                MessageBox.Show(ex.Message, "Ошибка!");
             }
         }
 

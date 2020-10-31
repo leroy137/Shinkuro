@@ -33,16 +33,16 @@
                 <TextBlock Grid.Column="0" Margin="5" Style="{StaticResource HeaderPageCompetition}">
                     Судейство
                 </TextBlock>
-                <Button ToolTip="Добавить судью" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                <Button  Command="{Binding CreateJudgeCommand}" ToolTip="Добавить судью" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
                     <md:PackIcon Kind="Plus" Height="16"></md:PackIcon>
                 </Button>
-                <Button ToolTip="Просмотр информации о судье" Grid.Column="3" VerticalAlignment="Bottom"  Padding="0" Height="22" Width="22" Margin="5">
+                <Button Command="{Binding ViewJudgeCommand}" ToolTip="Просмотр информации о судье" Grid.Column="3" VerticalAlignment="Bottom"  Padding="0" Height="22" Width="22" Margin="5">
                     <md:PackIcon Kind="Eye" Height="14"></md:PackIcon>
                 </Button>
-                <Button ToolTip="Изменить" Grid.Column="2" VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                <Button Command="{Binding EditJudgeCommand}" ToolTip="Изменить" Grid.Column="2" VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
                     <md:PackIcon Kind="Pen" Height="14"></md:PackIcon>
                 </Button>
-                <Button ToolTip="Удалить судью" Grid.Column="1"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                <Button Command="{Binding DeleteJudgeCommand}" ToolTip="Удалить судью" Grid.Column="1"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
                     <md:PackIcon Kind="Delete" Height="14"></md:PackIcon>
                 </Button>
             </Grid>
@@ -86,7 +86,13 @@
                     <TextBlock VerticalAlignment="Center" FontSize="13" Grid.Column="1" Margin="5"><md:PackIcon Height="10" VerticalAlignment="Center" Kind="Minus"></md:PackIcon>Отобразить судей, у которых не заполнена категория или должность</TextBlock>
                 </Grid>
                 <Grid Grid.Row="4">
-                    <Button Width="75" ToolTip="Сбросить все фильтры" FontSize="10" HorizontalAlignment="Right" Margin="5">сбросить</Button>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button Command="{Binding ResetFilterCommand}" Width="75" Grid.Column="1" ToolTip="Сбросить все фильтры" FontSize="10" HorizontalAlignment="Right" Margin="5">сбросить</Button>
+                    <Button Command="{Binding UpdateListJudgesCommand}" Grid.Column="2" ToolTip="Обновить список судей" FontSize="10" HorizontalAlignment="Right" Margin="5">обновить</Button>
                 </Grid>
             </Grid>
             <Grid Grid.Row="2">

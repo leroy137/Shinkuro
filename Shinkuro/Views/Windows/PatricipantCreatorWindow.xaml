@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Shinkuro.Views.Windows"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Создание участника" Height="550" Width="450" WindowStartupLocation="CenterScreen">
+        Title="Создание участника" x:Name="windowCreator" Height="550" Width="450" WindowStartupLocation="CenterScreen">
     <Grid TextBlock.FontSize="14">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -26,7 +26,7 @@
             <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
                 <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Account" />
             </TextBlock>
-            <TextBox md:HintAssist.Hint="Фамилия" Grid.Column="1"  Padding="5 0" ></TextBox>
+            <TextBox Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" md:HintAssist.Hint="Фамилия" Grid.Column="1"  Padding="5 0" ></TextBox>
         </Grid>
         <Grid Grid.Row="1" Margin="5 10">
             <Grid.ColumnDefinitions>
@@ -36,7 +36,7 @@
             <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
                 <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Account" />
             </TextBlock>
-            <TextBox md:HintAssist.Hint="Имя" Grid.Column="1" Padding="5 0" ></TextBox>
+            <TextBox  Text="{Binding SecondName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" md:HintAssist.Hint="Имя" Grid.Column="1" Padding="5 0" ></TextBox>
         </Grid>
         <Grid Grid.Row="2" Margin="5 10">
             <Grid.ColumnDefinitions>
@@ -46,7 +46,7 @@
             <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
                 <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Account" />
             </TextBlock>
-            <TextBox md:HintAssist.Hint="Отчество" Grid.Column="1" Padding="5 0" ></TextBox>
+            <TextBox  Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" md:HintAssist.Hint="Отчество" Grid.Column="1" Padding="5 0" ></TextBox>
         </Grid>
         <Grid Grid.Row="3" Margin="5 10">
             <Grid.ColumnDefinitions>
@@ -56,7 +56,7 @@
             <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
                 <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Place" />
             </TextBlock>
-            <TextBox md:HintAssist.Hint="Город" Grid.Column="1" Padding="5 0" ></TextBox>
+            <TextBox  Text="{Binding City, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" md:HintAssist.Hint="Город" Grid.Column="1" Padding="5 0" ></TextBox>
         </Grid>
         <Grid Grid.Row="4" Margin="5 10">
             <Grid.ColumnDefinitions>
@@ -72,7 +72,7 @@
                 <TextBlock VerticalAlignment="Center" Grid.Column="0" >
                     <md:PackIcon Kind="MusicAccidentalSharp" Grid.Column="0" Margin="5 0" />
                 </TextBlock>
-                <TextBox Grid.Column="1" Width="150" md:HintAssist.Hint="Номер #" Padding="5 0" ></TextBox>
+                <TextBox  Text="{Binding Number, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="1" Width="150" md:HintAssist.Hint="Номер #" Padding="5 0" ></TextBox>
             </Grid>
             <Grid Grid.Column="2">
                 <Grid.ColumnDefinitions>
@@ -82,7 +82,7 @@
                 <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
                     <md:PackIcon Grid.Column="0" Kind="Calendar" />
                 </TextBlock>
-                <TextBox Grid.Column="1" md:HintAssist.Hint="Год рождения" Grid.Row="3" Padding="5 0" ></TextBox>
+                <TextBox  Text="{Binding YearBirthday, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="1" md:HintAssist.Hint="Год рождения" Grid.Row="3" Padding="5 0" ></TextBox>
             </Grid>
         </Grid>
         <Grid Grid.Row="5" Margin="5 10">
@@ -93,7 +93,7 @@
             <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
                     <md:PackIcon Grid.Column="0" Kind="Rank" />
             </TextBlock>
-            <TextBox md:HintAssist.Hint="Разряд" Grid.Column="1" Padding="5 0" ></TextBox>
+            <TextBox  Text="{Binding Rank, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" md:HintAssist.Hint="Разряд" Grid.Column="1" Padding="5 0" ></TextBox>
         </Grid>
         <Grid Grid.Row="7"  Margin="5 10">
             <Grid.ColumnDefinitions>
@@ -101,8 +101,8 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0">Отмена</Button>
-            <Button Grid.Column="2">Создать</Button>
+            <Button x:Name="btnClose" Click="btnClose_Click" Grid.Column="0">Отмена</Button>
+            <Button x:Name="btnCreate" Click="btnCreate_Click" Grid.Column="2">Создать</Button>
         </Grid>
     </Grid>
 </Window>

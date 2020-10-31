@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Shinkuro.Models;
 
 namespace Shinkuro.Views.Windows
 {
@@ -20,6 +21,28 @@ namespace Shinkuro.Views.Windows
         public PatricipantEditorWindow()
         {
             InitializeComponent();
+        }
+
+        public PatricipantEditorWindow(Patricipant patricipant) : this()
+        {
+
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnChange_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка!");
+            }
         }
     }
 }

@@ -9,6 +9,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Shinkuro.Models;
+
 
 namespace Shinkuro.Views.Windows
 {
@@ -17,9 +19,22 @@ namespace Shinkuro.Views.Windows
     /// </summary>
     public partial class PatricipantViewerWindow : Window
     {
+        public Patricipant Patricipant { get; set; }
+
         public PatricipantViewerWindow()
         {
             InitializeComponent();
+            windowView.DataContext = this;
+        }
+
+        public PatricipantViewerWindow(Patricipant patricipant) : this()
+        {
+            Patricipant = patricipant;
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

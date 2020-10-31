@@ -106,18 +106,18 @@
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Button Command="{Binding ResetFilterCommand}" Width="75" Grid.Column="1" ToolTip="Сбросить все фильтры" FontSize="10" HorizontalAlignment="Right" Margin="5">сбросить</Button>
-                    <Button Command="{Binding UpdateListPatricipantCommand}" Grid.Column="2" ToolTip="Обновить список участнгиков" FontSize="10" HorizontalAlignment="Right" Margin="5">обновить</Button>
+                    <Button Command="{Binding UpdateListPatricipantCommand}" Grid.Column="2" ToolTip="Обновить список участников" FontSize="10" HorizontalAlignment="Right" Margin="5">обновить</Button>
                 </Grid>
             </Grid>
             <Grid Grid.Row="2">
-                <DataGrid FontSize="12" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" Margin="5" AutoGenerateColumns="False">
+                <DataGrid SelectedItem="{Binding SelectedPatricipant}" ItemsSource="{Binding Patricipants}" FontSize="12" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" Margin="5" AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Width="auto" Header="#"></DataGridTextColumn>
-                        <DataGridTextColumn Width="auto" Header="Фамилия"></DataGridTextColumn>
-                        <DataGridTextColumn Width="auto" Header="Имя"></DataGridTextColumn>
-                        <DataGridTextColumn Width="auto" Header="Отчество"></DataGridTextColumn>
-                        <DataGridTextColumn Width="auto" Header="Город"></DataGridTextColumn>
-                        <DataGridTextColumn Width="auto" Header="Год рождения"></DataGridTextColumn>
+                        <DataGridTextColumn Width="auto" Header="#" Binding="{Binding Path=Number}"></DataGridTextColumn>
+                        <DataGridTextColumn Width="auto" Header="Фамилия" Binding="{Binding Path=Firstname}"></DataGridTextColumn>
+                        <DataGridTextColumn Width="auto" Header="Имя" Binding="{Binding Path=Surname}"></DataGridTextColumn>
+                        <DataGridTextColumn Width="auto" Header="Отчество" Binding="{Binding Path=Lastname}"></DataGridTextColumn>
+                        <DataGridTextColumn Width="auto" Header="Город" Binding="{Binding Path=City}"></DataGridTextColumn>
+                        <DataGridTextColumn Width="auto" Header="Год рождения" Binding="{Binding Path=Year}"></DataGridTextColumn>
                         <DataGridTextColumn Width="*" Header="Группа"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
