@@ -8,6 +8,8 @@ using System.Windows;
 using Shinkuro.Models;
 using System.Collections.ObjectModel;
 using Shinkuro.Views.Windows;
+using System.ComponentModel;
+using System.Windows.Data;
 
 namespace Shinkuro.ViewModels
 {
@@ -23,29 +25,28 @@ namespace Shinkuro.ViewModels
         public String FIOPatricipantFilter 
         { 
             get { return _searchTextPatricipant; }
-            set { Set<String>(ref _searchTextPatricipant, value); }
+            set { Set<String>(ref _searchTextPatricipant, value); Patricipants.Refresh(); }
         }
 
         public String CityPatricipantFilter 
         {
             get { return _cityPatricipatnFilter; }
-            set { Set<String>(ref _cityPatricipatnFilter, value); }
+            set { Set<String>(ref _cityPatricipatnFilter, value); Patricipants.Refresh(); }
         }
 
         public String YearPatricipantFilter 
         { 
             get { return _yearPatricipantFilter; }
-            set { Set<String>(ref _yearPatricipantFilter, value); }
+            set { Set<String>(ref _yearPatricipantFilter, value); Patricipants.Refresh(); }
         }
 
         public bool CompletePatricipant 
         { 
             get { return _completePatricipants; }
-            set { Set<Boolean>(ref _completePatricipants, value); }
+            set { Set<Boolean>(ref _completePatricipants, value); Patricipants.Refresh(); }
         }
 
         public Patricipant SelectedPatricipant { get; set; }
-
         public ICommand ResetFilterCommand { get; set; }
         public ICommand UpdateListPatricipantCommand { get; set; }
         public ICommand CreatePatricipantCommand { get; set; }
@@ -53,7 +54,8 @@ namespace Shinkuro.ViewModels
         public ICommand EditPatricipantCommand { get; set; }
         public ICommand ViewPatricipantCommand { get; set; }
 
-        public ObservableCollection<Patricipant> Patricipants { get; set; }
+        public ICollectionView Patricipants { get; set; }
+
 
         public PatricipantPageViewModel()
         {
@@ -68,7 +70,8 @@ namespace Shinkuro.ViewModels
         public PatricipantPageViewModel(ApplicationCoreContext context) : this()
         {
             Context = context;
-            Patricipants = context.Patricipants;
+            Patricipants = CollectionViewSource.GetDefaultView(context.Patricipants);
+            Patricipants.Filter = FilterPatricipant;
         }
 
         private void ResetFilterCommandExecute(object obj)
@@ -96,7 +99,7 @@ namespace Shinkuro.ViewModels
         {
             try
             {
-                Patricipants = Context.Patricipants;
+                Patricipants.Refresh();
             }
             catch (Exception ex)
             {
@@ -106,7 +109,7 @@ namespace Shinkuro.ViewModels
 
         private bool UpdateListPatricipantrCommandCanExecute(object obj)
         {
-            return Patricipants.Count != Context.Patricipants.Count;
+            return true;
         }
 
         private void DeletePatricipantCommandExecute(object obj)
@@ -123,7 +126,7 @@ namespace Shinkuro.ViewModels
                     String city = SelectedPatricipant.City;
                     String firstname = SelectedPatricipant.Firstname;
                     String surname = SelectedPatricipant.Surname;
-                    Context.Patricipants.Remove(SelectedPatricipant);
+                    Context.RemovePatricipant(SelectedPatricipant);
                     MessageBox.Show($"Участник {firstname} {surname} (город {city}) удален!");
                 }
             }
@@ -150,7 +153,7 @@ namespace Shinkuro.ViewModels
                 if(patricipantEditorWindow.DialogResult==true)
                 {
                     Patricipant edit = patricipantEditorWindow.PatricipantEdit;
-                    ApplicationCoreContext.UpdatePatricipant(SelectedPatricipant, edit);
+                    Context.UpdatePatricipant(SelectedPatricipant, edit);
                     MessageBox.Show("Участник успешно изменен!", "Изменение участника");
                 }
 
@@ -175,7 +178,7 @@ namespace Shinkuro.ViewModels
                 if(patricipantCreatorWindow.DialogResult == true)
                 {
                     Patricipant patricipantNew = patricipantCreatorWindow.PatricipantNew;
-                    Context.Patricipants.Add(patricipantNew);
+                    Context.AddPatricipant(patricipantNew);
                     MessageBox.Show("Участник успешно добавлен!");
                 }
             }
@@ -209,6 +212,32 @@ namespace Shinkuro.ViewModels
         private bool ViewPatricipantrCommandCanExecute(object obj)
         {
             return SelectedPatricipant!=null;
+        }
+
+        private bool FilterPatricipant(object obj)
+        {
+            bool result = true;
+            Patricipant current = obj as Patricipant;
+            if (current != null)
+            {
+                if (!String.IsNullOrWhiteSpace(FIOPatricipantFilter))
+                    result = result && current.FIO.Contains(FIOPatricipantFilter);
+
+                if (!String.IsNullOrWhiteSpace(CityPatricipantFilter))
+                    result = result && current.City.Contains(CityPatricipantFilter);
+
+                if (!String.IsNullOrWhiteSpace(YearPatricipantFilter))
+                    result = result && current.Year.ToString().Contains(YearPatricipantFilter);
+
+                if (CompletePatricipant)
+                    result = result && (String.IsNullOrWhiteSpace(current.Firstname) || String.IsNullOrWhiteSpace(current.Surname) || String.IsNullOrWhiteSpace(current.City) || String.IsNullOrWhiteSpace(current.Year.ToString()));
+
+                return result;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

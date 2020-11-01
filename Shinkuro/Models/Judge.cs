@@ -67,7 +67,7 @@ namespace Shinkuro.Models
             set
             {
                 int maxSizeField = 50;
-                if (value.Length > maxSizeField)
+                if (!String.IsNullOrWhiteSpace(value)&&value.Length > maxSizeField)
                     throw new Exception($"Превышен лимит символов для ОТЧЕСТВО участника в {maxSizeField} символов!");
 
                 _lastname = value;
@@ -95,5 +95,7 @@ namespace Shinkuro.Models
             City = city;
             Info = info;
         }
+
+        public String FIO => $"{Firstname} {Surname} {Lastname}";
     }
 }

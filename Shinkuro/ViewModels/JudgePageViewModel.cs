@@ -8,6 +8,8 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using Shinkuro.Views.Windows;
 using Shinkuro.Infrastracture.Commands;
+using System.ComponentModel;
+using System.Windows.Data;
 
 namespace Shinkuro.ViewModels
 {
@@ -24,19 +26,19 @@ namespace Shinkuro.ViewModels
         public String FIOJudgeFilter
         {
             get { return _searchTextJudge; }
-            set { Set<String>(ref _searchTextJudge, value); }
+            set { Set<String>(ref _searchTextJudge, value); Judges.Refresh(); }
         }
 
         public String CityJudgeFilter
         {
             get { return _cityJudgeFilter; }
-            set { Set<String>(ref _cityJudgeFilter, value); }
+            set { Set<String>(ref _cityJudgeFilter, value); Judges.Refresh(); }
         }
 
         public bool CompleteJudge
         {
             get { return _completeJudges; }
-            set { Set<Boolean>(ref _completeJudges, value); }
+            set { Set<Boolean>(ref _completeJudges, value); Judges.Refresh(); }
         }
 
         public Judge SelectedJudge 
@@ -52,7 +54,7 @@ namespace Shinkuro.ViewModels
         public ICommand EditJudgeCommand { get; set; }
         public ICommand ViewJudgeCommand { get; set; }
 
-        public ObservableCollection<Judge> Judges { get; set; }
+        public ICollectionView Judges { get; set; }
 
         public JudgePageViewModel()
         {
@@ -67,7 +69,9 @@ namespace Shinkuro.ViewModels
         public JudgePageViewModel(ApplicationCoreContext context) : this()
         {
             Context = context;
-            Judges = context.Judges;
+            Judges = CollectionViewSource.GetDefaultView(Context.Judges);
+            Judges.Filter = FilterJudge;
+
         }
 
         private void ResetFilterCommandExecute(object obj)
@@ -94,7 +98,7 @@ namespace Shinkuro.ViewModels
         {
             try
             {
-
+                Judges.Refresh();
             }
             catch (Exception ex)
             {
@@ -104,7 +108,7 @@ namespace Shinkuro.ViewModels
 
         private bool UpdateListJudgesCommandCanExecute(object obj)
         {
-            return Context.Judges.Count != Judges.Count;
+            return true;
         }
 
         private void DeleteJudgeCommandExecute(object obj)
@@ -121,7 +125,7 @@ namespace Shinkuro.ViewModels
                     String city = SelectedJudge.City;
                     String firstname = SelectedJudge.Firstname;
                     String surname = SelectedJudge.Surname;
-                    Context.Judges.Remove(SelectedJudge);
+                    Context.RemoveJudge(SelectedJudge);
                     MessageBox.Show($"Судья {firstname} {surname} (город {city}) удален!");
                 }
             }
@@ -148,7 +152,7 @@ namespace Shinkuro.ViewModels
                 if (editorWindow.DialogResult == true)
                 {
                     Judge edit = editorWindow.JudgeEdit;
-                    ApplicationCoreContext.UpdateJudge(SelectedJudge, edit);
+                    Context.UpdateJudge(SelectedJudge, edit);
                     MessageBox.Show("Судья успешно изменен!", "Изменение судьи");
                 }
             }
@@ -172,7 +176,7 @@ namespace Shinkuro.ViewModels
                 if (judgeCreatorWindow.DialogResult == true)
                 {
                     Judge judgeNew = judgeCreatorWindow.JudgeNew;
-                    Context.Judges.Add(judgeNew);
+                    Context.AddJudge(judgeNew);
                     MessageBox.Show("Судья успешно добавлен!");
                 }
             }
@@ -206,6 +210,29 @@ namespace Shinkuro.ViewModels
         private bool ViewJudgeCommandCanExecute(object obj)
         {
             return SelectedJudge != null;
+        }
+
+        public bool FilterJudge(Object obj)
+        {
+            bool result = true;
+            Judge current = obj as Judge;
+            if (current != null)
+            {
+                if (!String.IsNullOrWhiteSpace(FIOJudgeFilter))
+                    result = result && current.FIO.Contains(FIOJudgeFilter);
+
+                if (!String.IsNullOrWhiteSpace(CityJudgeFilter))
+                    result = result && current.City.Contains(CityJudgeFilter);
+
+                if (CompleteJudge)
+                    result = result && (String.IsNullOrWhiteSpace(current.Post) || String.IsNullOrWhiteSpace(current.Rank));
+
+                return result;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
