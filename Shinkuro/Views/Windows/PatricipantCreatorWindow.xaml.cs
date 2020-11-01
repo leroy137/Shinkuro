@@ -20,7 +20,7 @@ namespace Shinkuro.Views.Windows
     {
         internal Patricipant PatricipantNew { get; set; }
 
-        public String Surname{ get; set; }
+        public String Surname { get; set; }
         public String PatricipantName { get; set; }
         public String Patronymic { get; set; }
         public String City { get; set; }

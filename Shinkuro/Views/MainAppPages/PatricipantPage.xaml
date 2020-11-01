@@ -110,7 +110,7 @@
                 </Grid>
             </Grid>
             <Grid Grid.Row="2">
-                <DataGrid SelectedItem="{Binding SelectedPatricipant}" ItemsSource="{Binding Patricipants}" FontSize="12" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" Margin="5" AutoGenerateColumns="False">
+                <DataGrid EnableRowVirtualization="True" EnableColumnVirtualization="True" SelectedItem="{Binding SelectedPatricipant}" ItemsSource="{Binding Patricipants}" FontSize="12" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" Margin="5" AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Width="auto" Header="#" Binding="{Binding Path=Number}"></DataGridTextColumn>
                         <DataGridTextColumn Width="auto" Header="Фамилия" Binding="{Binding Path=Surname}"></DataGridTextColumn>

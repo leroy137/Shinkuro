@@ -71,7 +71,6 @@ namespace Shinkuro.ViewModels
             Context = context;
             Judges = CollectionViewSource.GetDefaultView(Context.Judges);
             Judges.Filter = FilterJudge;
-
         }
 
         private void ResetFilterCommandExecute(object obj)
