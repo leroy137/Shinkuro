@@ -111,7 +111,19 @@ namespace Shinkuro.ViewModels
         {
             try
             {
+                if (SelectedJudge == null)
+                    throw new Exception("Судья для удаления не выбран!");
 
+                var result = MessageBox.Show($"Удалить судью {SelectedJudge.Firstname} {SelectedJudge.Surname} (город {SelectedJudge.City})?", "Удаление судьи", MessageBoxButton.YesNo);
+
+                if (result == MessageBoxResult.Yes) // если да то удаляем
+                {
+                    String city = SelectedJudge.City;
+                    String firstname = SelectedJudge.Firstname;
+                    String surname = SelectedJudge.Surname;
+                    Context.Judges.Remove(SelectedJudge);
+                    MessageBox.Show($"Судья {firstname} {surname} (город {city}) удален!");
+                }
             }
             catch (Exception ex)
             {
@@ -128,7 +140,17 @@ namespace Shinkuro.ViewModels
         {
             try
             {
+                if (SelectedJudge == null)
+                    throw new Exception("Судья для изменения не выбран!");
 
+                JudgeEditorWindow editorWindow = new JudgeEditorWindow(SelectedJudge);
+                editorWindow.ShowDialog();
+                if (editorWindow.DialogResult == true)
+                {
+                    Judge edit = editorWindow.JudgeEdit;
+                    ApplicationCoreContext.UpdateJudge(SelectedJudge, edit);
+                    MessageBox.Show("Судья успешно изменен!", "Изменение судьи");
+                }
             }
             catch (Exception ex)
             {
@@ -145,7 +167,14 @@ namespace Shinkuro.ViewModels
         {
             try
             {
-
+                JudgeCreatorWindow judgeCreatorWindow = new JudgeCreatorWindow();
+                judgeCreatorWindow.ShowDialog();
+                if (judgeCreatorWindow.DialogResult == true)
+                {
+                    Judge judgeNew = judgeCreatorWindow.JudgeNew;
+                    Context.Judges.Add(judgeNew);
+                    MessageBox.Show("Судья успешно добавлен!");
+                }
             }
             catch (Exception ex)
             {
@@ -162,7 +191,11 @@ namespace Shinkuro.ViewModels
         {
             try
             {
+                if (SelectedJudge == null)
+                    throw new Exception("Судья для просмотра не выбран!");
 
+                JudgeViewerWindow judgeViewerWindow = new JudgeViewerWindow(SelectedJudge);
+                judgeViewerWindow.ShowDialog();
             }
             catch (Exception ex)
             {

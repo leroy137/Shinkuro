@@ -96,15 +96,15 @@
                 </Grid>
             </Grid>
             <Grid Grid.Row="2">
-                <DataGrid FontSize="12" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" Margin="5" AutoGenerateColumns="False">
+                <DataGrid ItemsSource="{Binding Judges}" SelectedItem="{Binding SelectedJudge}" FontSize="12" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" Margin="5" AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Width="auto" Header="#"></DataGridTextColumn>
-                        <DataGridTextColumn Width="auto" Header="Фамилия"></DataGridTextColumn>
-                        <DataGridTextColumn Width="auto" Header="Имя"></DataGridTextColumn>
-                        <DataGridTextColumn Width="auto" Header="Отчество"></DataGridTextColumn>
-                        <DataGridTextColumn Width="auto" Header="Город"></DataGridTextColumn>
-                        <DataGridTextColumn Width="auto" Header="Должность"></DataGridTextColumn>
-                        <DataGridTextColumn Width="auto" Header="Категория"></DataGridTextColumn>
+                        <DataGridTextColumn Width="auto" Header="#" Binding="{Binding Path=Number}"></DataGridTextColumn>
+                        <DataGridTextColumn Width="auto" Header="Фамилия"  Binding="{Binding Path=Firstname}"></DataGridTextColumn>
+                        <DataGridTextColumn Width="auto" Header="Имя"  Binding="{Binding Path=Surname}"></DataGridTextColumn>
+                        <DataGridTextColumn Width="auto" Header="Отчество"  Binding="{Binding Path=Lastname}"></DataGridTextColumn>
+                        <DataGridTextColumn Width="auto" Header="Город"  Binding="{Binding Path=City}"></DataGridTextColumn>
+                        <DataGridTextColumn Width="auto" Header="Должность"  Binding="{Binding Path=Post}"></DataGridTextColumn>
+                        <DataGridTextColumn Width="auto" Header="Категория"  Binding="{Binding Path=Rank}"></DataGridTextColumn>
                         <DataGridTextColumn Width="*" Header="Группа"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>

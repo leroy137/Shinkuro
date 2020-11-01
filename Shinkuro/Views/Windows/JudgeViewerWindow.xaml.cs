@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Shinkuro.Models;
 
 namespace Shinkuro.Views.Windows
 {
@@ -17,9 +18,31 @@ namespace Shinkuro.Views.Windows
     /// </summary>
     public partial class JudgeViewerWindow : Window
     {
+
+        public String FirstName { get; set; }
+        public String SecondName { get; set; }
+        public String LastName { get; set; }
+        public String City { get; set; }
+        public String Number { get; set; }
+        public String Category { get; set; }
+        public String Work { get; set; }
+        public String Description { get; set; }
         public JudgeViewerWindow()
         {
             InitializeComponent();
+            windowJudgeView.DataContext = this;
+        }
+
+        public JudgeViewerWindow(Judge judge) : this()
+        {
+            FirstName = judge.Firstname;
+            SecondName = judge.Surname;
+            LastName = judge.Lastname;
+            City = judge.City;
+            Number = judge.Number.ToString();
+            Category = judge.Rank;
+            Work = judge.Post;
+            Description = judge.Info;
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)

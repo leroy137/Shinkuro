@@ -27,5 +27,17 @@ namespace Shinkuro.Models
             destination.Rank = source.Rank;
             destination.Year = source.Year;
         }
+
+        public static void UpdateJudge(Judge destination, Judge source)
+        {
+            destination.Firstname = source.Firstname;
+            destination.Surname = source.Surname;
+            destination.Lastname = source.Lastname;
+            destination.Number = source.Number;
+            destination.City = source.City;
+            destination.Rank = source.Rank;
+            destination.Post = source.Post;
+            destination.Info = source.Info;
+        }
     }
 }

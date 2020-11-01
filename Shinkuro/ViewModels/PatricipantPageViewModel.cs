@@ -121,8 +121,8 @@ namespace Shinkuro.ViewModels
                 if (result == MessageBoxResult.Yes) // если да то удаляем
                 {
                     String city = SelectedPatricipant.City;
-                    String firstname = SelectedPatricipant.City;
-                    String surname = SelectedPatricipant.City;
+                    String firstname = SelectedPatricipant.Firstname;
+                    String surname = SelectedPatricipant.Surname;
                     Context.Patricipants.Remove(SelectedPatricipant);
                     MessageBox.Show($"Участник {firstname} {surname} (город {city}) удален!");
                 }
