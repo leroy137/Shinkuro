@@ -26,7 +26,7 @@
             <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
                 <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Account" />
             </TextBlock>
-            <TextBox Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" md:HintAssist.Hint="Фамилия" Grid.Column="1"  Padding="5 0" ></TextBox>
+            <TextBox Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" md:HintAssist.Hint="Фамилия" Grid.Column="1"  Padding="5 0" ></TextBox>
         </Grid>
         <Grid Grid.Row="1" Margin="5 10">
             <Grid.ColumnDefinitions>
@@ -36,7 +36,7 @@
             <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
                 <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Account" />
             </TextBlock>
-            <TextBox  Text="{Binding SecondName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" md:HintAssist.Hint="Имя" Grid.Column="1" Padding="5 0" ></TextBox>
+            <TextBox  Text="{Binding PatricipantName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" md:HintAssist.Hint="Имя" Grid.Column="1" Padding="5 0" ></TextBox>
         </Grid>
         <Grid Grid.Row="2" Margin="5 10">
             <Grid.ColumnDefinitions>
@@ -46,7 +46,7 @@
             <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
                 <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Account" />
             </TextBlock>
-            <TextBox  Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" md:HintAssist.Hint="Отчество" Grid.Column="1" Padding="5 0" ></TextBox>
+            <TextBox  Text="{Binding Patronymic, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" md:HintAssist.Hint="Отчество" Grid.Column="1" Padding="5 0" ></TextBox>
         </Grid>
         <Grid Grid.Row="3" Margin="5 10">
             <Grid.ColumnDefinitions>

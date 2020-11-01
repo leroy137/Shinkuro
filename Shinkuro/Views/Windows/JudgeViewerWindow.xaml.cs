@@ -19,9 +19,9 @@ namespace Shinkuro.Views.Windows
     public partial class JudgeViewerWindow : Window
     {
 
-        public String FirstName { get; set; }
-        public String SecondName { get; set; }
-        public String LastName { get; set; }
+        public String Surname { get; set; }
+        public String JudgeName { get; set; }
+        public String Patronymic { get; set; }
         public String City { get; set; }
         public String Number { get; set; }
         public String Category { get; set; }
@@ -35,9 +35,9 @@ namespace Shinkuro.Views.Windows
 
         public JudgeViewerWindow(Judge judge) : this()
         {
-            FirstName = judge.Firstname;
-            SecondName = judge.Surname;
-            LastName = judge.Lastname;
+            Surname = judge.Surname;
+            JudgeName = judge.Name;
+            Patronymic = judge.Patronymic;
             City = judge.City;
             Number = judge.Number.ToString();
             Category = judge.Rank;

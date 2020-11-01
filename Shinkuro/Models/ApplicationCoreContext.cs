@@ -30,9 +30,9 @@ namespace Shinkuro.Models
             if (source == null)
                 throw new Exception("Изменения участника невозможно, так как измененный обект участника не выбран и равен null!");
 
-            destination.Firstname = source.Firstname;
             destination.Surname = source.Surname;
-            destination.Lastname = source.Lastname;
+            destination.Name = source.Name;
+            destination.Patronymic = source.Patronymic;
             destination.Number = source.Number;
             destination.City = source.City;
             destination.Rank = source.Rank;
@@ -47,9 +47,9 @@ namespace Shinkuro.Models
             if (source == null)
                 throw new Exception("Изменения судьи невозможно, так как измененный обект судьи не выбран и равен null!");
 
-            destination.Firstname = source.Firstname;
+            destination.Name = source.Name;
             destination.Surname = source.Surname;
-            destination.Lastname = source.Lastname;
+            destination.Patronymic = source.Patronymic;
             destination.Number = source.Number;
             destination.City = source.City;
             destination.Rank = source.Rank;

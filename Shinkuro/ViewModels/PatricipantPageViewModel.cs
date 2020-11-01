@@ -119,15 +119,15 @@ namespace Shinkuro.ViewModels
                 if (SelectedPatricipant == null)
                     throw new Exception("Участник для удаления не выбран!");
 
-                var result = MessageBox.Show($"Удалить участника {SelectedPatricipant.Firstname} {SelectedPatricipant.Surname} (город {SelectedPatricipant.City})?", "Удаление участника", MessageBoxButton.YesNo);
+                var result = MessageBox.Show($"Удалить участника {SelectedPatricipant.Surname} {SelectedPatricipant.Name} (город {SelectedPatricipant.City})?", "Удаление участника", MessageBoxButton.YesNo);
 
                 if (result == MessageBoxResult.Yes) // если да то удаляем
                 {
                     String city = SelectedPatricipant.City;
-                    String firstname = SelectedPatricipant.Firstname;
                     String surname = SelectedPatricipant.Surname;
+                    String name = SelectedPatricipant.Name;
                     Context.RemovePatricipant(SelectedPatricipant);
-                    MessageBox.Show($"Участник {firstname} {surname} (город {city}) удален!");
+                    MessageBox.Show($"Участник {surname} {name} (город {city}) удален!");
                 }
             }
             catch (Exception ex)
@@ -230,7 +230,7 @@ namespace Shinkuro.ViewModels
                     result = result && current.Year.ToString().Contains(YearPatricipantFilter);
 
                 if (CompletePatricipant)
-                    result = result && (String.IsNullOrWhiteSpace(current.Firstname) || String.IsNullOrWhiteSpace(current.Surname) || String.IsNullOrWhiteSpace(current.City) || String.IsNullOrWhiteSpace(current.Year.ToString()));
+                    result = result && (String.IsNullOrWhiteSpace(current.Surname) || String.IsNullOrWhiteSpace(current.Name) || String.IsNullOrWhiteSpace(current.City) || String.IsNullOrWhiteSpace(current.Year.ToString()));
 
                 return result;
             }

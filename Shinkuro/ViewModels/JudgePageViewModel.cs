@@ -118,15 +118,15 @@ namespace Shinkuro.ViewModels
                 if (SelectedJudge == null)
                     throw new Exception("Судья для удаления не выбран!");
 
-                var result = MessageBox.Show($"Удалить судью {SelectedJudge.Firstname} {SelectedJudge.Surname} (город {SelectedJudge.City})?", "Удаление судьи", MessageBoxButton.YesNo);
+                var result = MessageBox.Show($"Удалить судью {SelectedJudge.Surname} {SelectedJudge.Name} (город {SelectedJudge.City})?", "Удаление судьи", MessageBoxButton.YesNo);
 
                 if (result == MessageBoxResult.Yes) // если да то удаляем
                 {
                     String city = SelectedJudge.City;
-                    String firstname = SelectedJudge.Firstname;
                     String surname = SelectedJudge.Surname;
+                    String name = SelectedJudge.Name;
                     Context.RemoveJudge(SelectedJudge);
-                    MessageBox.Show($"Судья {firstname} {surname} (город {city}) удален!");
+                    MessageBox.Show($"Судья {surname} {name} (город {city}) удален!");
                 }
             }
             catch (Exception ex)

@@ -20,9 +20,9 @@ namespace Shinkuro.Views.Windows
     {
 
         public Judge JudgeEdit { get; set; }
-        public String FirstName { get; set; }
-        public String SecondName { get; set; }
-        public String LastName { get; set; }
+        public String Surname { get; set; }
+        public String JudgeName { get; set; }
+        public String Patronymic { get; set; }
         public String City { get; set; }
         public String Number { get; set; }
         public String Category { get; set; }
@@ -36,9 +36,9 @@ namespace Shinkuro.Views.Windows
 
         public JudgeEditorWindow(Judge judge) : this()
         {
-            FirstName = judge.Firstname;
-            SecondName = judge.Surname;
-            LastName = judge.Lastname;
+            Surname = judge.Surname;
+            JudgeName = judge.Name;
+            Patronymic = judge.Patronymic;
             City = judge.City;
             Number = judge.Number.ToString();
             Category = judge.Rank;
@@ -59,7 +59,7 @@ namespace Shinkuro.Views.Windows
                 if (!Int32.TryParse(Number, out int number))
                     throw new Exception("Формат поля НОМЕР судьи задан некорректно!");
 
-                Judge judge = new Judge(FirstName, SecondName, LastName, number, Category, Work, City, Description);
+                Judge judge = new Judge(Surname, JudgeName, Patronymic, number, Category, Work, City, Description);
                 JudgeEdit = judge;
 
                 this.DialogResult = true;
