@@ -17,11 +17,11 @@ namespace Shinkuro.Models
         /// <summary>
         /// Начальный год диапазона участников группы
         /// </summary>
-        public Int32 StartYear { get; set; }
+        public Int32? StartYear { get; set; }
         /// <summary>
         /// Конченый год диапазона участников группы
         /// </summary>
-        public Int32 FinishYear { get; set; }
+        public Int32? FinishYear { get; set; }
         /// <summary>
         /// Дополнительная информация
         /// </summary>
@@ -36,7 +36,7 @@ namespace Shinkuro.Models
 
         }
 
-        public Group(String name, Int32 startYear, Int32 finishYear, String description)
+        public Group(String name, Int32? startYear, Int32? finishYear, String description)
         {
             Name = name;
             StartYear = startYear;

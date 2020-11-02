@@ -13,7 +13,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition Width="auto"></ColumnDefinition>
-            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="120"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
@@ -78,7 +78,7 @@
                         <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
                             <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Calendar" Foreground="{Binding ElementName=NameTextBox, Path=BorderBrush}" />
                         </TextBlock>
-                        <TextBox Text="{Binding YearPatricipantFilter,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Height="28" VerticalContentAlignment="Center" Padding="5 0" FontSize="14" md:HintAssist.Hint="Год рождения" Grid.Column="1" Margin="5 0" Width="180"></TextBox>
+                        <TextBox Text="{Binding YearPatricipantFilter,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Height="28" VerticalContentAlignment="Center" Padding="3 0" FontSize="14" md:HintAssist.Hint="Год рождения" Grid.Column="1" Margin="5 0" Width="180"></TextBox>
                     </Grid>
                     <Grid Grid.Column="1">
                         <Grid.ColumnDefinitions>
@@ -116,9 +116,8 @@
                         <DataGridTextColumn Width="auto" Header="Фамилия" Binding="{Binding Path=Surname}"></DataGridTextColumn>
                         <DataGridTextColumn Width="auto" Header="Имя" Binding="{Binding Path=Name}"></DataGridTextColumn>
                         <DataGridTextColumn Width="auto" Header="Отчество" Binding="{Binding Path=Patronymic}"></DataGridTextColumn>
-                        <DataGridTextColumn Width="auto" Header="Город" Binding="{Binding Path=City}"></DataGridTextColumn>
                         <DataGridTextColumn Width="auto" Header="Год рождения" Binding="{Binding Path=Year}"></DataGridTextColumn>
-                        <DataGridTextColumn Width="*" Header="Группа"></DataGridTextColumn>
+                        <DataGridTextColumn Width="*" Header="Город" Binding="{Binding Path=City}"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

@@ -63,7 +63,7 @@ namespace Shinkuro.ViewModels
             HomePageViewModel = new HomePageViewModel();
             SettingsPageViewModel = new SettingsPageViewModel(Competition);
             JudgePageViewModel = new JudgePageViewModel(MainContext);
-            GroupsPageViewModel = new GroupsPageViewModel();
+            GroupsPageViewModel = new GroupsPageViewModel(MainContext);
             CompetitionCommandPageViewModel = new CompetitionCommandPageViewModel();
             CompetitionFigurePageViewModel = new CompetitionFigurePageViewModel();
             PatricipantsPageViewModel = new PatricipantPageViewModel(MainContext);

@@ -10,11 +10,13 @@ namespace Shinkuro.Models
         public Competition CurrentCompetition { get; set; }
         public ObservableCollection<Patricipant> Patricipants { get; set; }
         public ObservableCollection<Judge> Judges { get; set; }
+        public ObservableCollection<Group> Groups { get; set; }
         public ApplicationCoreContext()
         {
             CurrentCompetition = null;
             Patricipants = new ObservableCollection<Patricipant>();
             Judges = new ObservableCollection<Judge>();
+            Groups = new ObservableCollection<Group>();
         }
 
         public void UpdateCompetition(Competition competition)
@@ -73,6 +75,13 @@ namespace Shinkuro.Models
             Judges.Add(judge);
         }
 
+        public void AddGroup(Group group)
+        {
+            if (group == null)
+                throw new NullReferenceException("Группа не задан!");
+
+            Groups.Add(group);
+        }
 
         public bool RemovePatricipant(Patricipant patricipant)
         {

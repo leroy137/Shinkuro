@@ -32,25 +32,25 @@
                 <TextBlock Grid.Column="0" Margin="5" Style="{StaticResource HeaderPageCompetition}">
                     Группы
                 </TextBlock>
-                <Button ToolTip="Добавить группу" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                <Button Command="{Binding CreateGroupCommand}" ToolTip="Добавить группу" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
                     <md:PackIcon Kind="Plus" Height="16"></md:PackIcon>
                 </Button>
-                <Button ToolTip="Просмотр информации о группе" Grid.Column="3" VerticalAlignment="Bottom"  Padding="0" Height="22" Width="22" Margin="5">
+                <Button  Command="{Binding ViewGroupCommand}" ToolTip="Просмотр информации о группе" Grid.Column="3" VerticalAlignment="Bottom"  Padding="0" Height="22" Width="22" Margin="5">
                     <md:PackIcon Kind="Eye" Height="14"></md:PackIcon>
                 </Button>
-                <Button ToolTip="Изменить группу" Grid.Column="2" VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                <Button  Command="{Binding EditGroupCommand}" ToolTip="Изменить группу" Grid.Column="2" VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
                     <md:PackIcon Kind="Pen" Height="14"></md:PackIcon>
                 </Button>
-                <Button ToolTip="Удалить группу" Grid.Column="1"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                <Button  Command="{Binding DeleteGroupCommand}" ToolTip="Удалить группу" Grid.Column="1"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
                     <md:PackIcon Kind="Delete" Height="14"></md:PackIcon>
                 </Button>
             </Grid>
             <Grid Grid.Row="1">
-                <DataGrid Margin="5 0 5 5" Height="238"  FontSize="11" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
+                <DataGrid ItemsSource="{Binding Groups}" SelectedItem="{Binding SelectedGroup}" Margin="5 0 5 5" Height="280"  FontSize="11" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Название группы" Width="*"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Год начало" Width="auto"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Год окончание" Width="auto"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Название группы" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Год начало" Binding="{Binding StartYear}" Width="auto"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Год окончание" Binding="{Binding FinishYear}" Width="auto"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

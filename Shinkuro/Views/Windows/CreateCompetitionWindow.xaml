@@ -7,7 +7,7 @@
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="Начать соревнование" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Height="600" Width="600">
+        Title="Начать соревнование" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Height="580" Width="500">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -55,7 +55,7 @@
                                  Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" 
                                  TextWrapping="Wrap" 
                                  Padding="0" 
-                                 Height="180">
+                                 Height="150">
             </TextBox>
         </Grid>
         <Grid Grid.Row="3">
@@ -94,8 +94,8 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button IsCancel="True" x:Name="btnClose" Click="btnClose_Click" Width="120" Grid.Column="0" Margin="10">Отмена</Button>
-            <Button IsDefault="True" x:Name="btnCreate" Click="btnCreate_Click" Width="120" Grid.Column="2" Margin="10">Начать</Button>
+            <Button IsCancel="True" x:Name="btnClose" Click="btnClose_Click" Width="100" Grid.Column="0" Margin="10">Отмена</Button>
+            <Button IsDefault="True" x:Name="btnCreate" Click="btnCreate_Click" Width="100" Grid.Column="2" Margin="10">Начать</Button>
         </Grid>
     </Grid>
 </Window>
