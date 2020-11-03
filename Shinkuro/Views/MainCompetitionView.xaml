@@ -59,6 +59,7 @@
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
@@ -83,12 +84,20 @@
                         Grid.Row="2" Cursor="Hand" Padding="0">
                     <StackPanel Orientation="Horizontal">
                         <md:PackIcon Margin="0 0 5 0" Kind="Flag" VerticalAlignment="Center" Foreground="{Binding ElementName=txtButtonJudgeName, Path=Foreground}" />
-                        <TextBlock FontSize="13" Name="txtButtonJudgeName" VerticalAlignment="Center" Foreground="#FF5B25BB">Судейство</TextBlock>
+                        <TextBlock FontSize="13" Name="txtButtonJudgeName" VerticalAlignment="Center" Foreground="#FF5B25BB">Судьи</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Height="50"  Style="{StaticResource MaterialDesignFlatButton}" 
+                        Command="{Binding GoToGroupJudgesPageCommand}"
+                        Grid.Row="3" Cursor="Hand" Padding="0">
+                    <StackPanel Orientation="Horizontal">
+                        <md:PackIcon Margin="0 0 5 0" Kind="Flag" VerticalAlignment="Center" Foreground="{Binding ElementName=txtButtonJudgeName, Path=Foreground}" />
+                        <TextBlock FontSize="13" Name="txtButtonJudgeGroupName" VerticalAlignment="Center" Foreground="#FF5B25BB">Бригады судей</TextBlock>
                     </StackPanel>
                 </Button>
                 <Button Height="50"  Style="{StaticResource MaterialDesignFlatButton}" 
                         Command="{Binding GoToGroupsPageCommand}"
-                        Grid.Row="3" Cursor="Hand" Padding="0">
+                        Grid.Row="4" Cursor="Hand" Padding="0">
                     <StackPanel Orientation="Horizontal">
                         <md:PackIcon Margin="0 0 5 0" Kind="AccountGroup" VerticalAlignment="Center" Foreground="{Binding ElementName=txtButtonJudgeName, Path=Foreground}" />
                         <TextBlock FontSize="13" Name="txtButtonGroupsName" VerticalAlignment="Center" Foreground="#FF5B25BB">Группы</TextBlock>
@@ -96,7 +105,7 @@
                 </Button>
                 <Button Height="50"  Style="{StaticResource MaterialDesignFlatButton}" 
                         Command="{Binding GoToCompetitionFigurePageCommand}"
-                        Grid.Row="4" Cursor="Hand" Padding="0">
+                        Grid.Row="5" Cursor="Hand" Padding="0">
                     <StackPanel Orientation="Horizontal">
                         <md:PackIcon Margin="0 0 5 0" Kind="Shape" VerticalAlignment="Center" Foreground="{Binding ElementName=txtButtonCompetitionFigureName, Path=Foreground}" />
                         <TextBlock FontSize="13" Name="txtButtonCompetitionFigureName" VerticalAlignment="Center" Foreground="#FF5B25BB">Соревнования фигур</TextBlock>
@@ -104,7 +113,7 @@
                 </Button>
                 <Button Height="50"  Style="{StaticResource MaterialDesignFlatButton}" 
                          Command="{Binding GoToCompetitionCommandPageCommand}"
-                        Grid.Row="5" Cursor="Hand" Padding="0">
+                        Grid.Row="6" Cursor="Hand" Padding="0">
                     <StackPanel Orientation="Horizontal">
                         <md:PackIcon Margin="0 0 5 0" Kind="HumanQueue" VerticalAlignment="Center" Foreground="{Binding ElementName=txtButtonCompetitionCommandName, Path=Foreground}" />
                         <TextBlock FontSize="13" Name="txtButtonCompetitionCommandName" VerticalAlignment="Center" Foreground="#FF5B25BB" TextWrapping="WrapWithOverflow">Команды</TextBlock>
@@ -112,7 +121,7 @@
                 </Button>
                 <Button Height="50"  Style="{StaticResource MaterialDesignFlatButton}"
                         Command="{Binding GoToSettingsPageCommand}"
-                        Grid.Row="6" Cursor="Hand" Padding="0">
+                        Grid.Row="7" Cursor="Hand" Padding="0">
                     <StackPanel Orientation="Horizontal">
                         <md:PackIcon Margin="0 0 5 0" Kind="Settings" VerticalAlignment="Center" Foreground="{Binding ElementName=txtButtonSettingName, Path=Foreground}" />
                         <TextBlock FontSize="13" Name="txtButtonSettingName" VerticalAlignment="Center" Foreground="#FF5B25BB">Настройки</TextBlock>
@@ -120,7 +129,7 @@
                 </Button>
                 <Button Height="50" Command="{Binding Path=CloseApplicationCommand}"  
                         Style="{StaticResource MaterialDesignFlatButton}" 
-                        Grid.Row="8" Cursor="Hand" Padding="0">
+                        Grid.Row="9" Cursor="Hand" Padding="0">
                     <StackPanel Orientation="Horizontal">
                         <md:PackIcon Margin="0 0 5 0" Kind="ExitToApp" VerticalAlignment="Center" Foreground="{Binding ElementName=txtButtonExitName, Path=Foreground}" />
                         <TextBlock FontSize="13" Name="txtButtonExitName" VerticalAlignment="Center" Foreground="#FF5B25BB">Выход</TextBlock>

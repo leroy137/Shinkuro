@@ -8,9 +8,9 @@ namespace Shinkuro.Models
     {
 
         int _number;
-        private String _firstname;
         private String _surname;
-        private String _lastname;
+        private String _name;
+        private String _patronymic;
 
         public Int32 Number // номер судьи
         {
@@ -23,9 +23,9 @@ namespace Shinkuro.Models
             }
         }
 
-        public String Firstname
+        public String Surname
         {
-            get { return _firstname; }
+            get { return _surname; }
             set
             {
                 if (String.IsNullOrWhiteSpace(value))
@@ -35,16 +35,16 @@ namespace Shinkuro.Models
                 if (value.Length > maxSizeField)
                     throw new Exception($"Превышен лимит символов для ФАМИЛИИ участника в {maxSizeField} символов!");
 
-                _firstname = value;
+                _surname = value;
             }
         }
 
         /// <summary>
         /// Имя
         /// </summary>
-        public String Surname
+        public String Name
         {
-            get { return _surname; }
+            get { return _name; }
             set
             {
                 if (String.IsNullOrWhiteSpace(value))
@@ -54,23 +54,23 @@ namespace Shinkuro.Models
                 if (value.Length > maxSizeField)
                     throw new Exception($"Превышен лимит символов для ИМЯ участника в {maxSizeField} символов!");
 
-                _surname = value;
+                _name = value;
             }
         }
 
         /// <summary>
         /// Отчество
         /// </summary>
-        public String Lastname
+        public String Patronymic
         {
-            get { return _lastname; }
+            get { return _patronymic; }
             set
             {
                 int maxSizeField = 50;
-                if (value.Length > maxSizeField)
+                if (!String.IsNullOrWhiteSpace(value)&&value.Length > maxSizeField)
                     throw new Exception($"Превышен лимит символов для ОТЧЕСТВО участника в {maxSizeField} символов!");
 
-                _lastname = value;
+                _patronymic = value;
             }
         }
 
@@ -84,16 +84,18 @@ namespace Shinkuro.Models
 
         }
 
-        public Judge(String firstname, String surname, String lastname, Int32 number, String rank, String post, String city, String info)
+        public Judge(String surname, String name, String patronymic, Int32 number, String rank, String post, String city, String info)
         {
-            Firstname = firstname;
             Surname = surname;
-            Lastname = lastname;
+            Name = name;
+            Patronymic = patronymic;
             Number = number;
             Rank = rank;
             Post = post;
             City = city;
             Info = info;
         }
+
+        public String FIO => $"{Surname} {Name} {Patronymic}";
     }
 }

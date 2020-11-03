@@ -99,8 +99,8 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Command="{Binding ResetSettingsCommand}" FontSize="14" Width="100" Grid.Column="0" Margin="5">Сбросить</Button>
-            <Button Command="{Binding SaveSettingsCommand}" FontSize="14" Width="100" Grid.Column="2" Margin="5">Изменить</Button>
+            <Button Command="{Binding ResetSettingsCommand}" FontSize="12" Width="90" Grid.Column="0" Margin="5">Сбросить</Button>
+            <Button Command="{Binding SaveSettingsCommand}" FontSize="12" Width="90" Grid.Column="2" Margin="5">Изменить</Button>
         </Grid>
     </Grid>
 </Page>

@@ -13,101 +13,102 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition Width="auto"></ColumnDefinition>
-            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="120"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Margin="5" Style="{StaticResource HeaderPageCompetition}">
-                    Судейство
-                </TextBlock>
-                <Button  Command="{Binding CreateJudgeCommand}" ToolTip="Добавить судью" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
-                    <md:PackIcon Kind="Plus" Height="16"></md:PackIcon>
-                </Button>
-                <Button Command="{Binding ViewJudgeCommand}" ToolTip="Просмотр информации о судье" Grid.Column="3" VerticalAlignment="Bottom"  Padding="0" Height="22" Width="22" Margin="5">
-                    <md:PackIcon Kind="Eye" Height="14"></md:PackIcon>
-                </Button>
-                <Button Command="{Binding EditJudgeCommand}" ToolTip="Изменить" Grid.Column="2" VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
-                    <md:PackIcon Kind="Pen" Height="14"></md:PackIcon>
-                </Button>
-                <Button Command="{Binding DeleteJudgeCommand}" ToolTip="Удалить судью" Grid.Column="1"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
-                    <md:PackIcon Kind="Delete" Height="14"></md:PackIcon>
-                </Button>
-            </Grid>
-            <Grid Grid.Row="1">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
-                        <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Account" Foreground="{Binding ElementName=NameTextBox, Path=BorderBrush}" />
-                    </TextBlock>
-                    <TextBox VerticalContentAlignment="Center" md:HintAssist.Hint="Введите ФИО судьи" md:TextFieldAssist.HasClearButton="True" Padding="3 0" Grid.Column="1" FontSize="14" Margin="5 0"></TextBox>
-                </Grid>
-                <Grid Grid.Row="1">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"></ColumnDefinition>
-                            <ColumnDefinition Width="*" MaxWidth="350"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5">
-                            <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Place" Foreground="{Binding ElementName=NameTextBox, Path=BorderBrush}" />
-                        </TextBlock>
-                        <TextBox Padding="3 0" FontSize="14" md:HintAssist.Hint="Введите город судьи" Grid.Column="1" Margin="5"></TextBox>
-                    </Grid>
-                </Grid>
-                <Grid Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <CheckBox Margin="5" Grid.Column="0"></CheckBox>
-                    <TextBlock VerticalAlignment="Center" FontSize="13" Grid.Column="1" Margin="5"><md:PackIcon Height="10" VerticalAlignment="Center" Kind="Minus"></md:PackIcon>Отобразить судей, у которых не заполнена категория или должность</TextBlock>
-                </Grid>
-                <Grid Grid.Row="4">
-                    <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button Command="{Binding ResetFilterCommand}" Width="75" Grid.Column="1" ToolTip="Сбросить все фильтры" FontSize="10" HorizontalAlignment="Right" Margin="5">сбросить</Button>
-                    <Button Command="{Binding UpdateListJudgesCommand}" Grid.Column="2" ToolTip="Обновить список судей" FontSize="10" HorizontalAlignment="Right" Margin="5">обновить</Button>
+                    <TextBlock Grid.Column="0" Margin="5" Style="{StaticResource HeaderPageCompetition}">
+                    Судьи
+                    </TextBlock>
+                    <Button  Command="{Binding CreateJudgeCommand}" ToolTip="Добавить судью" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                        <md:PackIcon Kind="Plus" Height="16"></md:PackIcon>
+                    </Button>
+                    <Button Command="{Binding ViewJudgeCommand}" ToolTip="Просмотр информации о судье" Grid.Column="3" VerticalAlignment="Bottom"  Padding="0" Height="22" Width="22" Margin="5">
+                        <md:PackIcon Kind="Eye" Height="14"></md:PackIcon>
+                    </Button>
+                    <Button Command="{Binding EditJudgeCommand}" ToolTip="Изменить" Grid.Column="2" VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                        <md:PackIcon Kind="Pen" Height="14"></md:PackIcon>
+                    </Button>
+                    <Button Command="{Binding DeleteJudgeCommand}" ToolTip="Удалить судью" Grid.Column="1"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                        <md:PackIcon Kind="Delete" Height="14"></md:PackIcon>
+                    </Button>
                 </Grid>
-            </Grid>
-            <Grid Grid.Row="2">
-                <DataGrid FontSize="12" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" Margin="5" AutoGenerateColumns="False">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Width="auto" Header="#"></DataGridTextColumn>
-                        <DataGridTextColumn Width="auto" Header="Фамилия"></DataGridTextColumn>
-                        <DataGridTextColumn Width="auto" Header="Имя"></DataGridTextColumn>
-                        <DataGridTextColumn Width="auto" Header="Отчество"></DataGridTextColumn>
-                        <DataGridTextColumn Width="auto" Header="Город"></DataGridTextColumn>
-                        <DataGridTextColumn Width="auto" Header="Должность"></DataGridTextColumn>
-                        <DataGridTextColumn Width="auto" Header="Категория"></DataGridTextColumn>
-                        <DataGridTextColumn Width="*" Header="Группа"></DataGridTextColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
+                        <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Account" Foreground="{Binding ElementName=NameTextBox, Path=BorderBrush}" />
+                        </TextBlock>
+                        <TextBox Text="{Binding FIOJudgeFilter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalContentAlignment="Center" md:HintAssist.Hint="Введите ФИО судьи" md:TextFieldAssist.HasClearButton="True" Padding="3 0" Grid.Column="1" FontSize="14" Margin="5 0"></TextBox>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*" MaxWidth="350"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5">
+                            <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Place" Foreground="{Binding ElementName=NameTextBox, Path=BorderBrush}" />
+                            </TextBlock>
+                            <TextBox Text="{Binding CityJudgeFilter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Padding="3 0" FontSize="14" md:HintAssist.Hint="Введите город судьи" Grid.Column="1" Margin="5"></TextBox>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <CheckBox IsChecked="{Binding CompleteJudge, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5" Grid.Column="0"></CheckBox>
+                        <TextBlock VerticalAlignment="Center" FontSize="13" Grid.Column="1" Margin="5"><md:PackIcon Height="10" VerticalAlignment="Center" Kind="Minus"></md:PackIcon>Отобразить судей, у которых не заполнена категория или должность</TextBlock>
+                    </Grid>
+                    <Grid Grid.Row="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button Command="{Binding ResetFilterCommand}" Width="75" Grid.Column="1" ToolTip="Сбросить все фильтры" FontSize="10" HorizontalAlignment="Right" Margin="5">сбросить</Button>
+                        <Button Command="{Binding UpdateListJudgesCommand}" Grid.Column="2" ToolTip="Обновить список судей" FontSize="10" HorizontalAlignment="Right" Margin="5">обновить</Button>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <DataGrid EnableRowVirtualization="True" EnableColumnVirtualization="True" ItemsSource="{Binding Judges}" SelectedItem="{Binding SelectedJudge}" FontSize="12" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" Margin="5" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="auto" Header="#" Binding="{Binding Path=Number}"></DataGridTextColumn>
+                            <DataGridTextColumn Width="auto" Header="Фамилия"  Binding="{Binding Path=Surname}"></DataGridTextColumn>
+                            <DataGridTextColumn Width="auto" Header="Имя"  Binding="{Binding Path=Name}"></DataGridTextColumn>
+                            <DataGridTextColumn Width="auto" Header="Отчество"  Binding="{Binding Path=Patronymic}"></DataGridTextColumn>
+                            <DataGridTextColumn Width="auto" Header="Город"  Binding="{Binding Path=City}"></DataGridTextColumn>
+                            <DataGridTextColumn Width="auto" Header="Должность"  Binding="{Binding Path=Post}"></DataGridTextColumn>
+                            <DataGridTextColumn Width="auto" Header="Категория"  Binding="{Binding Path=Rank}"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
             </Grid>
         </Grid>
         <Grid Grid.Column="1" Background="#FF5B25BB" Width="1" Margin="5">

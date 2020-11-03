@@ -35,6 +35,7 @@ namespace Shinkuro.ViewModels
         public ICommand GoToGroupsPageCommand { get; set; }
         public ICommand GoToPatricipantsPageCommand { get; set; }
         public ICommand GoToJudgePageCommand { get; set; }
+        public ICommand GoToGroupJudgesPageCommand { get; set; }
         public ICommand GoToCompetitionCommandPageCommand { get; set; }
         public ICommand GoToCompetitionFigurePageCommand { get; set; }
 
@@ -43,6 +44,7 @@ namespace Shinkuro.ViewModels
         public ViewModelBase HomePageViewModel { get; private set; }
         public ViewModelBase PatricipantsPageViewModel { get; private set; }
         public ViewModelBase JudgePageViewModel { get; private set; }        
+        public ViewModelBase GroupJudgesPageViewModel { get; private set; }        
         public ViewModelBase GroupsPageViewModel { get; private set; }
         public ViewModelBase CompetitionFigurePageViewModel { get; private set; }
         public ViewModelBase CompetitionCommandPageViewModel { get; private set; }
@@ -62,8 +64,9 @@ namespace Shinkuro.ViewModels
         {
             HomePageViewModel = new HomePageViewModel();
             SettingsPageViewModel = new SettingsPageViewModel(Competition);
-            JudgePageViewModel = new JudgePageViewModel();
-            GroupsPageViewModel = new GroupsPageViewModel();
+            JudgePageViewModel = new JudgePageViewModel(MainContext);
+            GroupJudgesPageViewModel = new GroupJudgesPageViewModel();
+            GroupsPageViewModel = new GroupsPageViewModel(MainContext);
             CompetitionCommandPageViewModel = new CompetitionCommandPageViewModel();
             CompetitionFigurePageViewModel = new CompetitionFigurePageViewModel();
             PatricipantsPageViewModel = new PatricipantPageViewModel(MainContext);
@@ -78,6 +81,7 @@ namespace Shinkuro.ViewModels
             GoToCompetitionCommandPageCommand = new RelayCommand(GoToCompetitionCommandPageCommandExecute, GoToCompetitionCommandPageCommandCanExecute);
             GoToCompetitionFigurePageCommand = new RelayCommand(GoToCompetitionFigurePageCommandExecute,GoToCompetitionFigurePageCommandCanExecute);
             GoToGroupsPageCommand = new RelayCommand(GoToGroupsPageCommandExecute, GoToGroupsPageCommandCanExecute);
+            GoToGroupJudgesPageCommand = new RelayCommand(GoToGroupJudgesPageCommandExecute, GoToGroupJudgesPageCommandCanExecute);
         }
 
         private void GoToHomePageCommandExecute(object viewModel)
@@ -125,6 +129,19 @@ namespace Shinkuro.ViewModels
             {
                 CurrentCompetitionURI = CompetitionPagesResolver.JudgeAlias;
                 CompetitionNavigator.Navigate(CompetitionPagesResolver.JudgeAlias, JudgePageViewModel);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.StackTrace);
+            }
+        }
+
+        private void GoToGroupJudgesPageCommandExecute(object viewModel)
+        {
+            try
+            {
+                CurrentCompetitionURI = CompetitionPagesResolver.GroupJudgesAlias;
+                CompetitionNavigator.Navigate(CompetitionPagesResolver.GroupJudgesAlias, JudgePageViewModel);
             }
             catch (Exception ex)
             {
@@ -192,6 +209,11 @@ namespace Shinkuro.ViewModels
             return CompetitionPagesResolver.JudgeAlias != CurrentCompetitionURI;
         }
 
+        private bool GoToGroupJudgesPageCommandCanExecute(object viewModel)
+        {
+            return CompetitionPagesResolver.GroupJudgesAlias != CurrentCompetitionURI;
+        }
+
         private bool GoToCompetitionCommandPageCommandCanExecute(object viewModel)
         {
             return CompetitionPagesResolver.CompetitionCommandAlias != CurrentCompetitionURI;
@@ -206,6 +228,5 @@ namespace Shinkuro.ViewModels
         {
             return CompetitionPagesResolver.GroupsAlias != CurrentCompetitionURI;
         }
-
     }
 }

@@ -7,11 +7,10 @@
         xmlns:fa="http://schemas.fontawesome.com/icons/"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Менеджер фигур" Height="650" Width="1000" WindowState="Maximized">
+        Title="Менеджер фигур" Height="650" Width="1000" WindowState="Maximized" Name="figureManager">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition Width="400"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
@@ -29,81 +28,45 @@
                 <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="10 10 5 10">
                     <fa:FontAwesome FontSize="18" Icon="Solid_Search"></fa:FontAwesome>
                 </TextBlock>
-                <TextBox  md:HintAssist.Hint="Введите название фигуры" md:TextFieldAssist.HasClearButton="True" ToolTip="Введите название фигуры" Padding="5 0" Grid.Column="1" FontSize="16" Margin="5 10 10 10"></TextBox>
-                
+                <TextBox Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  md:HintAssist.Hint="Введите название фигуры" md:TextFieldAssist.HasClearButton="True" ToolTip="Введите название фигуры" Padding="5 0" Grid.Column="1" FontSize="16" Margin="5 10 10 10"></TextBox>
+
             </Grid>
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="1" Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock VerticalAlignment="Center" FontSize="20" Grid.Column="0" Margin="10" FontWeight="DemiBold">Фигуры</TextBlock>
-                <Button ToolTip="Добавить фигуру" Grid.Column="2" Margin="10" Padding="0" Width="26" Height="26" Cursor="Hand">
-                    <md:PackIcon Kind="Plus" Height="16"></md:PackIcon>
+                <TextBlock VerticalAlignment="Center" FontSize="20" Grid.Column="0" FontWeight="DemiBold">Фигуры</TextBlock>
+                <Button Command="{Binding CreateFigureCommand}" ToolTip="Добавить фигуру" Grid.Column="5"  VerticalAlignment="Bottom" Padding="0" Height="26" Width="26" Margin="5">
+                    <md:PackIcon Kind="Plus" ></md:PackIcon>
+                </Button>
+                <Button  Command="{Binding ViewFigureCommand}" ToolTip="Просмотр информации о фигуру" Grid.Column="4" VerticalAlignment="Bottom"  Padding="0" Height="26" Width="26" Margin="5">
+                    <md:PackIcon Kind="Eye" Height="14"></md:PackIcon>
+                </Button>
+                <Button  Command="{Binding EditFigureCommand}" ToolTip="Изменить фигуру" Grid.Column="3" VerticalAlignment="Bottom" Padding="0" Height="26" Width="26" Margin="5">
+                    <md:PackIcon Kind="Pen" Height="14"></md:PackIcon>
+                </Button>
+                <Button  Command="{Binding RemoveFigureCommand}" ToolTip="Удалить фигуру" Grid.Column="2"  VerticalAlignment="Bottom" Padding="0" Height="26" Width="26" Margin="5">
+                    <md:PackIcon Kind="Delete" Height="14"></md:PackIcon>
                 </Button>
             </Grid>
             <Grid Grid.Row="2">
-                <DataGrid CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" Margin="10 0 10 10" AutoGenerateColumns="False">
+                <DataGrid SelectedItem="{Binding SelectedFigure}" ItemsSource="{Binding Figures}" CanUserAddRows="False" CanUserDeleteRows="False" FontSize="15" CanUserReorderColumns="False" IsReadOnly="True" Margin="10 0 10 10" AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Width="auto" Header="Название"></DataGridTextColumn>
-                        <DataGridTextColumn Width="auto" Header="Коэффициент"></DataGridTextColumn>
-                        <DataGridTextColumn Width="*" Header="Описание"></DataGridTextColumn>
+                        <DataGridTextColumn Width="auto" Header="Название" Binding="{Binding Path=Name}"></DataGridTextColumn>
+                        <DataGridTextColumn Width="auto" Header="Коэффициент" Binding="{Binding Path=Complexity}"></DataGridTextColumn>
+                        <DataGridTextColumn Width="*" Header="Описание" Binding="{Binding Path=Description}"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
             <StackPanel Grid.Row="3" Orientation="Horizontal">
-                <Button Width="130" Margin="10">Назад</Button>
+                <Button Width="100" IsCancel="True" Margin="10">Закрыть</Button>
             </StackPanel>
-        </Grid>
-        <Grid Grid.Column="1" >
-            <GroupBox Header="Выбранная фигура" FontSize="16" Margin="10 10 10 62">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"></RowDefinition>
-                        <RowDefinition Height="auto"></RowDefinition>
-                        <RowDefinition Height="auto"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="auto"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <StackPanel Grid.Row="0" Margin="5">
-                        <TextBlock FontSize="16" FontWeight="DemiBold">Название:</TextBlock>
-                        <TextBox></TextBox>
-                    </StackPanel>
-                    <StackPanel  Grid.Row="1" Margin="5">
-                        <TextBlock FontSize="16" FontWeight="DemiBold">Коэффициент сложности:</TextBlock>
-                        <TextBox></TextBox>
-                    </StackPanel>
-                    <StackPanel  Grid.Row="2" Margin="5">
-                        <TextBlock FontSize="16" FontWeight="DemiBold">Описание:</TextBlock>
-                        <TextBox FontSize="14" VerticalAlignment="Stretch" 
-                                 Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" 
-                                 TextWrapping="Wrap" 
-                                 Padding="0" 
-                                 Height="300">
-                         </TextBox>
-                    </StackPanel>
-                    <Grid Grid.Row="4">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Button Width="130" Margin="5" Grid.Column="1">
-                            <StackPanel Orientation="Horizontal">
-                                <fa:FontAwesome FontSize="14" VerticalAlignment="Center" Margin="0 0 10 0" Icon="Solid_Times"></fa:FontAwesome>
-                                <TextBlock>Удалить</TextBlock>
-                            </StackPanel>
-                        </Button>
-                        <Button Width="130" Margin="5" Grid.Column="2">
-                            <StackPanel Orientation="Horizontal">
-                                <fa:FontAwesome FontSize="14" VerticalAlignment="Center" Margin="0 0 10 0" Icon="Solid_PencilAlt"></fa:FontAwesome>
-                                <TextBlock>Изменить</TextBlock>
-                            </StackPanel>
-                        </Button>
-                    </Grid>
-                </Grid>
-            </GroupBox>
         </Grid>
     </Grid>
 </Window>

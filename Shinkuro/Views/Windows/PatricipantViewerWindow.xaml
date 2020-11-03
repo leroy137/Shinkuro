@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Shinkuro.Views.Windows"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Участник" Height="550" Width="450" WindowStartupLocation="CenterScreen" Name="windowView">
+        Title="Участник" ResizeMode="NoResize" Height="550" Width="450" WindowStartupLocation="CenterScreen" Name="windowView">
     <Grid TextBlock.FontSize="14">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -26,7 +26,7 @@
             <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
                 <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Account" />
             </TextBlock>
-            <TextBox ToolTip="Фамилия" IsReadOnly="True" Text="{Binding Path=Patricipant.Firstname}"  md:HintAssist.Hint="Фамилия" Grid.Column="1"  Padding="5 0" ></TextBox>
+            <TextBox ToolTip="Фамилия" IsReadOnly="True" Text="{Binding Path=Patricipant.Surname}"  md:HintAssist.Hint="Фамилия" Grid.Column="1"  Padding="5 0" ></TextBox>
         </Grid>
         <Grid Grid.Row="1" Margin="5 10">
             <Grid.ColumnDefinitions>
@@ -36,7 +36,7 @@
             <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
                 <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Account" />
             </TextBlock>
-            <TextBox ToolTip="Имя" IsReadOnly="True" Text="{Binding Path=Patricipant.Surname}" md:HintAssist.Hint="Имя" Grid.Column="1" Padding="5 0" ></TextBox>
+            <TextBox ToolTip="Имя" IsReadOnly="True" Text="{Binding Path=Patricipant.Name}" md:HintAssist.Hint="Имя" Grid.Column="1" Padding="5 0" ></TextBox>
         </Grid>
         <Grid Grid.Row="2" Margin="5 10">
             <Grid.ColumnDefinitions>
@@ -46,7 +46,7 @@
             <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
                 <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Account" />
             </TextBlock>
-            <TextBox ToolTip="Отчество" IsReadOnly="True" Text="{Binding Path=Patricipant.Lastname}" md:HintAssist.Hint="Отчество" Grid.Column="1" Padding="5 0" ></TextBox>
+            <TextBox ToolTip="Отчество" IsReadOnly="True" Text="{Binding Path=Patricipant.Patronymic}" md:HintAssist.Hint="Отчество" Grid.Column="1" Padding="5 0" ></TextBox>
         </Grid>
         <Grid Grid.Row="3" Margin="5 10">
             <Grid.ColumnDefinitions>
@@ -101,7 +101,7 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnClose" Click="btnClose_Click" Grid.Column="0">Назад</Button>
+            <Button x:Name="btnClose" FontSize="12" Width="90" Click="btnClose_Click" Grid.Column="0">Назад</Button>
         </Grid>
     </Grid>
 </Window>

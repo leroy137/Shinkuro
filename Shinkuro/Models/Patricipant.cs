@@ -8,9 +8,9 @@ namespace Shinkuro.Models
     {
         private int _number;
 
-        private String _firstname;
+        private String _name;
         private String _surname;
-        private String _lastname;
+        private String _patronymic;
 
         private int _year;
         private string _city;
@@ -19,9 +19,9 @@ namespace Shinkuro.Models
         /// <summary>
         /// Фамилия
         /// </summary>
-        public String Firstname
+        public String Surname
         {
-            get { return _firstname; }
+            get { return _surname; }
             set
             {
                 if (String.IsNullOrWhiteSpace(value))
@@ -31,16 +31,16 @@ namespace Shinkuro.Models
                 if (value.Length > maxSizeField)
                     throw new Exception($"Превышен лимит символов для ФАМИЛИИ участника в {maxSizeField} символов!");
 
-                _firstname = value;
+                _surname = value;
             }
         }
 
         /// <summary>
         /// Имя
         /// </summary>
-        public String Surname
+        public String Name
         {
-            get { return _surname; }
+            get { return _name; }
             set
             {
                 if (String.IsNullOrWhiteSpace(value))
@@ -50,23 +50,23 @@ namespace Shinkuro.Models
                 if (value.Length > maxSizeField)
                     throw new Exception($"Превышен лимит символов для ИМЯ участника в {maxSizeField} символов!");
 
-                _surname = value;
+                _name = value;
             }
         }
 
         /// <summary>
         /// Отчество
         /// </summary>
-        public String Lastname
+        public String Patronymic
         {
-            get { return _lastname; }
+            get { return _patronymic; }
             set
             {
                 int maxSizeField = 50;
-                if (value.Length > maxSizeField)
+                if (!String.IsNullOrWhiteSpace(value)&&value.Length > maxSizeField)
                     throw new Exception($"Превышен лимит символов для ОТЧЕСТВО участника в {maxSizeField} символов!");
 
-                _lastname = value;
+                _patronymic = value;
             }
         }
 
@@ -108,16 +108,18 @@ namespace Shinkuro.Models
             }
         }
 
+        public String FIO => $"{Surname} {Name} {Patronymic}";
+
         public Patricipant()
         {
 
         }
 
-        public Patricipant(String firstname, String surname, String lastname, int number, int year, string city, string rank)
+        public Patricipant(String surname, String name, String patronymic, int number, int year, string city, string rank)
         {
-            Firstname = firstname;
             Surname = surname;
-            Lastname = lastname;
+            Name = name;
+            Patronymic = patronymic;
             Number = number;
             Year = year;
             City = city;

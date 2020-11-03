@@ -27,8 +27,6 @@ namespace Shinkuro.ViewModels
                 Set(ref _title, value);
             }
         }
-        public ObservableCollection<Competition> Competitions { get; set; }
-
         public ICommand CreateCompetitionCommand { get; private set; }
         public ICommand OpenCompetitionCommand { get; private set; }
 

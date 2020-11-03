@@ -21,9 +21,9 @@ namespace Shinkuro.Views.Windows
 
         internal Patricipant PatricipantEdit { get; set; }
 
-        public String FirstName { get; set; }
-        public String SecondName { get; set; }
-        public String LastName { get; set; }
+        public String Surname { get; set; }
+        public String PatricipantName { get; set; }
+        public String Patronymic { get; set; }
         public String City { get; set; }
         public String Rank { get; set; }
         public String YearBirthday { get; set; }
@@ -37,9 +37,9 @@ namespace Shinkuro.Views.Windows
 
         public PatricipantEditorWindow(Patricipant patricipant) : this()
         {
-            FirstName = patricipant.Firstname;
-            SecondName = patricipant.Surname;
-            LastName = patricipant.Lastname;
+            Surname = patricipant.Surname;
+            PatricipantName = patricipant.Name;
+            Patronymic = patricipant.Patronymic;
             City = patricipant.City;
             Rank = patricipant.Rank;
             YearBirthday = patricipant.Year.ToString();
@@ -62,7 +62,7 @@ namespace Shinkuro.Views.Windows
                 if (!Int32.TryParse(Number, out int yearbirthday))
                     throw new Exception("Неверно введен год рождения участника");
 
-                Patricipant patricipant = new Patricipant(FirstName, SecondName, LastName, number, yearbirthday, City, Rank);
+                Patricipant patricipant = new Patricipant(Surname, PatricipantName, Patronymic, number, yearbirthday, City, Rank);
                 PatricipantEdit = patricipant;
                 this.DialogResult = true;
                 this.Close();
