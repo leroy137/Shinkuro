@@ -8,6 +8,8 @@ namespace Shinkuro.Models
     internal class ApplicationCoreContext
     {
         public Competition CurrentCompetition { get; set; }
+
+        public static ObservableCollection<Figure> Figures { get; set; }
         public ObservableCollection<Patricipant> Patricipants { get; set; }
         public ObservableCollection<Judge> Judges { get; set; }
         public ObservableCollection<Group> Groups { get; set; }
@@ -17,6 +19,11 @@ namespace Shinkuro.Models
             Patricipants = new ObservableCollection<Patricipant>();
             Judges = new ObservableCollection<Judge>();
             Groups = new ObservableCollection<Group>();
+        }
+
+        static ApplicationCoreContext()
+        {
+            Figures = new ObservableCollection<Figure>();
         }
 
         public void UpdateCompetition(Competition competition)
@@ -73,6 +80,13 @@ namespace Shinkuro.Models
             destination.Description = source.Description;
         }
 
+        public static void UpdateFigure(Figure destination, Figure source)
+        {
+            destination.Name = source.Name;
+            destination.Complexity = source.Complexity;
+            destination.Description = source.Description;
+        }
+
         public void AddPatricipant(Patricipant patricipant)
         {
             if (patricipant == null)
@@ -97,6 +111,14 @@ namespace Shinkuro.Models
             Groups.Add(group);
         }
 
+        public static void AddFigure(Figure figure)
+        {
+            if (figure == null)
+                throw new NullReferenceException("Добавление фигуры невозможно, так как обеъкт фигуры не задан и равен null");
+
+            Figures.Add(figure);
+        }
+
         public bool RemovePatricipant(Patricipant patricipant)
         {
             if (patricipant == null)
@@ -119,6 +141,14 @@ namespace Shinkuro.Models
                 throw new NullReferenceException("Группа для удаления не задана!");
 
             return Groups.Remove(group);
+        }
+
+        public static bool RemoveFigure(Figure figure)
+        {
+            if (figure == null)
+                throw new NullReferenceException("Удаление фигуры невозможно, так как обеъкт фигуры не задан и равен null");
+
+            return Figures.Remove(figure);
         }
     }
 }

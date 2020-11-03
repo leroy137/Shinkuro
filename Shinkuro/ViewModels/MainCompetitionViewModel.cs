@@ -228,6 +228,5 @@ namespace Shinkuro.ViewModels
         {
             return CompetitionPagesResolver.GroupsAlias != CurrentCompetitionURI;
         }
-
     }
 }

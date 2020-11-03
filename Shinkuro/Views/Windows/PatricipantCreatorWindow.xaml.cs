@@ -43,7 +43,7 @@ namespace Shinkuro.Views.Windows
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace, "Ошибка!");
+                MessageBox.Show(ex.Message, "Ошибка!");
             }
         }
 
@@ -64,7 +64,7 @@ namespace Shinkuro.Views.Windows
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace, "Ошибка!");
+                MessageBox.Show(ex.Message, "Ошибка!");
             }
         }
     }

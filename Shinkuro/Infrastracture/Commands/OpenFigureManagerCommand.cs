@@ -4,6 +4,7 @@ using System.Text;
 using Shinkuro.Infrastracture.Commands.Base;
 using System.Windows;
 using Shinkuro.Views.Windows;
+using Shinkuro.Models;
 
 namespace Shinkuro.Infrastracture.Commands
 {
