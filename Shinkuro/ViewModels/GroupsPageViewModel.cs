@@ -46,7 +46,17 @@ namespace Shinkuro.ViewModels
         {
             try
             {
-                
+                if (SelectedGroup == null)
+                    throw new Exception("Группа для удаления не выбрана!");
+
+                var result = MessageBox.Show($"Удалить группу {SelectedGroup.Name}?", "Удаление группы", MessageBoxButton.YesNo);
+
+                if (result == MessageBoxResult.Yes) // если да то удаляем
+                {
+                    String name = SelectedGroup.Name;
+                    Context.RemoveGroup(SelectedGroup);
+                    MessageBox.Show($"Группа {name} удалена!");
+                }
             }
             catch (Exception ex)
             {
@@ -63,8 +73,20 @@ namespace Shinkuro.ViewModels
         {
             try
             {
-                
 
+                if (SelectedGroup == null)
+                    throw new Exception("Группа для изменения не выбрана!");
+
+
+                GroupEditorWindow editorWindow = new GroupEditorWindow(SelectedGroup);
+                editorWindow.ShowDialog();
+                if (editorWindow.DialogResult == true)
+                {
+                    Group edit = editorWindow.GroupEdit;
+                    Context.UpdateGroup(SelectedGroup, edit);
+                    MessageBox.Show("Грппа успешно изменена!", "Изменение группы");
+                    Groups.Refresh();
+                }
             }
             catch (Exception ex)
             {
@@ -108,7 +130,11 @@ namespace Shinkuro.ViewModels
         {
             try
             {
-                
+                if (SelectedGroup == null)
+                    throw new Exception("Группа для просмотра не выбрана!");
+
+                GroupViewerWindow groupViewerWindow = new GroupViewerWindow(SelectedGroup);
+                groupViewerWindow.ShowDialog();
             }
             catch (Exception ex)
             {

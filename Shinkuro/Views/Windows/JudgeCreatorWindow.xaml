@@ -112,8 +112,8 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnClose" Click="btnClose_Click" Grid.Column="0">Отмена</Button>
-            <Button x:Name="btnCreate" Click="btnCreate_Click" Grid.Column="2">Создать</Button>
+            <Button x:Name="btnClose" FontSize="12" Width="90" Click="btnClose_Click" Grid.Column="0">Отмена</Button>
+            <Button x:Name="btnCreate" FontSize="12" Width="90" Click="btnCreate_Click" Grid.Column="2">Создать</Button>
         </Grid>
     </Grid>
 </Window>

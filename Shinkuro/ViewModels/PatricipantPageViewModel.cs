@@ -155,8 +155,8 @@ namespace Shinkuro.ViewModels
                     Patricipant edit = patricipantEditorWindow.PatricipantEdit;
                     Context.UpdatePatricipant(SelectedPatricipant, edit);
                     MessageBox.Show("Участник успешно изменен!", "Изменение участника");
+                    Patricipants.Refresh();
                 }
-
             }
             catch (Exception ex)
             {

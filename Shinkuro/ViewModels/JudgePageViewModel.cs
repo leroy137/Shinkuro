@@ -153,6 +153,7 @@ namespace Shinkuro.ViewModels
                     Judge edit = editorWindow.JudgeEdit;
                     Context.UpdateJudge(SelectedJudge, edit);
                     MessageBox.Show("Судья успешно изменен!", "Изменение судьи");
+                    Judges.Refresh();
                 }
             }
             catch (Exception ex)

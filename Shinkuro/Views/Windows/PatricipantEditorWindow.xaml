@@ -101,8 +101,8 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnClose" Click="btnClose_Click" Grid.Column="0">Отмена</Button>
-            <Button x:Name="btnChange" Click="btnChange_Click" Grid.Column="2">Изменить</Button>
+            <Button x:Name="btnClose" FontSize="12" Width="90" Click="btnClose_Click" Grid.Column="0">Отмена</Button>
+            <Button x:Name="btnChange" FontSize="12" Width="90" Click="btnChange_Click" Grid.Column="2">Изменить</Button>
         </Grid>
     </Grid>
 </Window>

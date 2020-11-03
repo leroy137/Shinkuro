@@ -88,7 +88,7 @@
                     </StackPanel>
                 </Button>
                 <Button Height="50"  Style="{StaticResource MaterialDesignFlatButton}" 
-                        Command="{Binding GoToJudgePageCommand}"
+                        Command="{Binding GoToGroupJudgesPageCommand}"
                         Grid.Row="3" Cursor="Hand" Padding="0">
                     <StackPanel Orientation="Horizontal">
                         <md:PackIcon Margin="0 0 5 0" Kind="Flag" VerticalAlignment="Center" Foreground="{Binding ElementName=txtButtonJudgeName, Path=Foreground}" />

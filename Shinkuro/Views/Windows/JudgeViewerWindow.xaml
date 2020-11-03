@@ -112,7 +112,7 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnClose" Click="btnClose_Click" Grid.Column="0">Назад</Button>
+            <Button x:Name="btnClose" FontSize="12" Width="90" Click="btnClose_Click" Grid.Column="0">Назад</Button>
         </Grid>
     </Grid>
 </Window>

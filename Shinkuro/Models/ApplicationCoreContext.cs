@@ -59,6 +59,20 @@ namespace Shinkuro.Models
             destination.Info = source.Info;
         }
 
+        public void UpdateGroup(Group destination, Group source)
+        {
+            if (destination == null)
+                throw new Exception("Изменение группы невозможно, так как она не выбрана и равна null!");
+
+            if (source == null)
+                throw new Exception("Изменение группы невозможно, так как измененный обект группы не выбран и равен null!");
+
+            destination.Name = source.Name;
+            destination.StartYear = source.StartYear;
+            destination.FinishYear = source.FinishYear;
+            destination.Description = source.Description;
+        }
+
         public void AddPatricipant(Patricipant patricipant)
         {
             if (patricipant == null)
@@ -97,6 +111,14 @@ namespace Shinkuro.Models
                 throw new NullReferenceException("Судья не задан!");
 
             return Judges.Remove(judge);
+        }
+
+        public bool RemoveGroup(Group group)
+        {
+            if (group == null)
+                throw new NullReferenceException("Группа для удаления не задана!");
+
+            return Groups.Remove(group);
         }
     }
 }
