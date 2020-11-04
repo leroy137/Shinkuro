@@ -14,10 +14,16 @@ namespace Shinkuro.ViewModels
 {
     class GroupsPageViewModel : ViewModelBase 
     {
+
+        private Group _seletedGroup = null;
         public ApplicationCoreContext Context { get; set; }
         public ICollectionView Groups { get; set; }
 
-        public Group SelectedGroup { get; set; }
+        public Group SelectedGroup 
+        { 
+            get { return _seletedGroup; } 
+            set { Set<Group>(ref _seletedGroup, value); } 
+        }
 
         #region Команды
 

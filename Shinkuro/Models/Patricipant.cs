@@ -108,6 +108,8 @@ namespace Shinkuro.Models
             }
         }
 
+        public String SportSchool { get; set; }
+
         public String FIO => $"{Surname} {Name} {Patronymic}";
 
         public Patricipant()
@@ -115,15 +117,15 @@ namespace Shinkuro.Models
 
         }
 
-        public Patricipant(String surname, String name, String patronymic, int number, int year, string city, string rank)
+        public Patricipant(String surname, String name, String patronymic, int year, string city, string rank, string sportSchool)
         {
             Surname = surname;
             Name = name;
             Patronymic = patronymic;
-            Number = number;
             Year = year;
             City = city;
             Rank = rank;
+            SportSchool = sportSchool;
         }
     }
 }

@@ -23,7 +23,6 @@ namespace Shinkuro.Views.Windows
         public String JudgeName { get; set; }
         public String Patronymic { get; set; }
         public String City { get; set; }
-        public String Number { get; set; }
         public String Category { get; set; }
         public String Work { get; set; }
         public String Description { get; set; }
@@ -40,7 +39,6 @@ namespace Shinkuro.Views.Windows
             JudgeName = judge.Name;
             Patronymic = judge.Patronymic;
             City = judge.City;
-            Number = judge.Number.ToString();
             Category = judge.Rank;
             Work = judge.Post;
             Description = judge.Info;
@@ -56,10 +54,7 @@ namespace Shinkuro.Views.Windows
         {
             try
             {
-                if (!Int32.TryParse(Number, out int number))
-                    throw new Exception("Формат поля НОМЕР судьи задан некорректно!");
-
-                Judge judge = new Judge(Surname, JudgeName, Patronymic, number, Category, Work, City, Description);
+                Judge judge = new Judge(Surname, JudgeName, Patronymic, Category, Work, City, Description);
                 JudgeNew = judge;
 
                 this.DialogResult = true;

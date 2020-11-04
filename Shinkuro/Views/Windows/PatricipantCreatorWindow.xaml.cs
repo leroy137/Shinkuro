@@ -26,7 +26,7 @@ namespace Shinkuro.Views.Windows
         public String City { get; set; }
         public String Rank { get; set; }
         public String YearBirthday { get; set; }
-        public String Number { get; set; }
+        public String SportSchool { get; set; }
 
         public PatricipantCreatorWindow()
         {
@@ -51,13 +51,11 @@ namespace Shinkuro.Views.Windows
         {
             try
             {
-                if (!Int32.TryParse(Number, out int number))
-                    throw new Exception("Неверно введен номер участника!");
 
-                if (!Int32.TryParse(Number, out int yearbirthday))
+                if (!Int32.TryParse(YearBirthday, out int yearbirthday))
                     throw new Exception("Неверно введен год рождения участника");
 
-                Patricipant patricipant = new Patricipant(Surname, PatricipantName, Patronymic, number, yearbirthday, City, Rank);
+                Patricipant patricipant = new Patricipant(Surname, PatricipantName, Patronymic, yearbirthday, City, Rank, SportSchool);
                 PatricipantNew = patricipant;
                 this.DialogResult = true;
                 this.Close();

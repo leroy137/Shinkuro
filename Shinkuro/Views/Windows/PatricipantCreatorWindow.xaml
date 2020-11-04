@@ -48,20 +48,11 @@
             </TextBlock>
             <TextBox  Text="{Binding Patronymic, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" md:HintAssist.Hint="Отчество" Grid.Column="1" Padding="5 0" ></TextBox>
         </Grid>
+        
         <Grid Grid.Row="3" Margin="5 10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
-                <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Place" />
-            </TextBlock>
-            <TextBox  Text="{Binding City, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" md:HintAssist.Hint="Город" Grid.Column="1" Padding="5 0" ></TextBox>
-        </Grid>
-        <Grid Grid.Row="4" Margin="5 10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
-                <ColumnDefinition Width="50"></ColumnDefinition>
+                <ColumnDefinition Width="30"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
@@ -69,10 +60,10 @@
                     <ColumnDefinition Width="auto"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock VerticalAlignment="Center" Grid.Column="0" >
-                    <md:PackIcon Kind="MusicAccidentalSharp" Grid.Column="0" Margin="5 0" />
-                </TextBlock>
-                <TextBox  Text="{Binding Number, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="1" Width="150" md:HintAssist.Hint="Номер #" Padding="5 0" ></TextBox>
+                    <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
+                <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Place" />
+                    </TextBlock>
+                <TextBox Width="180" Text="{Binding City, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" md:HintAssist.Hint="Город" Grid.Column="1" Padding="5 0" ></TextBox>
             </Grid>
             <Grid Grid.Column="2">
                 <Grid.ColumnDefinitions>
@@ -84,6 +75,16 @@
                 </TextBlock>
                 <TextBox  Text="{Binding YearBirthday, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="1" md:HintAssist.Hint="Год рождения" Grid.Row="3" Padding="5 0" ></TextBox>
             </Grid>
+        </Grid>
+        <Grid Grid.Row="4" Margin="5 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
+                    <md:PackIcon Grid.Column="0" Kind="Warehouse" />
+            </TextBlock>
+            <TextBox  Text="{Binding SportSchool, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" md:HintAssist.Hint="Спортивная школа" Grid.Column="1" Padding="5 0" ></TextBox>
         </Grid>
         <Grid Grid.Row="5" Margin="5 10">
             <Grid.ColumnDefinitions>

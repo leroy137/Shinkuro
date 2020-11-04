@@ -112,12 +112,12 @@
             <Grid Grid.Row="2">
                 <DataGrid EnableRowVirtualization="True" EnableColumnVirtualization="True" SelectedItem="{Binding SelectedPatricipant}" ItemsSource="{Binding Patricipants}" FontSize="12" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" Margin="5" AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Width="auto" Header="#" Binding="{Binding Path=Number}"></DataGridTextColumn>
                         <DataGridTextColumn Width="auto" Header="Фамилия" Binding="{Binding Path=Surname}"></DataGridTextColumn>
                         <DataGridTextColumn Width="auto" Header="Имя" Binding="{Binding Path=Name}"></DataGridTextColumn>
                         <DataGridTextColumn Width="auto" Header="Отчество" Binding="{Binding Path=Patronymic}"></DataGridTextColumn>
                         <DataGridTextColumn Width="auto" Header="Год рождения" Binding="{Binding Path=Year}"></DataGridTextColumn>
-                        <DataGridTextColumn Width="*" Header="Город" Binding="{Binding Path=City}"></DataGridTextColumn>
+                        <DataGridTextColumn Width="auto" Header="Город" Binding="{Binding Path=City}"></DataGridTextColumn>
+                        <DataGridTextColumn Width="*" Header="Спортивная школа" Binding="{Binding Path=SportSchool}"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

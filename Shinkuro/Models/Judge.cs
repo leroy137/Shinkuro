@@ -7,21 +7,11 @@ namespace Shinkuro.Models
     public class Judge
     {
 
-        int _number;
         private String _surname;
         private String _name;
         private String _patronymic;
 
-        public Int32 Number // номер судьи
-        {
-            get { return _number; }
-            set
-            {
-                if (value <= 0)
-                    throw new Exception("Номер судьи не может быть числом равным нулю или меньше него!");
-                _number = value;
-            }
-        }
+        public Int32 Number { get; set; }
 
         public String Surname
         {
@@ -84,12 +74,11 @@ namespace Shinkuro.Models
 
         }
 
-        public Judge(String surname, String name, String patronymic, Int32 number, String rank, String post, String city, String info)
+        public Judge(String surname, String name, String patronymic, String rank, String post, String city, String info)
         {
             Surname = surname;
             Name = name;
             Patronymic = patronymic;
-            Number = number;
             Rank = rank;
             Post = post;
             City = city;

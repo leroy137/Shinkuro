@@ -59,52 +59,139 @@
             </Grid>
         </Grid>
         <Grid Grid.Column="1" Background="#FF5B25BB" Width="1" Margin="5"></Grid>
-        <TabControl Grid.Column="2" Margin="0 5">
-            <TabItem>
-                <TabItem.Header >
-                    <TextBlock FontSize="12">Фигуры</TextBlock>
-                </TabItem.Header>
-                <Grid>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition Width="auto"></ColumnDefinition>
-                            <ColumnDefinition Width="auto"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="0">
+        <Grid Grid.Column="2" Margin="0 5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Margin="5 0 5 5" Style="{StaticResource HeaderPageCompetition}">Выбранная группа:</TextBlock>
+                <Grid Grid.Row="1" Grid.IsSharedSizeScope="True">
+                    <Border CornerRadius="5" Height="100" BorderThickness="1" BorderBrush="#FFBCB0F1" Background="White">
+                        <Grid Margin="5" TextBlock.FontSize="14">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"></RowDefinition>
-                                <RowDefinition></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
                             </Grid.RowDefinitions>
-                            <Grid Grid.Row="0">
+                            <Grid Margin="5" Grid.Row="0">
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
                                     <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                                    <ColumnDefinition Width="auto"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock VerticalAlignment="Bottom" Grid.Column="0" Margin="5" FontSize="14" FontWeight="DemiBold">
-                            Фигуры
-                                </TextBlock>
-                                <Button ToolTip="Добавить фигуру" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
-                                    <md:PackIcon Kind="Plus" Height="14"></md:PackIcon>
-                                </Button>
-                                <Button ToolTip="Открепить фигуру" Grid.Column="3" VerticalAlignment="Bottom"  Padding="0" Height="22" Width="22" Margin="5">
-                                    <md:PackIcon Kind="BlockHelper" Height="14"></md:PackIcon>
-                                </Button>
+                                <TextBlock Grid.Column="0">Название группы:</TextBlock>
+                                <TextBlock Margin="10 0" FontWeight="SemiBold" Grid.Column="1" Text="{Binding Path=SelectedGroup.Name, TargetNullValue='...', FallbackValue='...'}"></TextBlock>
                             </Grid>
-                            <Grid Grid.Row="1">
-                                <DataGrid Margin="5 0 5 5"  FontSize="11" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Название" Width="*"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Сложность" Width="auto"></DataGridTextColumn>
-                                    </DataGrid.Columns>
-                                </DataGrid>
+                            <Grid Margin="5" Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition SharedSizeGroup="ColumnNameGroup" Width="auto"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0">год рождения (начало):</TextBlock>
+                                <TextBlock Margin="10 0" Grid.Column="1" FontWeight="SemiBold" Text="{Binding Path=SelectedGroup.StartYear, TargetNullValue='...', FallbackValue='...'}"></TextBlock>
+                            </Grid>
+                            <Grid Margin="5" Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition SharedSizeGroup="ColumnNameGroup" Width="auto"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0">год рождения (окончание):</TextBlock>
+                                <TextBlock Margin="10 0" Grid.Column="1" FontWeight="SemiBold" Text="{Binding Path=SelectedGroup.FinishYear, TargetNullValue='...', FallbackValue='...'}"></TextBlock>
                             </Grid>
                         </Grid>
-                        <Grid Grid.Column="1" Width="5" Visibility="Collapsed"></Grid>
-                        <Grid Grid.Column="2" Visibility="Collapsed">
+                    </Border>
+                </Grid>
+            </Grid>
+            <TabControl Grid.Row="1" Margin="0 15 5 0">
+                <TabItem>
+                    <TabItem.Header >
+                        <TextBlock FontSize="12">Фигуры</TextBlock>
+                    </TabItem.Header>
+                    <Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock VerticalAlignment="Bottom" Grid.Column="0" Margin="5" FontSize="14" FontWeight="DemiBold">
+                            Фигуры
+                                    </TextBlock>
+                                    <Button ToolTip="Добавить фигуру" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                                        <md:PackIcon Kind="Plus" Height="14"></md:PackIcon>
+                                    </Button>
+                                    <Button ToolTip="Открепить фигуру" Grid.Column="3" VerticalAlignment="Bottom"  Padding="0" Height="22" Width="22" Margin="5">
+                                        <md:PackIcon Kind="BlockHelper" Height="14"></md:PackIcon>
+                                    </Button>
+                                </Grid>
+                                <Grid Grid.Row="1">
+                                    <DataGrid Margin="5 0 5 5"  FontSize="11" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="Название" Width="*"></DataGridTextColumn>
+                                            <DataGridTextColumn Header="Сложность" Width="auto"></DataGridTextColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </Grid>
+                            </Grid>
+                            <Grid Grid.Column="1" Width="5" Visibility="Collapsed"></Grid>
+                            <Grid Grid.Column="2" Visibility="Collapsed">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock VerticalAlignment="Bottom" Grid.Column="0" Margin="5" FontSize="14" FontWeight="DemiBold">
+                            Судейская бригада
+                                    </TextBlock>
+                                    <Button ToolTip="Добавить судью" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                                        <md:PackIcon Kind="Plus" Height="16"></md:PackIcon>
+                                    </Button>
+                                    <Button ToolTip="Открепить судью" Grid.Column="3" VerticalAlignment="Bottom"  Padding="0" Height="22" Width="22" Margin="5">
+                                        <md:PackIcon Kind="BlockHelper" Height="14"></md:PackIcon>
+                                    </Button>
+                                </Grid>
+                                <Grid Grid.Row="1">
+                                    <DataGrid Margin="5 0 5 5" MinHeight="240"  FontSize="11" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="Фамилия ИО" Width="*"></DataGridTextColumn>
+                                            <DataGridTextColumn Header="Город" Width="auto"></DataGridTextColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <TextBlock>Участники</TextBlock>
+                    </TabItem.Header>
+                    <Grid>
+                        <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"></RowDefinition>
                                 <RowDefinition></RowDefinition>
@@ -117,75 +204,34 @@
                                     <ColumnDefinition Width="auto"></ColumnDefinition>
                                     <ColumnDefinition Width="auto"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock VerticalAlignment="Bottom" Grid.Column="0" Margin="5" FontSize="14" FontWeight="DemiBold">
-                            Судейская бригада
+                                <TextBlock Grid.Column="0" Margin="5" VerticalAlignment="Bottom" FontSize="14" FontWeight="DemiBold">
+                        Участники
                                 </TextBlock>
-                                <Button ToolTip="Добавить судью" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                                <Button ToolTip="Добавить участника" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
                                     <md:PackIcon Kind="Plus" Height="16"></md:PackIcon>
                                 </Button>
-                                <Button ToolTip="Открепить судью" Grid.Column="3" VerticalAlignment="Bottom"  Padding="0" Height="22" Width="22" Margin="5">
+                                <Button ToolTip="Открепить участника" Grid.Column="3" VerticalAlignment="Bottom"  Padding="0" Height="22" Width="22" Margin="5">
                                     <md:PackIcon Kind="BlockHelper" Height="14"></md:PackIcon>
                                 </Button>
                             </Grid>
                             <Grid Grid.Row="1">
-                                <DataGrid Margin="5 0 5 5" MinHeight="240"  FontSize="11" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
+                                <DataGrid Margin="5 0 5 5" MinHeight="300"  FontSize="11" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Фамилия ИО" Width="*"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Фамилия ИО" Width="auto"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Год рождения" Width="auto"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Город" Width="auto"></DataGridTextColumn>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
                         </Grid>
                     </Grid>
-                </Grid>
-            </TabItem>
-            <TabItem>
-                <TabItem.Header>
-                    <TextBlock>Участники</TextBlock>
-                </TabItem.Header>
-                <Grid>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition Width="auto"></ColumnDefinition>
-                                <ColumnDefinition Width="auto"></ColumnDefinition>
-                                <ColumnDefinition Width="auto"></ColumnDefinition>
-                                <ColumnDefinition Width="auto"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Margin="5" VerticalAlignment="Bottom" FontSize="14" FontWeight="DemiBold">
-                        Участники
-                            </TextBlock>
-                            <Button ToolTip="Добавить участника" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
-                                <md:PackIcon Kind="Plus" Height="16"></md:PackIcon>
-                            </Button>
-                            <Button ToolTip="Открепить участника" Grid.Column="3" VerticalAlignment="Bottom"  Padding="0" Height="22" Width="22" Margin="5">
-                                <md:PackIcon Kind="BlockHelper" Height="14"></md:PackIcon>
-                            </Button>
-                        </Grid>
-                        <Grid Grid.Row="1">
-                            <DataGrid Margin="5 0 5 5" MinHeight="300"  FontSize="11" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Фамилия ИО" Width="auto"></DataGridTextColumn>
-                                    <DataGridTextColumn Header="Год рождения" Width="auto"></DataGridTextColumn>
-                                    <DataGridTextColumn Header="Город" Width="auto"></DataGridTextColumn>
-                                </DataGrid.Columns>
-                            </DataGrid>
-                        </Grid>
-                    </Grid>
-                </Grid>
-                
-                
-            </TabItem>
-            <TabItem>
-                <TabItem.Header>
-                    Судьи и фигуры
-                </TabItem.Header>
-            </TabItem>
-        </TabControl>
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        Судьи и фигуры
+                    </TabItem.Header>
+                </TabItem>
+            </TabControl>
+        </Grid>
     </Grid>
 </Page>

@@ -46,6 +46,7 @@ namespace Shinkuro.Models
             destination.City = source.City;
             destination.Rank = source.Rank;
             destination.Year = source.Year;
+            destination.SportSchool = source.SportSchool;
         }
 
         public void UpdateJudge(Judge destination, Judge source)
