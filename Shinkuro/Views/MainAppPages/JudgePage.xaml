@@ -99,7 +99,6 @@
                 <Grid Grid.Row="2">
                     <DataGrid EnableRowVirtualization="True" EnableColumnVirtualization="True" ItemsSource="{Binding Judges}" SelectedItem="{Binding SelectedJudge}" FontSize="12" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" Margin="5" AutoGenerateColumns="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Width="auto" Header="#" Binding="{Binding Path=Number}"></DataGridTextColumn>
                             <DataGridTextColumn Width="auto" Header="Фамилия"  Binding="{Binding Path=Surname}"></DataGridTextColumn>
                             <DataGridTextColumn Width="auto" Header="Имя"  Binding="{Binding Path=Name}"></DataGridTextColumn>
                             <DataGridTextColumn Width="auto" Header="Отчество"  Binding="{Binding Path=Patronymic}"></DataGridTextColumn>

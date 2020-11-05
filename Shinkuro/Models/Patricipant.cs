@@ -6,7 +6,6 @@ namespace Shinkuro.Models
 {
     public class Patricipant
     {
-        private int _number;
 
         private String _name;
         private String _surname;
@@ -70,16 +69,6 @@ namespace Shinkuro.Models
             }
         }
 
-        public Int32 Number
-        {
-            get { return _number; }
-            set
-            {
-                if (value <= 0)
-                    throw new Exception("Номер участника не может быть меньше или равен нулю!");
-                _number = value;
-            }
-        }
         public Int32 Year
         {
             get { return _year; }

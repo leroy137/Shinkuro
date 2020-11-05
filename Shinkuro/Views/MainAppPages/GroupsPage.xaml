@@ -10,7 +10,7 @@
       Title="GroupsPage">
     <Grid Style="{StaticResource CompetitionPagePanel}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="520"></ColumnDefinition>
+            <ColumnDefinition Width="450"></ColumnDefinition>
             <ColumnDefinition Width="auto"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
@@ -65,48 +65,14 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                </Grid.RowDefinitions>
-                <TextBlock Margin="5 0 5 5" Style="{StaticResource HeaderPageCompetition}">Выбранная группа:</TextBlock>
-                <Grid Grid.Row="1" Grid.IsSharedSizeScope="True">
-                    <Border CornerRadius="5" Height="100" BorderThickness="1" BorderBrush="#FFBCB0F1" Background="White">
-                        <Grid Margin="5" TextBlock.FontSize="14">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"></RowDefinition>
-                                <RowDefinition Height="auto"></RowDefinition>
-                                <RowDefinition Height="auto"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Grid Margin="5" Grid.Row="0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0">Название группы:</TextBlock>
-                                <TextBlock Margin="10 0" FontWeight="SemiBold" Grid.Column="1" Text="{Binding Path=SelectedGroup.Name, TargetNullValue='...', FallbackValue='...'}"></TextBlock>
-                            </Grid>
-                            <Grid Margin="5" Grid.Row="1">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition SharedSizeGroup="ColumnNameGroup" Width="auto"></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0">год рождения (начало):</TextBlock>
-                                <TextBlock Margin="10 0" Grid.Column="1" FontWeight="SemiBold" Text="{Binding Path=SelectedGroup.StartYear, TargetNullValue='...', FallbackValue='...'}"></TextBlock>
-                            </Grid>
-                            <Grid Margin="5" Grid.Row="2">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition SharedSizeGroup="ColumnNameGroup" Width="auto"></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0">год рождения (окончание):</TextBlock>
-                                <TextBlock Margin="10 0" Grid.Column="1" FontWeight="SemiBold" Text="{Binding Path=SelectedGroup.FinishYear, TargetNullValue='...', FallbackValue='...'}"></TextBlock>
-                            </Grid>
-                        </Grid>
-                    </Border>
-                </Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Margin="5 0" FontSize="15" Style="{StaticResource HeaderPageCompetition}">Выбранная группа:</TextBlock>
+                <TextBlock Grid.Column="1"  Margin="5 0" FontSize="15" Foreground="#FF831CE2" Style="{StaticResource HeaderPageCompetition}" Text="{Binding SelectedGroup.Name, FallbackValue='не выбрана', TargetNullValue='не выбрана'}"></TextBlock>
             </Grid>
-            <TabControl Grid.Row="1" Margin="0 15 5 0">
+            <TabControl Grid.Row="1" Margin="0 5 5 0">
                 <TabItem>
                     <TabItem.Header >
                         <TextBlock FontSize="12">Фигуры</TextBlock>
@@ -228,7 +194,12 @@
                 </TabItem>
                 <TabItem>
                     <TabItem.Header>
-                        Судьи и фигуры
+                        Бригады судей и фигуры
+                    </TabItem.Header>
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        Разбивка по подгруппам
                     </TabItem.Header>
                 </TabItem>
             </TabControl>

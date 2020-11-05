@@ -62,7 +62,7 @@
                 <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
                 <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Place" />
                 </TextBlock>
-                <TextBox Width="180" IsReadOnly="True" Text="{Binding City}" md:HintAssist.Hint="Город" Grid.Column="1" Padding="5 0" ></TextBox>
+                <TextBox Width="180" IsReadOnly="True" Text="{Binding Path=Patricipant.City}" md:HintAssist.Hint="Город" Grid.Column="1" Padding="5 0" ></TextBox>
             </Grid>
             <Grid Grid.Column="2">
                 <Grid.ColumnDefinitions>
@@ -72,7 +72,7 @@
                 <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
                     <md:PackIcon Grid.Column="0" Kind="Calendar" />
                 </TextBlock>
-                <TextBox IsReadOnly="True"  Text="{Binding YearBirthday}" Grid.Column="1" md:HintAssist.Hint="Год рождения" Grid.Row="3" Padding="5 0" ></TextBox>
+                <TextBox IsReadOnly="True" Text="{Binding Path=Patricipant.Year}" Grid.Column="1" md:HintAssist.Hint="Год рождения" Grid.Row="3" Padding="5 0" ></TextBox>
             </Grid>
         </Grid>
         <Grid Grid.Row="4" Margin="5 10">
@@ -83,7 +83,7 @@
             <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
                     <md:PackIcon Grid.Column="0" Kind="Warehouse" />
             </TextBlock>
-            <TextBox  Text="{Binding SportSchool}" md:HintAssist.Hint="Спортивная школа" Grid.Column="1" Padding="5 0" ></TextBox>
+            <TextBox  Text="{Binding Path=Patricipant.SportSchool}" md:HintAssist.Hint="Спортивная школа" Grid.Column="1" Padding="5 0" ></TextBox>
         </Grid>
         <Grid Grid.Row="5" Margin="5 10">
             <Grid.ColumnDefinitions>

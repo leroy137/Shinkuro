@@ -46,7 +46,7 @@ namespace Shinkuro.Views.Windows
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
+            this.DialogResult = false;
             this.Close();
         }
 

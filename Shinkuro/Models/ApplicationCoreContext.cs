@@ -42,7 +42,6 @@ namespace Shinkuro.Models
             destination.Surname = source.Surname;
             destination.Name = source.Name;
             destination.Patronymic = source.Patronymic;
-            destination.Number = source.Number;
             destination.City = source.City;
             destination.Rank = source.Rank;
             destination.Year = source.Year;
@@ -60,7 +59,6 @@ namespace Shinkuro.Models
             destination.Name = source.Name;
             destination.Surname = source.Surname;
             destination.Patronymic = source.Patronymic;
-            destination.Number = source.Number;
             destination.City = source.City;
             destination.Rank = source.Rank;
             destination.Post = source.Post;
