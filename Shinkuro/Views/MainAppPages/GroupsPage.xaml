@@ -100,10 +100,10 @@
                                     <TextBlock VerticalAlignment="Bottom" Grid.Column="0" Margin="5" FontSize="14" FontWeight="DemiBold">
                             Фигуры
                                     </TextBlock>
-                                    <Button ToolTip="Добавить фигуру" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                                    <Button Command="{Binding SelectFiguresCommand}" ToolTip="Добавить фигуры" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
                                         <md:PackIcon Kind="Plus" Height="14"></md:PackIcon>
                                     </Button>
-                                    <Button ToolTip="Открепить фигуру" Grid.Column="3" VerticalAlignment="Bottom"  Padding="0" Height="22" Width="22" Margin="5">
+                                    <Button ToolTip="Открепить фигуру" Command="{Binding UnsetFigureCommand}" Grid.Column="3" VerticalAlignment="Bottom"  Padding="0" Height="22" Width="22" Margin="5">
                                         <md:PackIcon Kind="BlockHelper" Height="14"></md:PackIcon>
                                     </Button>
                                 </Grid>
@@ -173,10 +173,10 @@
                                 <TextBlock Grid.Column="0" Margin="5" VerticalAlignment="Bottom" FontSize="14" FontWeight="DemiBold">
                         Участники
                                 </TextBlock>
-                                <Button ToolTip="Добавить участника" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                                <Button Command="{Binding SelectPatricipantsCommand}" ToolTip="Добавить участников" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
                                     <md:PackIcon Kind="Plus" Height="16"></md:PackIcon>
                                 </Button>
-                                <Button ToolTip="Открепить участника" Grid.Column="3" VerticalAlignment="Bottom"  Padding="0" Height="22" Width="22" Margin="5">
+                                <Button Command="{Binding UnsetPatricipantCommand}" ToolTip="Открепить участника" Grid.Column="3" VerticalAlignment="Bottom"  Padding="0" Height="22" Width="22" Margin="5">
                                     <md:PackIcon Kind="BlockHelper" Height="14"></md:PackIcon>
                                 </Button>
                             </Grid>

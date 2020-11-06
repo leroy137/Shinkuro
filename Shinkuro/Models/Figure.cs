@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Shinkuro.Models.Base;
 
 namespace Shinkuro.Models
 {
-    public class Figure
+    public class Figure : ModelBase
     {
         private String _name;
         private double _compexity;
+        private String _description;
 
         public String Name // название фигуры
         {
@@ -21,7 +23,7 @@ namespace Shinkuro.Models
                 if (value.Length > maxSizeCount)
                     throw new Exception($"Название фигуры превышает максимально допустимую длину в {maxSizeCount} символов!");
 
-                _name = value;
+                Set<String>(ref _name, value);
             }
         }
 
@@ -33,11 +35,19 @@ namespace Shinkuro.Models
                 if (value <= 0)
                     throw new Exception("Коэффициент сложности не может быть меньше или равен нулю!");
 
-                _compexity = value;
+                Set<double>(ref _compexity, value);
             }
         }
 
-        public String Description { get; set; }
+        public String Description
+        { 
+            get { return _description; }
+            set
+            {
+                Set<String>(ref _description, value);
+            }
+        }
+
 
         public Figure()
         {

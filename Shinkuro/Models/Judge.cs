@@ -1,17 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Shinkuro.Models.Base;
 
 namespace Shinkuro.Models
 {
-    public class Judge
+    public class Judge : ModelBase
     {
-
+        private Int32 _number;
         private String _surname;
         private String _name;
         private String _patronymic;
+        private String _post;
+        private String _city;
+        private String _rank;
+        private String _info;
 
-        public Int32 Number { get; set; }
+        public Int32 Number 
+        { 
+            get { return _number; } 
+            set { Set<Int32>(ref _number, value); } 
+        }
 
         public String Surname
         {
@@ -25,7 +34,7 @@ namespace Shinkuro.Models
                 if (value.Length > maxSizeField)
                     throw new Exception($"Превышен лимит символов для ФАМИЛИИ участника в {maxSizeField} символов!");
 
-                _surname = value;
+                Set<String>(ref _surname, value);
             }
         }
 
@@ -44,7 +53,7 @@ namespace Shinkuro.Models
                 if (value.Length > maxSizeField)
                     throw new Exception($"Превышен лимит символов для ИМЯ участника в {maxSizeField} символов!");
 
-                _name = value;
+                Set<String>(ref _name, value);
             }
         }
 
@@ -60,14 +69,37 @@ namespace Shinkuro.Models
                 if (!String.IsNullOrWhiteSpace(value)&&value.Length > maxSizeField)
                     throw new Exception($"Превышен лимит символов для ОТЧЕСТВО участника в {maxSizeField} символов!");
 
-                _patronymic = value;
+                Set<String>(ref _patronymic, value);
             }
         }
 
-        public String Rank { get; set; } // Категория
-        public String Post { get; set; } // должность
-        public String City { get; set; } // город
-        public String Info { get; set; } // дополнительная информация
+        // Категория
+        public String Rank 
+        { 
+            get { return _rank; }
+            set { Set<String>(ref _rank, value); } 
+        }
+
+        // должность
+        public String Post 
+        { 
+            get { return _post; } 
+            set { Set<String>(ref _post, value); } 
+        }
+
+        // город
+        public String City 
+        { 
+            get { return _city; } 
+            set { Set<String>(ref _city, value); }
+        }
+
+        // дополнительная информация
+        public String Info 
+        { 
+            get { return _info; } 
+            set { Set<String>(ref _info, value); } 
+        } 
 
         public Judge()
         {
@@ -86,5 +118,7 @@ namespace Shinkuro.Models
         }
 
         public String FIO => $"{Surname} {Name} {Patronymic}";
+
+        public String ShortFIO => $"{Surname} {Name?.ToUpper()[0]}{Patronymic?.ToUpper()[0]}";
     }
 }

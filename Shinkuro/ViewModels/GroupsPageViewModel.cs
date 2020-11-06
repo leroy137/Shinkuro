@@ -32,6 +32,13 @@ namespace Shinkuro.ViewModels
         public ICommand EditGroupCommand { get; set; }
         public ICommand ViewGroupCommand { get; set; }
 
+        public ICommand SelectFiguresCommand { get; set; }
+        public ICommand UnsetFigureCommand { get; set; }
+
+        public ICommand SelectPatricipantsCommand { get; set; }
+
+        public ICommand UnsetPatricipantCommand { get; set; }
+
         #endregion
 
         public GroupsPageViewModel()
@@ -40,6 +47,10 @@ namespace Shinkuro.ViewModels
             DeleteGroupCommand = new RelayCommand(DeleteGrouptCommandExecute, DeleteGroupCommandCanExecute);
             EditGroupCommand = new RelayCommand(EditGroupCommandExecute, EditGroupCommandCanExecute);
             ViewGroupCommand = new RelayCommand(ViewGroupCommandExecute, ViewGrouprCommandCanExecute);
+            SelectFiguresCommand = new RelayCommand(SelectFiguresCommandExecute, SelectFiguresCommandCanExecute);
+            UnsetFigureCommand = new RelayCommand(UnsetFigureCommandExecute, UnsetFigureCommandCanExecute);
+            SelectPatricipantsCommand = new RelayCommand(SelectPatricipantsCommandExecute, SelectPatricipantsCommandCanExecute);
+            UnsetPatricipantCommand = new RelayCommand(UnsetPatricipantCommandExecute, UnsetPatricipantCommandCanExecute);
         }
 
         public GroupsPageViewModel(ApplicationCoreContext context) : this()
@@ -149,6 +160,81 @@ namespace Shinkuro.ViewModels
         }
 
         private bool ViewGrouprCommandCanExecute(object obj)
+        {
+            return SelectedGroup != null;
+        }
+
+        private void SelectFiguresCommandExecute(Object obj)
+        {
+            try
+            {
+                FigureSelectedViewModel figureSelectedViewModel = new FigureSelectedViewModel(SelectedGroup.Figures);
+                FiguresSeletedWindow figuresSeletedWindow = new FiguresSeletedWindow(figureSelectedViewModel);
+                figuresSeletedWindow.ShowDialog();
+                if(figuresSeletedWindow.DialogResult == true)
+                {
+
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка!");
+            }
+        }
+
+        private bool SelectFiguresCommandCanExecute(Object obj)
+        {
+            return SelectedGroup != null;
+        }
+
+        private void UnsetFigureCommandExecute(Object obj)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка!");
+            }
+        }
+
+        private bool UnsetFigureCommandCanExecute(Object obj)
+        {
+            return SelectedGroup != null;
+        }
+
+
+        private void SelectPatricipantsCommandExecute(Object obj)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка!");
+            }
+        }
+
+        private bool SelectPatricipantsCommandCanExecute(Object obj)
+        {
+            return SelectedGroup != null;
+        }
+
+        private void UnsetPatricipantCommandExecute(Object obj)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка!");
+            }
+        }
+
+        private bool UnsetPatricipantCommandCanExecute(Object obj)
         {
             return SelectedGroup != null;
         }

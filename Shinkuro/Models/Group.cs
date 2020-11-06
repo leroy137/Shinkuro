@@ -52,10 +52,12 @@ namespace Shinkuro.Models
 
         public Group()
         {
-
+            Figures = new List<Figure>();
+            Judges = new List<Judge>();
+            Patricipants = new List<Patricipant>();
         }
 
-        public Group(String name, Int32? startYear, Int32? finishYear, String description)
+        public Group(String name, Int32? startYear, Int32? finishYear, String description) : this()
         {
             Name = name;
             StartYear = startYear;
