@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Shinkuro.Views.Windows"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Выбрать фигуры" Name="window" WindowStartupLocation="CenterScreen" Height="600" Width="550">
+        Name="windowSelectedForm"
+        Title="Выбрать фигуры" WindowStartupLocation="CenterScreen" Height="600" Width="550">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -44,7 +45,7 @@
                 <ColumnDefinition Width="auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Button Width="90" FontSize="12" Grid.Column="0" IsCancel="True">Отмена</Button>
-            <Button Command="{Binding SelectFiguresCommand}" Width="90" FontSize="12" Grid.Column="2">Выбрать</Button>
+            <Button Command="{Binding SelectFiguresCommand}" CommandParameter="{Binding ElementName=windowSelectedForm}" Width="90" FontSize="12" Grid.Column="2">Выбрать</Button>
         </Grid>
     </Grid>
 </Window>

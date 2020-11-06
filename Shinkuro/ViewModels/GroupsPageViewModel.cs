@@ -9,6 +9,7 @@ using System.Windows.Input;
 using Shinkuro.Infrastracture.Commands;
 using System.Windows;
 using Shinkuro.Views.Windows;
+using System.Linq;
 
 namespace Shinkuro.ViewModels
 {
@@ -16,13 +17,26 @@ namespace Shinkuro.ViewModels
     {
 
         private Group _seletedGroup = null;
+        private Figure _selectedGroupFigure = null;
         public ApplicationCoreContext Context { get; set; }
         public ICollectionView Groups { get; set; }
 
         public Group SelectedGroup 
         { 
             get { return _seletedGroup; } 
-            set { Set<Group>(ref _seletedGroup, value); } 
+            set 
+            { 
+                Set<Group>(ref _seletedGroup, value);
+            } 
+        }
+
+        public Figure SelectedGroupFigure
+        {
+            get { return _selectedGroupFigure; }
+            set
+            {
+                Set<Figure>(ref _selectedGroupFigure, value);
+            }
         }
 
         #region Команды
@@ -168,12 +182,19 @@ namespace Shinkuro.ViewModels
         {
             try
             {
+                if (SelectedGroup == null)
+                    throw new Exception("Группа для заполенения списка фигур не выбрана!");
+
                 FigureSelectedViewModel figureSelectedViewModel = new FigureSelectedViewModel(SelectedGroup.Figures);
                 FiguresSeletedWindow figuresSeletedWindow = new FiguresSeletedWindow(figureSelectedViewModel);
                 figuresSeletedWindow.ShowDialog();
                 if(figuresSeletedWindow.DialogResult == true)
                 {
-
+                    List<Figure> selectedFigures = figureSelectedViewModel.SelectedFiguresGroup.ToList();
+                    Context.SelectFiguresGroup(SelectedGroup, selectedFigures);
+                    Group gr = SelectedGroup;
+                    SelectedGroup = null;
+                    SelectedGroup = gr;
                 }
             }
             catch(Exception ex)
@@ -191,7 +212,15 @@ namespace Shinkuro.ViewModels
         {
             try
             {
+                if (SelectedGroupFigure == null)
+                    throw new Exception("Фигура для открепления от группы не задана!");
 
+                if (!Context.UnsetGroupFigure(SelectedGroup, SelectedGroupFigure))
+                    throw new Exception("Открепление фигуры не удалось!");
+
+                Group gr = SelectedGroup;
+                SelectedGroup = null;
+                SelectedGroup = gr;
             }
             catch (Exception ex)
             {
@@ -201,7 +230,7 @@ namespace Shinkuro.ViewModels
 
         private bool UnsetFigureCommandCanExecute(Object obj)
         {
-            return SelectedGroup != null;
+            return SelectedGroupFigure != null;
         }
 
 

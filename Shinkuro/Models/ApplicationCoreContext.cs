@@ -19,11 +19,25 @@ namespace Shinkuro.Models
             Patricipants = new ObservableCollection<Patricipant>();
             Judges = new ObservableCollection<Judge>();
             Groups = new ObservableCollection<Group>();
+
+            for (int i = 0; i < 10; i += 2)
+                Groups.Add(new Group($"Группа {i + 1}", 2000 + i, 2001 + i, $"Описание группы {i + 1}"));
+
+
+
+            for (int i = 0; i < 50; i++)
+                Patricipants.Add(Patricipant.CreateRandom());
         }
 
         static ApplicationCoreContext()
         {
             Figures = new ObservableCollection<Figure>();
+
+
+            for(int i=0;i<10;i++)
+            {
+                Figures.Add(new Figure($"Фигура {i}", 1.2+i, $"Тестовое описание {i}"));
+            }
         }
 
         public void UpdateCompetition(Competition competition)
@@ -148,6 +162,25 @@ namespace Shinkuro.Models
                 throw new NullReferenceException("Удаление фигуры невозможно, так как обеъкт фигуры не задан и равен null");
 
             return Figures.Remove(figure);
+        }
+
+
+        public void SelectFiguresGroup(Group group, List<Figure> selected)
+        {
+            if (group == null)
+                throw new NullReferenceException("Группа не задана для заполнения фигур, пожалуйста выберите группу или обновите список!");
+
+            group.Figures.Clear();
+            foreach (var figure in selected)
+                group.Figures.Add(figure);
+        }
+
+        public bool UnsetGroupFigure(Group group, Figure figure)
+        {
+            if (group == null)
+                throw new NullReferenceException("Группа не задана для открепления фигуры, пожалуйста выберите группу или обновите список!");
+
+            return group.Figures.Remove(figure);
         }
     }
 }

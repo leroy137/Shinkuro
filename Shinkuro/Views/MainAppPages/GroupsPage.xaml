@@ -10,7 +10,7 @@
       Title="GroupsPage">
     <Grid Style="{StaticResource CompetitionPagePanel}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="450"></ColumnDefinition>
+            <ColumnDefinition Width="480"></ColumnDefinition>
             <ColumnDefinition Width="auto"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
@@ -46,7 +46,7 @@
                 </Button>
             </Grid>
             <Grid Grid.Row="1">
-                <DataGrid ItemsSource="{Binding Groups}" SelectedItem="{Binding SelectedGroup}" Margin="5 0 5 5" Height="300"  FontSize="12" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True">
+                <DataGrid ItemsSource="{Binding Groups}" SelectedItem="{Binding SelectedGroup}" Margin="5 0 0 0" Height="320"  FontSize="12" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Название группы" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
                         <DataGridTextColumn Header="Год начало" Binding="{Binding StartYear}" Width="auto"></DataGridTextColumn>
@@ -54,8 +54,30 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
-            <Grid Grid.Row="2">
-
+            <Grid Grid.Row="2 " Margin="5 5 0 5">
+                <TabControl>
+                    <TabItem Header="Информация о выолненных действиях">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Button Padding="0" Grid.Column="2" Height="24" Width="24">
+                                    <md:PackIcon Kind="Broom" ToolTip="Очистить сообщения"></md:PackIcon>
+                                </Button>
+                            </Grid>
+                            <Grid Grid.Row="1">
+                                
+                            </Grid>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
             </Grid>
         </Grid>
         <Grid Grid.Column="1" Background="#FF5B25BB" Width="1" Margin="5"></Grid>
@@ -108,10 +130,10 @@
                                     </Button>
                                 </Grid>
                                 <Grid Grid.Row="1">
-                                    <DataGrid Margin="5 0 5 5"  FontSize="11" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
+                                    <DataGrid SelectedItem="{Binding SelectedGroupFigure}" Margin="5 0 5 5" ItemsSource="{Binding SelectedGroup.Figures}"  FontSize="11" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
                                         <DataGrid.Columns>
-                                            <DataGridTextColumn Header="Название" Width="*"></DataGridTextColumn>
-                                            <DataGridTextColumn Header="Сложность" Width="auto"></DataGridTextColumn>
+                                            <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
+                                            <DataGridTextColumn Header="Сложность" Binding="{Binding Complexity}" Width="auto"></DataGridTextColumn>
                                         </DataGrid.Columns>
                                     </DataGrid>
                                 </Grid>
@@ -181,7 +203,7 @@
                                 </Button>
                             </Grid>
                             <Grid Grid.Row="1">
-                                <DataGrid Margin="5 0 5 5" MinHeight="300"  FontSize="11" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
+                                <DataGrid Margin="5 0 5 5" ItemsSource="{Binding SelectedGroup.Patricipants}"  FontSize="11" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Фамилия ИО" Width="auto"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Год рождения" Width="auto"></DataGridTextColumn>

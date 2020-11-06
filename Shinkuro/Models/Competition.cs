@@ -46,6 +46,8 @@ namespace Shinkuro.Models
         public String Organizator { get; set; } // организатор
         public String Contacts { get; set; } // контакты
 
+        // относительный путь до лого
+        public String LogoPath { get; set; }
 
         public Competition(String name)
         {

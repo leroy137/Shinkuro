@@ -11,9 +11,13 @@ namespace Shinkuro.Models
         private String _surname;
         private String _patronymic;
 
+
+
         private int _year;
         private string _city;
         private string _rank;
+
+        private static Random rand = new Random();
 
         /// <summary>
         /// Фамилия
@@ -115,6 +119,29 @@ namespace Shinkuro.Models
             City = city;
             Rank = rank;
             SportSchool = sportSchool;
+        }
+
+        public static Patricipant CreateRandom()
+        {
+
+            List<String> cities = new List<string> { "Оренбург", "Самара", "Салават", "Набережные Челны", "Уфа", "Казань" };
+            List<String> names = new List<string> { "Иван", "Алексей", "Петр", "Николай" };
+            List<String> surnames = new List<string> { "Иванов", "Алексеев", "Петров", "Николаев" };
+            List<String> patronimics = new List<string> { "Иванович", "Алексеевич", "Петрович", "Николаевич" };
+            Int32 startYear = 2000;
+            Int32 lastYear = 2010;
+            List<String> sportSchools = new List<string> { "Спортшкола им. Ивана", "Пингвин", "Газовик", "Алмаз", "Дельфин" };
+            List<String> ranks = new List<string> { "КМС", "МС", "ММ", "1 юношеский", "1 взрослый" };
+
+            String surname = surnames[rand.Next(surnames.Count)];
+            String name = names[rand.Next(names.Count)];
+            String patronimic = patronimics[rand.Next(patronimics.Count)];
+            String city = cities[rand.Next(cities.Count)];
+            Int32 year = rand.Next(startYear, lastYear + 1);
+            String sportSchool = sportSchools[rand.Next(sportSchools.Count)];
+            String rank = ranks[rand.Next(ranks.Count)];
+
+            return new Patricipant(surname, name, patronimic, year, city, rank, sportSchool);
         }
     }
 }

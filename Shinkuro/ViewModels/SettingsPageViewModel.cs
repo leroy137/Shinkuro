@@ -37,12 +37,15 @@ namespace Shinkuro.ViewModels
 
         public ICommand SaveSettingsCommand { get; set; }
         public ICommand ResetSettingsCommand { get; set; }
+        public ICommand UploadLogoCompetition { get; set; }
+        public ICommand CancelChangeLogo { get; set; }
 
         public SettingsPageViewModel(Competition competition)
         {
             SaveSettingsCommand = new RelayCommand(SaveSettingsCommandExecute, SaveSettingsCommandCanExecute);
             ResetSettingsCommand = new RelayCommand(ResetSettingsCommandExecute, ResetSettingsCommandCanExecute);
-
+            UploadLogoCompetition = new RelayCommand(UploadLogoCompetitionExecute, UploadLogoCompetitionCanExecute);
+            CancelChangeLogo = new RelayCommand(CancelChangeLogoExecute, CancelChangeLogoCanExecute);
 
             Competition = competition;
             CompetitionName = competition.Name;
@@ -85,5 +88,26 @@ namespace Shinkuro.ViewModels
         {
             return !(Competition.Equals(CompetitionCloneView)&&CompetitionName==Competition.Name);
         }
+
+        private void UploadLogoCompetitionExecute(Object obj)
+        {
+
+        }
+
+        private bool UploadLogoCompetitionCanExecute(Object obj)
+        {
+            return true;
+        }
+
+        private void CancelChangeLogoExecute(Object obj)
+        {
+
+        }
+
+        private bool CancelChangeLogoCanExecute(Object obj)
+        {
+            return true;
+        }
+
     }
 }

@@ -16,7 +16,7 @@ namespace Shinkuro.Views.Windows
 
         public FiguresSeletedWindow(FigureSelectedViewModel viewModel) : this()
         {
-            window.DataContext = viewModel;
+            windowSelectedForm.DataContext = viewModel;
         }
     }
 }
