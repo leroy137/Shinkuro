@@ -105,6 +105,8 @@ namespace Shinkuro.Models
 
         public String FIO => $"{Surname} {Name} {Patronymic}";
 
+        public String ShortFIO => $"{Surname} {Name?.ToUpper()[0]+"."}{Patronymic?.ToUpper()[0] + "."}";
+
         public Patricipant()
         {
 

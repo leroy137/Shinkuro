@@ -23,10 +23,11 @@ namespace Shinkuro.Models
             for (int i = 0; i < 10; i += 2)
                 Groups.Add(new Group($"Группа {i + 1}", 2000 + i, 2001 + i, $"Описание группы {i + 1}"));
 
-
-
             for (int i = 0; i < 50; i++)
                 Patricipants.Add(Patricipant.CreateRandom());
+
+
+            AutoFillGroups();
         }
 
         static ApplicationCoreContext()
@@ -181,6 +182,40 @@ namespace Shinkuro.Models
                 throw new NullReferenceException("Группа не задана для открепления фигуры, пожалуйста выберите группу или обновите список!");
 
             return group.Figures.Remove(figure);
+        }
+
+
+        /// <summary>
+        /// метод автоматического заполнения групп
+        /// </summary>
+        public void AutoFillGroups()
+        {
+            List<Patricipant> patricipantsWithoutGroup = new List<Patricipant>();
+
+            foreach(Patricipant patricipant in Patricipants)
+            {
+                bool isDetermined = false;
+                foreach(Group g in Groups)
+                {
+                    if (g.IsSatisfiedPatricipant(patricipant))
+                    {
+                        isDetermined = true;
+                        AddPatricipantGroup(g, patricipant);
+                        break;
+                    }
+                }
+
+                if(!isDetermined)
+                {
+                    patricipantsWithoutGroup.Add(patricipant);
+                }
+            }
+        }
+
+
+        public void AddPatricipantGroup(Group group, Patricipant p)
+        {
+            group.Patricipants.Add(p);
         }
     }
 }

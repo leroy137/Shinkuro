@@ -71,5 +71,15 @@ namespace Shinkuro.Models
             Judges = judges;
             Patricipants = patricipants;
         }
+
+        public bool IsSatisfiedPatricipant(Patricipant p)
+        {
+            if(this.StartYear!=null&&this.FinishYear!=null)
+            {
+                return p.Year <= FinishYear && p.Year >= StartYear;
+            }
+
+            return false;
+        }
     }
 }
