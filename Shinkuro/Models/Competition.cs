@@ -6,12 +6,15 @@ using Shinkuro.Models.Base;
 
 namespace Shinkuro.Models
 {
-    public class Competition : IEquatable<Competition>
+    public class Competition : ModelBase, IEquatable<Competition>
     {
         string _name;
         DateTime? _startDate;
         DateTime? _finishDate;
         String _description;
+
+
+        private string _logoPath;
 
         // название соревнования
         public String Name
@@ -47,7 +50,11 @@ namespace Shinkuro.Models
         public String Contacts { get; set; } // контакты
 
         // относительный путь до лого
-        public String LogoPath { get; set; }
+        public String LogoPath 
+        {
+            get { return _logoPath; }
+            set { Set<String>(ref _logoPath, value); }
+        }
 
         public Competition(String name)
         {
@@ -98,6 +105,9 @@ namespace Shinkuro.Models
             if (this.Contacts != other.Contacts)
                 return false;
 
+            if (this.LogoPath != other.LogoPath)
+                return false;
+
             return true;
         }
 
@@ -110,6 +120,7 @@ namespace Shinkuro.Models
             this.Organizator = competition.Organizator;
             this.Place = competition.Place;
             this.Contacts = competition.Contacts;
+            this.LogoPath = competition.LogoPath;
         }
     }
 }

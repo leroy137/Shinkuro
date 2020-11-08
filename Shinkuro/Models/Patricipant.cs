@@ -145,5 +145,33 @@ namespace Shinkuro.Models
 
             return new Patricipant(surname, name, patronimic, year, city, rank, sportSchool);
         }
+
+        public String GetChanges(Patricipant p)
+        {
+            String result = "";
+
+            if (Surname != p.Surname)
+                result += $"{p.Surname} -> {Surname}; ";
+
+            if (Name != p.Name)
+                result += $"{p.Name} -> {Name}; ";
+
+            if (Patronymic != p.Patronymic)
+                result += $"{p.Patronymic} -> {Patronymic}; ";
+
+            if (Year != p.Year)
+                result += $"{p.Year} -> {Year}; ";
+
+            if (City != p.City)
+                result += $"{p.City} -> {City}; ";
+
+            if (SportSchool != p.SportSchool)
+                result += $"{p.SportSchool} -> {SportSchool}; ";
+
+            if (Rank != p.Rank)
+                result += $"{p.Rank} -> {Rank}; ";
+
+            return result;
+        }
     }
 }

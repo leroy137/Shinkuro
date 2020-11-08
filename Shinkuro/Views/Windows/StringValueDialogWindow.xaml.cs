@@ -17,7 +17,6 @@ namespace Shinkuro.Views.Windows
     /// </summary>
     public partial class StringValueDialogWindow : Window
     {
-
         public string Message { get => txtMessage.Text; set => txtMessage.Text = value; }
 
         public string Value { get => txtUserValue.Text; set => txtUserValue.Text = value; }

@@ -7,6 +7,8 @@ using Shinkuro.Infrastracture.Commands;
 using Shinkuro.Infrastracture.Commands.Base;
 using System.Windows.Input;
 using System.Windows;
+using Microsoft.Win32;
+using Shinkuro.Services;
 
 namespace Shinkuro.ViewModels
 {
@@ -19,7 +21,7 @@ namespace Shinkuro.ViewModels
         private string _competitionName;
 
         public Competition Competition 
-        { 
+        {   
             get { return _innerCompetition; } 
             set { Set<Competition>(ref _innerCompetition, value); } 
         }
@@ -75,12 +77,13 @@ namespace Shinkuro.ViewModels
             try
             {
                 Competition c = new Competition(Competition.Name, Competition.StartDate, Competition.FinishDate, Competition.Description, Competition.Place, Competition.Organizator, Competition.Contacts);
+                c.LogoPath = Competition.LogoPath;
                 CompetitionCloneView = c;
                 CompetitionName = c.Name;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошика!");
+                MessageBox.Show(ex.Message, "Ошибка!");
             }
         }
 
@@ -91,7 +94,22 @@ namespace Shinkuro.ViewModels
 
         private void UploadLogoCompetitionExecute(Object obj)
         {
-
+            try
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog() { Multiselect = false };
+                openFileDialog.Filter = "Файлы изображений (*.bmp, *.jpg, *.png, *.jpeg)|*.bmp;*.jpg;*.png;*.jpeg";
+                openFileDialog.ShowDialog();
+                string[] imagesPath = openFileDialog.FileNames; // пути к файлам
+                if(imagesPath.Length!=0)
+                {
+                    String imagePath = imagesPath[0];
+                    CompetitionCloneView.LogoPath = imagePath;
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка!");
+            }
         }
 
         private bool UploadLogoCompetitionCanExecute(Object obj)

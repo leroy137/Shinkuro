@@ -13,15 +13,16 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" Grid.IsSharedSizeScope="True">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="480"></ColumnDefinition>
+                <ColumnDefinition Width="390"></ColumnDefinition>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto" SharedSizeGroup="TopTitleBlock"></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
@@ -59,10 +60,10 @@
                     </DataGrid>
                 </Grid>
             </Grid>
-            <Grid Grid.Column="1" Background="#FF5B25BB" Width="1" Margin="5"></Grid>
-            <Grid Grid.Column="2" Margin="0 5">
+            <Grid Grid.Column="1" Width="1" Margin="5 5 0 5"></Grid><!--Background="#FF5B25BB"--> 
+            <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition  SharedSizeGroup="TopTitleBlock" Height="auto"></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
@@ -70,10 +71,10 @@
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Margin="5 0" FontSize="15" Style="{StaticResource HeaderPageCompetition}">Выбранная группа:</TextBlock>
-                    <TextBlock Grid.Column="1"  Margin="5 0" FontSize="15" Foreground="#FF831CE2" Style="{StaticResource HeaderPageCompetition}" Text="{Binding SelectedGroup.Name, FallbackValue='не выбрана', TargetNullValue='не выбрана'}"></TextBlock>
+                    <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0" FontSize="14" Style="{StaticResource HeaderPageCompetition}">группа:</TextBlock>
+                    <TextBlock  VerticalAlignment="Center" Grid.Column="1"  Margin="5 0" FontSize="14" Foreground="#FF831CE2" Style="{StaticResource HeaderPageCompetition}" Text="{Binding SelectedGroup.Name, FallbackValue='не выбрана', TargetNullValue='не выбрана'}"></TextBlock>
                 </Grid>
-                <TabControl Grid.Row="1" Margin="0 5 5 0">
+                <TabControl Grid.Row="1">
                     <TabItem>
                         <TabItem.Header >
                             <TextBlock FontSize="12">Фигуры</TextBlock>
@@ -206,9 +207,9 @@
                 </TabControl>
             </Grid>
         </Grid>
-        <Grid Grid.Row="1" Margin="5">
-            <TabControl Height="160">
-                <TabItem Header="Сообщения о выполненных действиях">
+        <Grid Grid.Row="1" Margin="5" TextBlock.FontSize="11">
+            <TabControl Height="170" TextBlock.FontSize="11" Padding="0">
+                <TabItem Header="Сообщения">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"></RowDefinition>
@@ -219,12 +220,28 @@
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition Width="auto"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Button Grid.Column="1" Padding="0" Margin="2" Height="22" Width="22">
-                                <md:PackIcon Kind="Broom" ToolTip="Очистить вывод действий"></md:PackIcon>
+                            <Button Visibility="Collapsed" Grid.Column="1" Padding="0" Margin="2" Height="18" Width="18">
+                                <md:PackIcon Height="14" Kind="Broom" ToolTip="Очистить вывод действий"></md:PackIcon>
                             </Button>
                         </Grid>
                         <Grid Grid.Row="1">
-                            
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+
+                            </Grid>
+                            <Grid Grid.Row="1" Background="#FFF4EEFF" Height="26">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="300"></ColumnDefinition>
+                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Margin="5 0" VerticalAlignment="Center" Grid.Column="0">Cтатус:</TextBlock>
+                                <TextBlock Margin="5 0" VerticalAlignment="Center" Grid.Column="1" Text="{Binding StatusText, TargetNullValue='...', FallbackValue='...'}"></TextBlock>
+                                <ProgressBar Margin="5 0" VerticalAlignment="Center" Height="18" Grid.Column="2"></ProgressBar>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </TabItem>

@@ -56,6 +56,7 @@ namespace Shinkuro.ViewModels
 
         public ICollectionView Patricipants { get; set; }
 
+        public ObservableCollection<MessageLog> MessageLogs { get; set; } = new ObservableCollection<MessageLog>();
 
         public PatricipantPageViewModel()
         {
@@ -85,7 +86,7 @@ namespace Shinkuro.ViewModels
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошика!");
+                MessageBox.Show(ex.Message, "Ошибка!");
             }
         }
 
@@ -128,11 +129,13 @@ namespace Shinkuro.ViewModels
                     String name = SelectedPatricipant.Name;
                     Context.RemovePatricipant(SelectedPatricipant);
                     MessageBox.Show($"Участник {surname} {name} (город {city}) удален!");
+                    MessageLogs.Add(new MessageLog(LogType.Successfull, $"Участник {surname} {name} (город {city}) успешно удален!"));
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка!");
+                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -153,14 +156,17 @@ namespace Shinkuro.ViewModels
                 if(patricipantEditorWindow.DialogResult==true)
                 {
                     Patricipant edit = patricipantEditorWindow.PatricipantEdit;
+                    String changes = edit.GetChanges(SelectedPatricipant);
                     Context.UpdatePatricipant(SelectedPatricipant, edit);
                     MessageBox.Show("Участник успешно изменен!", "Изменение участника");
                     Patricipants.Refresh();
+                    MessageLogs.Add(new MessageLog(LogType.Successfull, $"Изменение участника {SelectedPatricipant.ShortFIO}: {changes}!"));
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка!");
+                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -180,11 +186,13 @@ namespace Shinkuro.ViewModels
                     Patricipant patricipantNew = patricipantCreatorWindow.PatricipantNew;
                     Context.AddPatricipant(patricipantNew);
                     MessageBox.Show("Участник успешно добавлен!");
+                    MessageLogs.Add(new MessageLog(LogType.Successfull, $"Участник {patricipantNew.ShortFIO} (город: {patricipantNew.City}) успешно добавлен!"));
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка!");
+                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
             }
         }
 

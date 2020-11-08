@@ -64,7 +64,7 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="90"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Height="54" Style="{StaticResource MaterialDesignFlatButton}" 
+                <Button Height="58" Style="{StaticResource MaterialDesignFlatButton}" 
                         Command="{Binding GoToHomePageCommand}"
                         Grid.Column="0">
                     <StackPanel Orientation="Vertical">
@@ -72,7 +72,7 @@
                         <TextBlock Style="{StaticResource MenuButtonStyle}">Главная</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Height="54" Style="{StaticResource MaterialDesignFlatButton}" 
+                <Button Height="58" Style="{StaticResource MaterialDesignFlatButton}" 
                          Command="{Binding GoToPatricipantsPageCommand}"
                         Grid.Column="1">
                     <StackPanel Orientation="Vertical">
@@ -80,7 +80,7 @@
                         <TextBlock Style="{StaticResource MenuButtonStyle}">Участники</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Height="54" Style="{StaticResource MaterialDesignFlatButton}" 
+                <Button Height="58" Style="{StaticResource MaterialDesignFlatButton}" 
                         Command="{Binding GoToJudgePageCommand}"
                         Grid.Column="2" >
                     <StackPanel Orientation="Vertical">
@@ -88,7 +88,7 @@
                         <TextBlock Style="{StaticResource MenuButtonStyle}">Судьи</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Height="54" Style="{StaticResource MaterialDesignFlatButton}" 
+                <Button Height="58" Style="{StaticResource MaterialDesignFlatButton}" 
                         Command="{Binding GoToGroupJudgesPageCommand}"
                         Grid.Column="3">
                     <StackPanel Orientation="Vertical">
@@ -97,7 +97,7 @@
                         <TextBlock  Style="{StaticResource MenuButtonStyle}">судей</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Height="54" Style="{StaticResource MaterialDesignFlatButton}" 
+                <Button Height="58" Style="{StaticResource MaterialDesignFlatButton}" 
                         Command="{Binding GoToGroupsPageCommand}"
                         Grid.Column="4" Cursor="Hand">
                     <StackPanel Orientation="Vertical">
@@ -105,7 +105,7 @@
                         <TextBlock Style="{StaticResource MenuButtonStyle}">Группы</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Padding="0" Height="54" Style="{StaticResource MaterialDesignFlatButton}" 
+                <Button Padding="0" Height="58" Style="{StaticResource MaterialDesignFlatButton}" 
                         Command="{Binding GoToCompetitionFigurePageCommand}"
                         Grid.Column="5">
                     <StackPanel Orientation="Vertical">
@@ -114,7 +114,7 @@
                         <TextBlock Style="{StaticResource MenuButtonStyle}">фигур</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Height="54" Style="{StaticResource MaterialDesignFlatButton}" 
+                <Button Height="58" Style="{StaticResource MaterialDesignFlatButton}" 
                          Command="{Binding GoToCompetitionCommandPageCommand}"
                         Grid.Column="6" Cursor="Hand" Padding="0">
                     <StackPanel Orientation="Vertical">
@@ -122,7 +122,7 @@
                         <TextBlock Style="{StaticResource MenuButtonStyle}">Команды</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Height="54" Style="{StaticResource MaterialDesignFlatButton}"
+                <Button Height="58" Style="{StaticResource MaterialDesignFlatButton}"
                         Command="{Binding GoToSettingsPageCommand}"
                         Grid.Column="7">
                     <StackPanel Orientation="Vertical">
@@ -130,7 +130,7 @@
                         <TextBlock  Style="{StaticResource MenuButtonStyle}">Настройки</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Height="54" Command="{Binding Path=CloseApplicationCommand}"  
+                <Button Height="58" Command="{Binding Path=CloseApplicationCommand}"  
                         Style="{StaticResource MaterialDesignFlatButton}" 
                         Grid.Column="10" >
                     <StackPanel Orientation="Vertical">
