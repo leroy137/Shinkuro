@@ -108,7 +108,7 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
-                <Grid Grid.Row="3" Margin="5 15 0 5">
+                <Grid Grid.Row="3" Margin="5 12 0 5">
                     <TabControl Height="170" TextBlock.FontSize="11" Padding="0">
                         <TabItem Header="Сообщения">
                             <Grid>
@@ -116,32 +116,67 @@
                                     <RowDefinition Height="auto"></RowDefinition>
                                     <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <Grid Grid.Row="0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition></ColumnDefinition>
-                                        <ColumnDefinition Width="auto"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Button Visibility="Collapsed" Grid.Column="1" Padding="0" Margin="2" Height="18" Width="18">
-                                        <md:PackIcon Height="14" Kind="Broom" ToolTip="Очистить вывод действий"></md:PackIcon>
-                                    </Button>
-                                </Grid>
                                 <Grid Grid.Row="1">
                                     <Grid.RowDefinitions>
                                         <RowDefinition></RowDefinition>
                                         <RowDefinition Height="auto"></RowDefinition>
                                     </Grid.RowDefinitions>
                                     <Grid Grid.Row="0">
-
+                                        <ListBox ItemsSource="{Binding MessageLogs}" ItemContainerStyle="{StaticResource ListBoxItemLogStyle}">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Margin="0" Padding="0" Focusable="False" TextWrapping="Wrap">
+                                                    <Run Text="{Binding Time, StringFormat=dd.MM - hh:mm:ss >>>}"></Run>
+                                                    <Run Name="txtMessage" Text="{Binding Message}"></Run>
+                                                    </TextBlock>
+                                                    <DataTemplate.Triggers>
+                                                        <DataTrigger Binding="{Binding Path=Type}" Value="Successfull">
+                                                            <Setter TargetName="txtMessage" Property="TextBlock.Foreground" Value="#FF2E852E"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Path=Type}" Value="Error">
+                                                            <Setter TargetName="txtMessage" Property="TextBlock.Foreground" Value="#FFCD0C0C"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Path=Type}" Value="Warrning">
+                                                            <Setter TargetName="txtMessage" Property="TextBlock.Foreground" Value="#FFB6B63C"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Path=Type}" Value="Information">
+                                                            <Setter TargetName="txtMessage" Property="TextBlock.Foreground" Value="#FF6767BF"/>
+                                                        </DataTrigger>
+                                                    </DataTemplate.Triggers>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
                                     </Grid>
-                                    <Grid Grid.Row="1" Background="#FFF4EEFF" Height="26">
+                                    <Grid Grid.Row="1" Background="#FFF4EEFF" Height="28">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="auto"></ColumnDefinition>
                                             <ColumnDefinition Width="300"></ColumnDefinition>
                                             <ColumnDefinition Width="150"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="auto"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Margin="5 0" VerticalAlignment="Center" Grid.Column="0">Cтатус:</TextBlock>
                                         <TextBlock Margin="5 0" VerticalAlignment="Center" Grid.Column="1" Text="{Binding StatusText, TargetNullValue='...', FallbackValue='...'}"></TextBlock>
                                         <ProgressBar Margin="5 0" VerticalAlignment="Center" Height="18" Grid.Column="2"></ProgressBar>
+                                        <TextBlock Margin="10 0" Grid.Column="4" VerticalAlignment="Center">
+                                        <md:PackIcon Kind="SortVariantRemove" Width="18" Height="18"></md:PackIcon>
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Foreground" Value="#FF9A65E4"></Setter>
+                                                            <Setter Property="Background" Value="#FFF4EFFF"></Setter>
+                                                            <Setter Property="Block.BorderBrush" Value="#FFC2C0F5"></Setter>
+                                                            <Setter Property="Block.BorderThickness" Value="2"></Setter>
+                                                            <Setter Property="Cursor" Value="Hand"></Setter>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                            <TextBlock.InputBindings>
+                                                <MouseBinding MouseAction="LeftClick" Command="{Binding ClearMessagesBlockCommand}"></MouseBinding>
+                                            </TextBlock.InputBindings>
+                                        </TextBlock>
                                     </Grid>
                                 </Grid>
                             </Grid>

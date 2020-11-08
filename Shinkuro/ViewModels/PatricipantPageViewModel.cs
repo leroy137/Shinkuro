@@ -53,6 +53,8 @@ namespace Shinkuro.ViewModels
         public ICommand DeletePatricipantCommand { get; set; }
         public ICommand EditPatricipantCommand { get; set; }
         public ICommand ViewPatricipantCommand { get; set; }
+        public ICommand ClearMessagesBlockCommand { get; set; }
+
 
         public ICollectionView Patricipants { get; set; }
 
@@ -66,6 +68,7 @@ namespace Shinkuro.ViewModels
             EditPatricipantCommand = new RelayCommand(EditPatricipantCommandExecute, EditPatricipantrCommandCanExecute);
             ViewPatricipantCommand = new RelayCommand(ViewPatricipantCommandExecute, ViewPatricipantrCommandCanExecute);
             CreatePatricipantCommand = new RelayCommand(CreatePatricipantCommandExecute, CreatePatricipantrCommandCanExecute);
+            ClearMessagesBlockCommand = new RelayCommand(ClearMessagesBlockCommandExecute, ClearMessagesBlockCommandCanExecute);
         }
 
         public PatricipantPageViewModel(ApplicationCoreContext context) : this()
@@ -128,13 +131,11 @@ namespace Shinkuro.ViewModels
                     String surname = SelectedPatricipant.Surname;
                     String name = SelectedPatricipant.Name;
                     Context.RemovePatricipant(SelectedPatricipant);
-                    MessageBox.Show($"Участник {surname} {name} (город {city}) удален!");
-                    MessageLogs.Add(new MessageLog(LogType.Successfull, $"Участник {surname} {name} (город {city}) успешно удален!"));
+                    MessageLogs.Add(new MessageLog(LogType.Warrning, $"Участник {surname} {name} (город {city}) успешно удален!"));
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
                 MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
             }
         }
@@ -158,14 +159,12 @@ namespace Shinkuro.ViewModels
                     Patricipant edit = patricipantEditorWindow.PatricipantEdit;
                     String changes = edit.GetChanges(SelectedPatricipant);
                     Context.UpdatePatricipant(SelectedPatricipant, edit);
-                    MessageBox.Show("Участник успешно изменен!", "Изменение участника");
                     Patricipants.Refresh();
-                    MessageLogs.Add(new MessageLog(LogType.Successfull, $"Изменение участника {SelectedPatricipant.ShortFIO}: {changes}!"));
+                    MessageLogs.Add(new MessageLog(LogType.Information, $"Изменение участника {SelectedPatricipant.ShortFIO}: {changes}!"));
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
                 MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
             }
         }
@@ -185,13 +184,11 @@ namespace Shinkuro.ViewModels
                 {
                     Patricipant patricipantNew = patricipantCreatorWindow.PatricipantNew;
                     Context.AddPatricipant(patricipantNew);
-                    MessageBox.Show("Участник успешно добавлен!");
                     MessageLogs.Add(new MessageLog(LogType.Successfull, $"Участник {patricipantNew.ShortFIO} (город: {patricipantNew.City}) успешно добавлен!"));
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
                 MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
             }
         }
@@ -245,6 +242,23 @@ namespace Shinkuro.ViewModels
             else
             {
                 return false;
+            }
+        }
+
+        private bool ClearMessagesBlockCommandCanExecute(Object obj)
+        {
+            return MessageLogs.Count != 0;
+        }
+
+        private void ClearMessagesBlockCommandExecute(Object obj)
+        {
+            try
+            {
+                MessageLogs.Clear();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка!");
             }
         }
     }
