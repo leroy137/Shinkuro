@@ -10,11 +10,11 @@
     <DockPanel Margin="10">
         <UniformGrid Rows="1" DockPanel.Dock="Bottom" HorizontalAlignment="Right" Margin="5"
                      Button.Click="OnButtonClick">
-            <Button Content="OK" IsDefault="True" Margin="5,0" Padding="30,5" FontWeight="Bold"/>
-            <Button Content="Отмена" IsCancel="True" Margin="5,0" Padding="30,5"/>
+            <Button Content="OK" FontSize="12" Width="90" IsDefault="True" Margin="5,0"/>
+            <Button Content="Отмена" FontSize="12" Width="90" IsCancel="True" Margin="5,0"/>
         </UniformGrid>
         <TextBlock FontSize="16" Text="Сообщение" Name="txtMessage" DockPanel.Dock="Top" Margin="5,10"/>
-        <TextBox x:Name="txtUserValue" FontSize="14" Margin="10 0 10 5" VerticalAlignment="Stretch" 
+        <TextBox x:Name="txtUserValue" FontSize="14" IsReadOnly="True" Margin="10 0 10 5" VerticalAlignment="Stretch" 
                                  Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" 
                                  TextWrapping="Wrap" 
                                  Padding="0">

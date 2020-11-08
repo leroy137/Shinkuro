@@ -5,10 +5,101 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Shinkuro.Views.MainAppPages"
       mc:Ignorable="d" 
+      xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="GroupJudgesPage">
 
     <Grid>
-        <TextBlock>Бригады судей</TextBlock>
+        <Grid Style="{StaticResource CompetitionPagePanel}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Margin="5" Style="{StaticResource HeaderPageCompetition}">
+                            Бригады судей
+                        </TextBlock>
+                        <Button ToolTip="Добавить бригаду" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5 5 0 5">
+                            <md:PackIcon Kind="Plus" Height="16"></md:PackIcon>
+                        </Button>
+                        <Button ToolTip="Просмотр информации о бригаде" Grid.Column="3" VerticalAlignment="Bottom"  Padding="0" Height="22" Width="22" Margin="5">
+                            <md:PackIcon Kind="Eye" Height="14"></md:PackIcon>
+                        </Button>
+                        <Button ToolTip="Изменить бригаду судей" Grid.Column="2" VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                            <md:PackIcon Kind="Pen" Height="14"></md:PackIcon>
+                        </Button>
+                        <Button ToolTip="Удалить бригаду" Grid.Column="1"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                            <md:PackIcon Kind="Delete" Height="14"></md:PackIcon>
+                        </Button>
+                    </Grid>
+
+                    <Grid Grid.Row="3" Margin="5 15 0 5">
+                        <TabControl Height="170" TextBlock.FontSize="11" Padding="0">
+                            <TabItem Header="Сообщения">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Visibility="Collapsed" Grid.Column="1" Padding="0" Margin="2" Height="18" Width="18">
+                                            <md:PackIcon Height="14" Kind="Broom" ToolTip="Очистить вывод действий"></md:PackIcon>
+                                        </Button>
+                                    </Grid>
+                                    <Grid Grid.Row="1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition Height="auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid Grid.Row="0">
+
+                                        </Grid>
+                                        <Grid Grid.Row="1" Background="#FFF4EEFF" Height="26">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                                <ColumnDefinition Width="300"></ColumnDefinition>
+                                                <ColumnDefinition Width="150"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Margin="5 0" VerticalAlignment="Center" Grid.Column="0">Cтатус:</TextBlock>
+                                            <TextBlock Margin="5 0" VerticalAlignment="Center" Grid.Column="1" Text="{Binding StatusText, TargetNullValue='...', FallbackValue='...'}"></TextBlock>
+                                            <ProgressBar Margin="5 0" VerticalAlignment="Center" Height="18" Grid.Column="2"></ProgressBar>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </TabItem>
+                        </TabControl>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid Grid.Column="1" Background="#FF5B25BB" Width="1" Margin="5">
+            </Grid>
+            <Grid Grid.Column="2" Margin="0 5 5 5" Style="{StaticResource CompetitionPageSidebar}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>

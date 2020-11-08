@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Shinkuro.Views"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d"
-             MinHeight="650" MinWidth="800" >
+             MinHeight="650" MinWidth="1000" >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -46,97 +46,100 @@
 
         </Grid>
         <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0" Width="164" Background="#FFF1F1F1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Button Height="50"  Style="{StaticResource MaterialDesignFlatButton}" Padding="0"
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Background="#FFF1F1F1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90"></ColumnDefinition>
+                    <ColumnDefinition Width="90"></ColumnDefinition>
+                    <ColumnDefinition Width="90"></ColumnDefinition>
+                    <ColumnDefinition Width="90"></ColumnDefinition>
+                    <ColumnDefinition Width="90"></ColumnDefinition>
+                    <ColumnDefinition Width="110"></ColumnDefinition>
+                    <ColumnDefinition Width="90"></ColumnDefinition>
+                    <ColumnDefinition Width="90"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="90"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Height="58" Style="{StaticResource MaterialDesignFlatButton}" 
                         Command="{Binding GoToHomePageCommand}"
-                        Grid.Row="0" Cursor="Hand">
-                    <StackPanel Orientation="Horizontal">
-                        <md:PackIcon Margin="0 0 5 0" Kind="Home" VerticalAlignment="Center" Foreground="{Binding ElementName=txtButtonHomeName, Path=Foreground}" />
-                        <TextBlock FontSize="13" Name="txtButtonHomeName" VerticalAlignment="Center" Foreground="#FF5B25BB">Главная</TextBlock>
+                        Grid.Column="0">
+                    <StackPanel Orientation="Vertical">
+                        <md:PackIcon Kind="Home" Style="{StaticResource MenuIcon}" />
+                        <TextBlock Style="{StaticResource MenuButtonStyle}">Главная</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Height="50"  Style="{StaticResource MaterialDesignFlatButton}" 
+                <Button Height="58" Style="{StaticResource MaterialDesignFlatButton}" 
                          Command="{Binding GoToPatricipantsPageCommand}"
-                        Grid.Row="1" Cursor="Hand" Padding="0">
-                    <StackPanel Orientation="Horizontal">
-                        <md:PackIcon Margin="0 0 5 0" Kind="People" VerticalAlignment="Center" Foreground="{Binding ElementName=txtButtonPatricipantgName, Path=Foreground}" />
-                        <TextBlock FontSize="13" Name="txtButtonPatricipantgName" VerticalAlignment="Center" Foreground="#FF5B25BB">Участники</TextBlock>
+                        Grid.Column="1">
+                    <StackPanel Orientation="Vertical">
+                        <md:PackIcon Kind="People" Style="{StaticResource MenuIcon}" />
+                        <TextBlock Style="{StaticResource MenuButtonStyle}">Участники</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Height="50"  Style="{StaticResource MaterialDesignFlatButton}" 
+                <Button Height="58" Style="{StaticResource MaterialDesignFlatButton}" 
                         Command="{Binding GoToJudgePageCommand}"
-                        Grid.Row="2" Cursor="Hand" Padding="0">
-                    <StackPanel Orientation="Horizontal">
-                        <md:PackIcon Margin="0 0 5 0" Kind="Flag" VerticalAlignment="Center" Foreground="{Binding ElementName=txtButtonJudgeName, Path=Foreground}" />
-                        <TextBlock FontSize="13" Name="txtButtonJudgeName" VerticalAlignment="Center" Foreground="#FF5B25BB">Судьи</TextBlock>
+                        Grid.Column="2" >
+                    <StackPanel Orientation="Vertical">
+                        <md:PackIcon Kind="Flag" Style="{StaticResource MenuIcon}" />
+                        <TextBlock Style="{StaticResource MenuButtonStyle}">Судьи</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Height="50"  Style="{StaticResource MaterialDesignFlatButton}" 
+                <Button Height="58" Style="{StaticResource MaterialDesignFlatButton}" 
                         Command="{Binding GoToGroupJudgesPageCommand}"
-                        Grid.Row="3" Cursor="Hand" Padding="0">
-                    <StackPanel Orientation="Horizontal">
-                        <md:PackIcon Margin="0 0 5 0" Kind="Flag" VerticalAlignment="Center" Foreground="{Binding ElementName=txtButtonJudgeName, Path=Foreground}" />
-                        <TextBlock FontSize="13" Name="txtButtonJudgeGroupName" VerticalAlignment="Center" Foreground="#FF5B25BB">Бригады судей</TextBlock>
+                        Grid.Column="3">
+                    <StackPanel Orientation="Vertical">
+                        <md:PackIcon Kind="Flag" Style="{StaticResource MenuIcon}" />
+                        <TextBlock  Style="{StaticResource MenuButtonStyle}">Бригады</TextBlock>
+                        <TextBlock  Style="{StaticResource MenuButtonStyle}">судей</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Height="50"  Style="{StaticResource MaterialDesignFlatButton}" 
+                <Button Height="58" Style="{StaticResource MaterialDesignFlatButton}" 
                         Command="{Binding GoToGroupsPageCommand}"
-                        Grid.Row="4" Cursor="Hand" Padding="0">
-                    <StackPanel Orientation="Horizontal">
-                        <md:PackIcon Margin="0 0 5 0" Kind="AccountGroup" VerticalAlignment="Center" Foreground="{Binding ElementName=txtButtonJudgeName, Path=Foreground}" />
-                        <TextBlock FontSize="13" Name="txtButtonGroupsName" VerticalAlignment="Center" Foreground="#FF5B25BB">Группы</TextBlock>
+                        Grid.Column="4" Cursor="Hand">
+                    <StackPanel Orientation="Vertical">
+                        <md:PackIcon Kind="AccountGroup" Style="{StaticResource MenuIcon}" />
+                        <TextBlock Style="{StaticResource MenuButtonStyle}">Группы</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Height="50"  Style="{StaticResource MaterialDesignFlatButton}" 
+                <Button Padding="0" Height="58" Style="{StaticResource MaterialDesignFlatButton}" 
                         Command="{Binding GoToCompetitionFigurePageCommand}"
-                        Grid.Row="5" Cursor="Hand" Padding="0">
-                    <StackPanel Orientation="Horizontal">
-                        <md:PackIcon Margin="0 0 5 0" Kind="Shape" VerticalAlignment="Center" Foreground="{Binding ElementName=txtButtonCompetitionFigureName, Path=Foreground}" />
-                        <TextBlock FontSize="13" Name="txtButtonCompetitionFigureName" VerticalAlignment="Center" Foreground="#FF5B25BB">Соревнования фигур</TextBlock>
+                        Grid.Column="5">
+                    <StackPanel Orientation="Vertical">
+                        <md:PackIcon Kind="Shape" Style="{StaticResource MenuIcon}" />
+                        <TextBlock Style="{StaticResource MenuButtonStyle}">Соревнования</TextBlock>
+                        <TextBlock Style="{StaticResource MenuButtonStyle}">фигур</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Height="50"  Style="{StaticResource MaterialDesignFlatButton}" 
+                <Button Height="58" Style="{StaticResource MaterialDesignFlatButton}" 
                          Command="{Binding GoToCompetitionCommandPageCommand}"
-                        Grid.Row="6" Cursor="Hand" Padding="0">
-                    <StackPanel Orientation="Horizontal">
-                        <md:PackIcon Margin="0 0 5 0" Kind="HumanQueue" VerticalAlignment="Center" Foreground="{Binding ElementName=txtButtonCompetitionCommandName, Path=Foreground}" />
-                        <TextBlock FontSize="13" Name="txtButtonCompetitionCommandName" VerticalAlignment="Center" Foreground="#FF5B25BB" TextWrapping="WrapWithOverflow">Команды</TextBlock>
+                        Grid.Column="6" Cursor="Hand" Padding="0">
+                    <StackPanel Orientation="Vertical">
+                        <md:PackIcon Kind="HumanQueue" Style="{StaticResource MenuIcon}" />
+                        <TextBlock Style="{StaticResource MenuButtonStyle}">Команды</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Height="50"  Style="{StaticResource MaterialDesignFlatButton}"
+                <Button Height="58" Style="{StaticResource MaterialDesignFlatButton}"
                         Command="{Binding GoToSettingsPageCommand}"
-                        Grid.Row="7" Cursor="Hand" Padding="0">
-                    <StackPanel Orientation="Horizontal">
-                        <md:PackIcon Margin="0 0 5 0" Kind="Settings" VerticalAlignment="Center" Foreground="{Binding ElementName=txtButtonSettingName, Path=Foreground}" />
-                        <TextBlock FontSize="13" Name="txtButtonSettingName" VerticalAlignment="Center" Foreground="#FF5B25BB">Настройки</TextBlock>
+                        Grid.Column="7">
+                    <StackPanel Orientation="Vertical">
+                        <md:PackIcon Kind="Settings" Style="{StaticResource MenuIcon}"/>
+                        <TextBlock  Style="{StaticResource MenuButtonStyle}">Настройки</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Height="50" Command="{Binding Path=CloseApplicationCommand}"  
+                <Button Height="58" Command="{Binding Path=CloseApplicationCommand}"  
                         Style="{StaticResource MaterialDesignFlatButton}" 
-                        Grid.Row="9" Cursor="Hand" Padding="0">
-                    <StackPanel Orientation="Horizontal">
-                        <md:PackIcon Margin="0 0 5 0" Kind="ExitToApp" VerticalAlignment="Center" Foreground="{Binding ElementName=txtButtonExitName, Path=Foreground}" />
-                        <TextBlock FontSize="13" Name="txtButtonExitName" VerticalAlignment="Center" Foreground="#FF5B25BB">Выход</TextBlock>
+                        Grid.Column="10" >
+                    <StackPanel Orientation="Vertical">
+                        <md:PackIcon Kind="ExitToApp" Style="{StaticResource MenuIcon}" />
+                        <TextBlock Style="{StaticResource MenuButtonStyle}">Выход</TextBlock>
                     </StackPanel>
                 </Button>
             </Grid>
-            <Grid Grid.Column="1">
+            <Grid Grid.Row="1">
                 <Frame x:Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden">
 
                 </Frame>

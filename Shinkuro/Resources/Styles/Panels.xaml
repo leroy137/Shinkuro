@@ -10,5 +10,5 @@
     <Style TargetType="Grid" x:Key="CompetitionPageSidebar">
         <Setter Property="Background" Value="#FFF4EEFF"></Setter>
     </Style>
-     
+    
 </ResourceDictionary>

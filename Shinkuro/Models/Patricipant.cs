@@ -6,15 +6,18 @@ namespace Shinkuro.Models
 {
     public class Patricipant
     {
-        private int _number;
 
         private String _name;
         private String _surname;
         private String _patronymic;
 
+
+
         private int _year;
         private string _city;
         private string _rank;
+
+        private static Random rand = new Random();
 
         /// <summary>
         /// Фамилия
@@ -70,16 +73,6 @@ namespace Shinkuro.Models
             }
         }
 
-        public Int32 Number
-        {
-            get { return _number; }
-            set
-            {
-                if (value <= 0)
-                    throw new Exception("Номер участника не может быть меньше или равен нулю!");
-                _number = value;
-            }
-        }
         public Int32 Year
         {
             get { return _year; }
@@ -108,22 +101,77 @@ namespace Shinkuro.Models
             }
         }
 
+        public String SportSchool { get; set; }
+
         public String FIO => $"{Surname} {Name} {Patronymic}";
+
+        public String ShortFIO => $"{Surname} {Name?.ToUpper()[0]+"."}{Patronymic?.ToUpper()[0] + "."}";
 
         public Patricipant()
         {
 
         }
 
-        public Patricipant(String surname, String name, String patronymic, int number, int year, string city, string rank)
+        public Patricipant(String surname, String name, String patronymic, int year, string city, string rank, string sportSchool)
         {
             Surname = surname;
             Name = name;
             Patronymic = patronymic;
-            Number = number;
             Year = year;
             City = city;
             Rank = rank;
+            SportSchool = sportSchool;
+        }
+
+        public static Patricipant CreateRandom()
+        {
+
+            List<String> cities = new List<string> { "Оренбург", "Самара", "Салават", "Набережные Челны", "Уфа", "Казань" };
+            List<String> names = new List<string> { "Иван", "Алексей", "Петр", "Николай" };
+            List<String> surnames = new List<string> { "Иванов", "Алексеев", "Петров", "Николаев" };
+            List<String> patronimics = new List<string> { "Иванович", "Алексеевич", "Петрович", "Николаевич" };
+            Int32 startYear = 2000;
+            Int32 lastYear = 2010;
+            List<String> sportSchools = new List<string> { "Спортшкола им. Ивана", "Пингвин", "Газовик", "Алмаз", "Дельфин" };
+            List<String> ranks = new List<string> { "КМС", "МС", "ММ", "1 юношеский", "1 взрослый" };
+
+            String surname = surnames[rand.Next(surnames.Count)];
+            String name = names[rand.Next(names.Count)];
+            String patronimic = patronimics[rand.Next(patronimics.Count)];
+            String city = cities[rand.Next(cities.Count)];
+            Int32 year = rand.Next(startYear, lastYear + 1);
+            String sportSchool = sportSchools[rand.Next(sportSchools.Count)];
+            String rank = ranks[rand.Next(ranks.Count)];
+
+            return new Patricipant(surname, name, patronimic, year, city, rank, sportSchool);
+        }
+
+        public String GetChanges(Patricipant p)
+        {
+            String result = "";
+
+            if (Surname != p.Surname)
+                result += $"{p.Surname} -> {Surname}; ";
+
+            if (Name != p.Name)
+                result += $"{p.Name} -> {Name}; ";
+
+            if (Patronymic != p.Patronymic)
+                result += $"{p.Patronymic} -> {Patronymic}; ";
+
+            if (Year != p.Year)
+                result += $"{p.Year} -> {Year}; ";
+
+            if (City != p.City)
+                result += $"{p.City} -> {City}; ";
+
+            if (SportSchool != p.SportSchool)
+                result += $"{p.SportSchool} -> {SportSchool}; ";
+
+            if (Rank != p.Rank)
+                result += $"{p.Rank} -> {Rank}; ";
+
+            return result;
         }
     }
 }

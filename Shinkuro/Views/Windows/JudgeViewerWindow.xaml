@@ -27,7 +27,7 @@
             <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
                 <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Account" />
             </TextBlock>
-            <TextBox IsReadOnly="True" ToolTip="Фамилия" Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" md:HintAssist.Hint="Фамилия" Grid.Column="1"  Padding="5 0" ></TextBox>
+            <TextBox IsReadOnly="True" ToolTip="Фамилия" Text="{Binding Surname}" md:HintAssist.Hint="Фамилия" Grid.Column="1"  Padding="5 0" ></TextBox>
         </Grid>
         <Grid Grid.Row="1" Margin="5 10">
             <Grid.ColumnDefinitions>
@@ -37,7 +37,7 @@
             <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
                 <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Account" />
             </TextBlock>
-            <TextBox IsReadOnly="True" ToolTip="Имя" Text="{Binding JudgeName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" md:HintAssist.Hint="Имя" Grid.Column="1" Padding="5 0" ></TextBox>
+            <TextBox IsReadOnly="True" ToolTip="Имя" Text="{Binding JudgeName}" md:HintAssist.Hint="Имя" Grid.Column="1" Padding="5 0" ></TextBox>
         </Grid>
         <Grid Grid.Row="2" Margin="5 10">
             <Grid.ColumnDefinitions>
@@ -47,22 +47,12 @@
             <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
                 <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Account" />
             </TextBlock>
-            <TextBox IsReadOnly="True" ToolTip="Отчество" Text="{Binding Patronymic, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" md:HintAssist.Hint="Отчество" Grid.Column="1" Padding="5 0" ></TextBox>
+            <TextBox IsReadOnly="True" ToolTip="Отчество" Text="{Binding Patronymic}" md:HintAssist.Hint="Отчество" Grid.Column="1" Padding="5 0" ></TextBox>
         </Grid>
         <Grid Grid.Row="3" Margin="5 10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
-                <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Place" />
-            </TextBlock>
-            <TextBox ToolTip="Город" IsReadOnly="True" Text="{Binding City, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" md:HintAssist.Hint="Город" Grid.Column="1" Padding="5 0" ></TextBox>
-        </Grid>
-        <Grid Grid.Row="4" Margin="5 10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
-                <ColumnDefinition Width="50"></ColumnDefinition>
+                <ColumnDefinition Width="30"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
@@ -70,10 +60,10 @@
                     <ColumnDefinition Width="auto"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock VerticalAlignment="Center" Grid.Column="0" >
-                    <md:PackIcon Kind="MusicAccidentalSharp" Grid.Column="0" Margin="5 0" />
+                <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
+                <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Place" />
                 </TextBlock>
-                <TextBox ToolTip="Номер #" IsReadOnly="True" Text="{Binding Number, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="1" Width="150" md:HintAssist.Hint="Номер #" Padding="5 0" ></TextBox>
+                <TextBox IsReadOnly="True" Width="160" ToolTip="Город" Text="{Binding City}" md:HintAssist.Hint="Город" Grid.Column="1" Padding="5 0" ></TextBox>
             </Grid>
             <Grid Grid.Column="2">
                 <Grid.ColumnDefinitions>
@@ -83,10 +73,10 @@
                 <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
                     <md:PackIcon Grid.Column="0" Kind="Rank" />
                 </TextBlock>
-                <TextBox ToolTip="Категория" IsReadOnly="True" Text="{Binding Category, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="1" md:HintAssist.Hint="Категория" Grid.Row="3" Padding="5 0" ></TextBox>
+                <TextBox IsReadOnly="True" ToolTip="Категория" Text="{Binding Category}" Grid.Column="1" md:HintAssist.Hint="Категория" Grid.Row="3" Padding="5 0" ></TextBox>
             </Grid>
         </Grid>
-        <Grid Grid.Row="5" Margin="5 10">
+        <Grid Grid.Row="4" Margin="5 10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -94,9 +84,9 @@
             <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
                     <md:PackIcon Grid.Column="0" Kind="Work" />
             </TextBlock>
-            <TextBox ToolTip="Должность" IsReadOnly="True" Text="{Binding Work, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" md:HintAssist.Hint="Должность" Grid.Column="1" Padding="5 0" ></TextBox>
+            <TextBox IsReadOnly="True" ToolTip="Должность" Text="{Binding Work}" md:HintAssist.Hint="Должность" Grid.Column="1" Padding="5 0" ></TextBox>
         </Grid>
-        <Grid Grid.Row="6" Margin="5 10">
+        <Grid Grid.Row="5" Margin="5 10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -104,7 +94,7 @@
             <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
                     <md:PackIcon Grid.Column="0" Kind="InfoCircle" />
             </TextBlock>
-            <TextBox ToolTip="Дополнительная информация" IsReadOnly="True" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" md:HintAssist.Hint="Дополнительная информация" Grid.Column="1" Padding="5 0" ></TextBox>
+            <TextBox IsReadOnly="True" ToolTip="Дополнительная информация" Text="{Binding Description}" md:HintAssist.Hint="Дополнительная информация" Grid.Column="1" Padding="5 0" ></TextBox>
         </Grid>
         <Grid Grid.Row="8"  Margin="5 10">
             <Grid.ColumnDefinitions>

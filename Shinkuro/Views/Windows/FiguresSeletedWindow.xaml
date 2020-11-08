@@ -4,9 +4,48 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Shinkuro.Views.Windows"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="FiguresSeletedWindow" Height="450" Width="800">
+        Name="windowSelectedForm"
+        Title="Выбрать фигуры" WindowStartupLocation="CenterScreen" Height="600" Width="550">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Margin="10">
+            <TextBlock FontSize="16" FontWeight="SemiBold">Выберите фигуры:</TextBlock>
+        </Grid>
+        <Grid Grid.Row="1" Margin="10 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="0 0 5 0">
+                 <md:PackIcon Kind="Search" Height="24" Width="24"></md:PackIcon>
+            </TextBlock>
+            <TextBox Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  md:HintAssist.Hint="Введите название фигуры" md:TextFieldAssist.HasClearButton="True" ToolTip="Введите название фигуры" Padding="5 0" Grid.Column="1" FontSize="16" Margin="5 0 0 0"></TextBox>
+        </Grid>
+        <Grid Grid.Row="2" Margin="10 10 10 0">
+            <DataGrid CanUserAddRows="False" ItemsSource="{Binding SelectedFigures}" FontSize="12" AutoGenerateColumns="False" >
+                <DataGrid.Columns>
+                    <DataGridCheckBoxColumn Binding="{Binding IsSelected}" Width="auto" Header="#"></DataGridCheckBoxColumn>
+                    <DataGridTextColumn Binding="{Binding Path=Figure.Name}" Header="Название фигуры" Width="*"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Path=Figure.Complexity}" Header="Коэффициент сложности"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Grid Grid.Row="3" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Width="90" FontSize="12" Grid.Column="0" IsCancel="True">Отмена</Button>
+            <Button Command="{Binding SelectFiguresCommand}" CommandParameter="{Binding ElementName=windowSelectedForm}" Width="90" FontSize="12" Grid.Column="2">Выбрать</Button>
+        </Grid>
     </Grid>
 </Window>
