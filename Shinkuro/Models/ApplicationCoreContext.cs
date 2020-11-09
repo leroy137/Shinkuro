@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.IO;
+using Shinkuro.Services;
 
 namespace Shinkuro.Models
 {
@@ -43,6 +45,24 @@ namespace Shinkuro.Models
 
         public void UpdateCompetition(Competition competition)
         {
+
+            String logopath = competition.LogoPath;
+            using (FileStream s = File.Open(logopath, FileMode.Open))
+            {
+
+                if (s.Length > FileManager.MaxSizeLogo)
+                {
+                    s.Dispose();
+                    throw new Exception($"Размер логотипа превышает {(FileManager.MaxSizeLogo / 1024.0 / 1024.0)}МБ.");
+                }
+            }
+
+            String filelogoUploadPath = FileManager.UploadLogoCompetition(logopath);
+
+            if (String.IsNullOrEmpty(filelogoUploadPath))
+                throw new Exception("Не удалось загрузить логотип!");
+
+            competition.LogoPath = filelogoUploadPath;
             CurrentCompetition.UpdateCompetition(competition);
         }
 
