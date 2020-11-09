@@ -120,5 +120,30 @@ namespace Shinkuro.Models
         public String FIO => $"{Surname} {Name} {Patronymic}";
 
         public String ShortFIO => $"{Surname} {Name?.ToUpper()[0] + "."}{Patronymic?.ToUpper()[0] + "."}";
+
+        public string GetChanges(Judge j)
+        {
+            String result = "";
+
+            if (Surname != j.Surname)
+                result += $"{j.Surname} -> {Surname}; ";
+
+            if (Name != j.Name)
+                result += $"{j.Name} -> {Name}; ";
+
+            if (Patronymic != j.Patronymic)
+                result += $"{j.Patronymic} -> {Patronymic}; ";
+
+            if (City != j.City)
+                result += $"{j.City} -> {City}; ";
+
+            if (Post != j.Post)
+                result += $"{j.Post} -> {Post}; ";
+
+            if (Rank != j.Rank)
+                result += $"{j.Rank} -> {Rank}; ";
+
+            return result;
+        }
     }
 }

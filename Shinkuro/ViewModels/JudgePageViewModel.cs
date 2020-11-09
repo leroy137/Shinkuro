@@ -53,8 +53,10 @@ namespace Shinkuro.ViewModels
         public ICommand DeleteJudgeCommand { get; set; }
         public ICommand EditJudgeCommand { get; set; }
         public ICommand ViewJudgeCommand { get; set; }
-
+        public ICommand ClearMessagesBlockCommand { get; set; }
         public ICollectionView Judges { get; set; }
+
+        public ObservableCollection<MessageLog> MessageLogs { get; set; } = new ObservableCollection<MessageLog>();
 
         public JudgePageViewModel()
         {
@@ -64,6 +66,7 @@ namespace Shinkuro.ViewModels
             EditJudgeCommand = new RelayCommand(EditJudgeCommandExecute, EditJudgeCommandCanExecute);
             ViewJudgeCommand = new RelayCommand(ViewJudgeCommandExecute, ViewJudgeCommandCanExecute);
             CreateJudgeCommand = new RelayCommand(CreateJudgeCommandExecute, CreateJudgeCommandCanExecute);
+            ClearMessagesBlockCommand = new RelayCommand(ClearMessagesBlockCommandExecute, ClearMessagesBlockCommandCanExecute);
         }
 
         public JudgePageViewModel(ApplicationCoreContext context) : this()
@@ -125,12 +128,12 @@ namespace Shinkuro.ViewModels
                     String surname = SelectedJudge.Surname;
                     String name = SelectedJudge.Name;
                     Context.RemoveJudge(SelectedJudge);
-                    MessageBox.Show($"Судья {surname} {name} (город {city}) удален!");
+                    MessageLogs.Add(new MessageLog(LogType.Warrning, $"Судья { surname } { name} (город { city}) удален!"));
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
+                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -151,14 +154,15 @@ namespace Shinkuro.ViewModels
                 if (editorWindow.DialogResult == true)
                 {
                     Judge edit = editorWindow.JudgeEdit;
+                    String changes = edit.GetChanges(SelectedJudge);
                     Context.UpdateJudge(SelectedJudge, edit);
-                    MessageBox.Show("Судья успешно изменен!", "Изменение судьи");
                     Judges.Refresh();
+                    MessageLogs.Add(new MessageLog(LogType.Information, $"Изменение судьи {SelectedJudge.ShortFIO}: {changes}!"));
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
+                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -177,12 +181,12 @@ namespace Shinkuro.ViewModels
                 {
                     Judge judgeNew = judgeCreatorWindow.JudgeNew;
                     Context.AddJudge(judgeNew);
-                    MessageBox.Show("Судья успешно добавлен!");
+                    MessageLogs.Add(new MessageLog(LogType.Successfull, $"Судья {judgeNew.ShortFIO} успешно добавлен!"));
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
+                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -232,6 +236,23 @@ namespace Shinkuro.ViewModels
             else
             {
                 return false;
+            }
+        }
+
+        private bool ClearMessagesBlockCommandCanExecute(Object obj)
+        {
+            return MessageLogs.Count != 0;
+        }
+
+        private void ClearMessagesBlockCommandExecute(Object obj)
+        {
+            try
+            {
+                MessageLogs.Clear();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка!");
             }
         }
     }

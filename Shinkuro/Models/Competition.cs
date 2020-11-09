@@ -22,6 +22,9 @@ namespace Shinkuro.Models
             get { return _name; }
             set
             {
+                if (value == null)
+                    throw new ArgumentException("Название соревнования не может быть пустым!");
+
                 if (value.Trim().Length == 0) 
                     throw new ArgumentException("Название соревнования не может быть пустым!");
                 _name = value;
