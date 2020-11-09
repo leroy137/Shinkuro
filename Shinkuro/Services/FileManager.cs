@@ -10,6 +10,7 @@ namespace Shinkuro.Services
         public static String LogoFolderPathPrefix { get; set; } = @"Resources\Images\Logotips";
         public static String AppDir { get; set; }
         public static String LogoFolderPath { get; set; }
+        public static int MaxSizeLogo { get; set; }
 
         static FileManager()
         {
@@ -17,7 +18,7 @@ namespace Shinkuro.Services
             LogoFolderPath = Path.Combine(AppDir, LogoFolderPathPrefix);
 
             if (!Directory.Exists(LogoFolderPath))
-                Directory.CreateDirectory(LogoFolderPath);
+                Directory.CreateDirectory(LogoFolderPath); 
         }
     }
 }

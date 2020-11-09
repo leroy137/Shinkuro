@@ -7,6 +7,7 @@ using System.Windows.Input;
 using Shinkuro.Infrastracture.Commands;
 using System.Windows;
 using Shinkuro.Views.Windows;
+using System.Collections.ObjectModel;
 
 namespace Shinkuro.ViewModels
 {
@@ -20,28 +21,29 @@ namespace Shinkuro.ViewModels
             get { return _filterText; }
             set { Set<String>(ref _filterText, value); Figures.Refresh(); }
         }
-
         public ICollectionView Figures { get; set; }
-
         public Figure SelectedFigure { get; set; }
-
+        public ObservableCollection<MessageLog> MessageLogs { get; set; } = new ObservableCollection<MessageLog>();
 
         public ICommand CreateFigureCommand { get; set; }
         public ICommand ViewFigureCommand { get; set; }
         public ICommand RemoveFigureCommand { get; set; }
         public ICommand EditFigureCommand { get; set; }
-
+        public ICommand ClearMessagesBlockCommand { get; set; }
+        public ICommand UpdateListFiguresCommand { get; set; }
 
         public FigureManagerViewModel()
         {
             Figures = CollectionViewSource.GetDefaultView(ApplicationCoreContext.Figures);
             Figures.Filter = FilterFigure;
 
+            UpdateListFiguresCommand = new RelayCommand(UpdateListFiguresCommandExecute, UpdateListFiguresCommandCanExecute);
             // инициализируем команды менеджера фигур
             CreateFigureCommand = new RelayCommand(CreateFigureCommandExecute, CreateFigureCommandCanExecute);
             ViewFigureCommand = new RelayCommand(ViewFigureCommandExecute, ViewFigureCommandCanExecute);
             RemoveFigureCommand = new RelayCommand(RemoveFigureCommandExecute, RemoveFigureCommandCanExecute);
             EditFigureCommand = new RelayCommand(EditFigureCommandExecute, EditFigureCommandCanExecute);
+            ClearMessagesBlockCommand = new RelayCommand(ClearMessagesBlockCommandExecute, ClearMessagesBlockCommandCanExecute);
         }
 
         public bool FilterFigure(Object obj)
@@ -71,12 +73,12 @@ namespace Shinkuro.ViewModels
                 {
                     Figure figureNew = figureCreatorWindow.FigureNew;
                     ApplicationCoreContext.AddFigure(figureNew);
-                    MessageBox.Show("Фигура успешно добавлена!");
+                    MessageLogs.Add(new MessageLog(LogType.Successfull, $"Фигура {figureNew.Name} успешно добавлена!"));
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
+                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -99,14 +101,14 @@ namespace Shinkuro.ViewModels
 
                     String name = SelectedFigure.Name;
                     if (ApplicationCoreContext.RemoveFigure(SelectedFigure))
-                        MessageBox.Show($"Фигура {name} удалена!");
+                        MessageLogs.Add(new MessageLog(LogType.Successfull, $"Фигура {name} удалена!"));
                     else
                         throw new Exception("Ошибка операции удаления фигуры!");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
+                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -149,13 +151,13 @@ namespace Shinkuro.ViewModels
                 {
                     Figure edit = editorWindow.FigureEdit;
                     ApplicationCoreContext.UpdateFigure(SelectedFigure, edit);
-                    MessageBox.Show("Фигура успешно изменен!", "Изменение фигуры");
                     Figures.Refresh();
+                    MessageLogs.Add(new MessageLog(LogType.Information, $"Фигура {edit.Name} успешно изменена!"));
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
+                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -164,5 +166,38 @@ namespace Shinkuro.ViewModels
             return SelectedFigure != null;
         }
 
+        private bool ClearMessagesBlockCommandCanExecute(Object obj)
+        {
+            return MessageLogs.Count != 0;
+        }
+
+        private void ClearMessagesBlockCommandExecute(Object obj)
+        {
+            try
+            {
+                MessageLogs.Clear();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка!");
+            }
+        }
+
+        private void UpdateListFiguresCommandExecute(object obj)
+        {
+            try
+            {
+                Figures.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка!");
+            }
+        }
+
+        private bool UpdateListFiguresCommandCanExecute(object obj)
+        {
+            return true;
+        }
     }
 }

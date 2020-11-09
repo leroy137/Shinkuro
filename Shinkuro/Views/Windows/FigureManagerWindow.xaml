@@ -9,53 +9,172 @@
         mc:Ignorable="d"
         Title="Менеджер фигур" Height="650" Width="1000" WindowState="Maximized" Name="figureManager">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-            </Grid.RowDefinitions>
-            
-            <Grid Grid.Row="1" Margin="10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <TextBlock VerticalAlignment="Center" FontSize="20" Grid.Column="0" FontWeight="DemiBold">Фигуры</TextBlock>
-                <Button Command="{Binding CreateFigureCommand}" ToolTip="Добавить фигуру" Grid.Column="5"  VerticalAlignment="Bottom" Padding="0" Height="26" Width="26" Margin="5">
-                    <md:PackIcon Kind="Plus" ></md:PackIcon>
-                </Button>
-                <Button  Command="{Binding ViewFigureCommand}" ToolTip="Просмотр информации о фигуру" Grid.Column="4" VerticalAlignment="Bottom"  Padding="0" Height="26" Width="26" Margin="5">
-                    <md:PackIcon Kind="Eye" Height="14"></md:PackIcon>
-                </Button>
-                <Button  Command="{Binding EditFigureCommand}" ToolTip="Изменить фигуру" Grid.Column="3" VerticalAlignment="Bottom" Padding="0" Height="26" Width="26" Margin="5">
-                    <md:PackIcon Kind="Pen" Height="14"></md:PackIcon>
-                </Button>
-                <Button  Command="{Binding RemoveFigureCommand}" ToolTip="Удалить фигуру" Grid.Column="2"  VerticalAlignment="Bottom" Padding="0" Height="26" Width="26" Margin="5">
-                    <md:PackIcon Kind="Delete" Height="14"></md:PackIcon>
-                </Button>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Style="{StaticResource CompetitionPagePanel}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Margin="5" Style="{StaticResource HeaderPageCompetition}">
+                        Менеджер фигур
+                    </TextBlock>
+                    <Button Command="{Binding CreateFigureCommand}" ToolTip="Добавить фигуру" Grid.Column="4" VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5 5 0 5">
+                        <md:PackIcon Kind="Plus" Height="16"></md:PackIcon>
+                    </Button>
+                    <Button Command="{Binding ViewFigureCommand}" ToolTip="Просмотр фигуры" Grid.Column="3"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                        <md:PackIcon Kind="Eye" Height="14"></md:PackIcon>
+                    </Button>
+                    <Button Command="{Binding EditFigureCommand}" ToolTip="Изменить фигуру" Grid.Column="2"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                        <md:PackIcon Kind="Pen" Height="14"></md:PackIcon>
+                    </Button>
+                    <Button Command="{Binding RemoveFigureCommand}" ToolTip="Удалить фигуру" Grid.Column="1" VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                        <md:PackIcon Kind="Delete" Height="14"></md:PackIcon>
+                    </Button>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
+                        <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Search" />
+                        </TextBlock>
+                        <TextBox Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalContentAlignment="Center" md:HintAssist.Hint="Введите название фигуры" md:TextFieldAssist.HasClearButton="True" Padding="5 0" Grid.Column="1" FontSize="12"></TextBox>
+                    </Grid>
+                    <Grid Grid.Row="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button Command="{Binding UpdateListFiguresCommand}" Height="26" Margin="0 10" Grid.Column="2" ToolTip="Обновить список фигур" FontSize="10" HorizontalAlignment="Right">обновить</Button>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="2" Margin="5 5 0 5">
+                    <DataGrid SelectedItem="{Binding SelectedFigure}" ItemsSource="{Binding Figures}" CanUserAddRows="False" CanUserDeleteRows="False" FontSize="12" CanUserReorderColumns="False" IsReadOnly="True"  AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="auto" Header="Название" Binding="{Binding Path=Name}"></DataGridTextColumn>
+                            <DataGridTextColumn Width="auto" Header="Коэффициент" Binding="{Binding Path=Complexity}"></DataGridTextColumn>
+                            <DataGridTextColumn Width="*" Header="Описание" Binding="{Binding Path=Description}"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+                <Grid Grid.Row="3" Margin="5 12 0 5">
+                    <TabControl Height="170" TextBlock.FontSize="11" Padding="0">
+                        <TabItem Header="Сообщения">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition Height="auto"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0">
+                                        <ListBox ItemsSource="{Binding MessageLogs}" ItemContainerStyle="{StaticResource ListBoxItemLogStyle}">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Margin="0" Padding="0" Focusable="False" TextWrapping="Wrap">
+                                                    <Run Text="{Binding Time, StringFormat=dd.MM - HH:mm:ss >>>}"></Run>
+                                                    <Run Name="txtMessage" Text="{Binding Message}"></Run>
+                                                    </TextBlock>
+                                                    <DataTemplate.Triggers>
+                                                        <DataTrigger Binding="{Binding Path=Type}" Value="Successfull">
+                                                            <Setter TargetName="txtMessage" Property="TextBlock.Foreground" Value="#FF2E852E"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Path=Type}" Value="Error">
+                                                            <Setter TargetName="txtMessage" Property="TextBlock.Foreground" Value="#FFCD0C0C"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Path=Type}" Value="Warrning">
+                                                            <Setter TargetName="txtMessage" Property="TextBlock.Foreground" Value="#FFB6B63C"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Path=Type}" Value="Information">
+                                                            <Setter TargetName="txtMessage" Property="TextBlock.Foreground" Value="#FF6767BF"/>
+                                                        </DataTrigger>
+                                                    </DataTemplate.Triggers>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                    </Grid>
+                                    <Grid Grid.Row="1" Background="#FFF4EEFF" Height="28">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                                            <ColumnDefinition Width="300"></ColumnDefinition>
+                                            <ColumnDefinition Width="150"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Margin="5 0" VerticalAlignment="Center" Grid.Column="0">Cтатус:</TextBlock>
+                                        <TextBlock Margin="5 0" VerticalAlignment="Center" Grid.Column="1" Text="{Binding StatusText, TargetNullValue='...', FallbackValue='...'}"></TextBlock>
+                                        <ProgressBar Margin="5 0" VerticalAlignment="Center" Height="18" Grid.Column="2"></ProgressBar>
+                                        <TextBlock ToolTipService.Placement="Top" ToolTip="Очистить вывод" Margin="10 0" Grid.Column="4" VerticalAlignment="Center">
+                                        <md:PackIcon Kind="SortVariantRemove" Width="18" Height="18"></md:PackIcon>
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Foreground" Value="#FF9A65E4"></Setter>
+                                                            <Setter Property="Background" Value="#FFF4EFFF"></Setter>
+                                                            <Setter Property="Block.BorderBrush" Value="#FFC2C0F5"></Setter>
+                                                            <Setter Property="Block.BorderThickness" Value="2"></Setter>
+                                                            <Setter Property="Cursor" Value="Hand"></Setter>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                            <TextBlock.InputBindings>
+                                                <MouseBinding MouseAction="LeftClick" Command="{Binding ClearMessagesBlockCommand}"></MouseBinding>
+                                            </TextBlock.InputBindings>
+                                        </TextBlock>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
             </Grid>
-            <Grid Grid.Row="2">
-                <DataGrid SelectedItem="{Binding SelectedFigure}" ItemsSource="{Binding Figures}" CanUserAddRows="False" CanUserDeleteRows="False" FontSize="15" CanUserReorderColumns="False" IsReadOnly="True" Margin="10 0 10 10" AutoGenerateColumns="False">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Width="auto" Header="Название" Binding="{Binding Path=Name}"></DataGridTextColumn>
-                        <DataGridTextColumn Width="auto" Header="Коэффициент" Binding="{Binding Path=Complexity}"></DataGridTextColumn>
-                        <DataGridTextColumn Width="*" Header="Описание" Binding="{Binding Path=Description}"></DataGridTextColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+            <Grid Grid.Column="1" Background="#FF5B25BB" Width="1" Margin="5">
             </Grid>
-            <StackPanel Grid.Row="3" Orientation="Horizontal">
-                <Button Width="100" IsCancel="True" Margin="10">Закрыть</Button>
-            </StackPanel>
+            <Grid Grid.Column="2" Margin="0 5 5 5" Style="{StaticResource CompetitionPageSidebar}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1" Margin="10 0 10 10">
+            <Button Width="90" FontSize="12" IsCancel="True" HorizontalAlignment="Left">Закрыть</Button>
         </Grid>
     </Grid>
 </Window>

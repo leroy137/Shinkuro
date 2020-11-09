@@ -63,7 +63,7 @@ namespace Shinkuro.ViewModels
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошика!");
+                MessageBox.Show(ex.Message, "Ошибка!");
             }
         }
 

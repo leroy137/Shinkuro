@@ -126,7 +126,7 @@
                                             <ListBox.ItemTemplate>
                                                 <DataTemplate>
                                                     <TextBlock Margin="0" Padding="0" Focusable="False" TextWrapping="Wrap">
-                                                    <Run Text="{Binding Time, StringFormat=dd.MM - hh:mm:ss >>>}"></Run>
+                                                    <Run Text="{Binding Time, StringFormat=dd.MM - HH:mm:ss >>>}"></Run>
                                                     <Run Name="txtMessage" Text="{Binding Message}"></Run>
                                                     </TextBlock>
                                                     <DataTemplate.Triggers>
@@ -158,7 +158,7 @@
                                         <TextBlock Margin="5 0" VerticalAlignment="Center" Grid.Column="0">Cтатус:</TextBlock>
                                         <TextBlock Margin="5 0" VerticalAlignment="Center" Grid.Column="1" Text="{Binding StatusText, TargetNullValue='...', FallbackValue='...'}"></TextBlock>
                                         <ProgressBar Margin="5 0" VerticalAlignment="Center" Height="18" Grid.Column="2"></ProgressBar>
-                                        <TextBlock Margin="10 0" Grid.Column="4" VerticalAlignment="Center">
+                                        <TextBlock ToolTipService.Placement="Top" ToolTip="Очистить вывод" Margin="10 0" Grid.Column="4" VerticalAlignment="Center">
                                         <md:PackIcon Kind="SortVariantRemove" Width="18" Height="18"></md:PackIcon>
                                             <TextBlock.Style>
                                                 <Style TargetType="TextBlock">
