@@ -65,7 +65,7 @@ namespace Shinkuro.ViewModels
             HomePageViewModel = new HomePageViewModel();
             SettingsPageViewModel = new SettingsPageViewModel(MainContext);
             JudgePageViewModel = new JudgePageViewModel(MainContext);
-            GroupJudgesPageViewModel = new GroupJudgesPageViewModel();
+            GroupJudgesPageViewModel = new GroupJudgesPageViewModel(MainContext);
             GroupsPageViewModel = new GroupsPageViewModel(MainContext);
             CompetitionCommandPageViewModel = new CompetitionCommandPageViewModel();
             CompetitionFigurePageViewModel = new CompetitionFigurePageViewModel();
@@ -141,7 +141,7 @@ namespace Shinkuro.ViewModels
             try
             {
                 CurrentCompetitionURI = CompetitionPagesResolver.GroupJudgesAlias;
-                CompetitionNavigator.Navigate(CompetitionPagesResolver.GroupJudgesAlias, JudgePageViewModel);
+                CompetitionNavigator.Navigate(CompetitionPagesResolver.GroupJudgesAlias, GroupJudgesPageViewModel);
             }
             catch (Exception ex)
             {
