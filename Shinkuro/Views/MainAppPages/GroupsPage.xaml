@@ -9,278 +9,293 @@
       d:DesignHeight="650" d:DesignWidth="1000"
       Title="GroupsPage">
     <Grid Style="{StaticResource CompetitionPagePanel}">
-        <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Grid.IsSharedSizeScope="True">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="390"></ColumnDefinition>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="200"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" SharedSizeGroup="TopTitleBlock"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition Width="auto"></ColumnDefinition>
-                        <ColumnDefinition Width="auto"></ColumnDefinition>
-                        <ColumnDefinition Width="auto"></ColumnDefinition>
-                        <ColumnDefinition Width="auto"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Margin="5" Style="{StaticResource HeaderPageCompetition}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="80"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Grid.IsSharedSizeScope="True">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="380"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" SharedSizeGroup="TopTitleBlock"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Margin="5" Style="{StaticResource HeaderPageCompetition}">
                     Группы
-                    </TextBlock>
-                    <Button Command="{Binding CreateGroupCommand}" ToolTip="Добавить группу" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
-                        <md:PackIcon Kind="Plus" Height="16"></md:PackIcon>
-                    </Button>
-                    <Button  Command="{Binding ViewGroupCommand}" ToolTip="Просмотр информации о группе" Grid.Column="3" VerticalAlignment="Bottom"  Padding="0" Height="22" Width="22" Margin="5">
-                        <md:PackIcon Kind="Eye" Height="14"></md:PackIcon>
-                    </Button>
-                    <Button  Command="{Binding EditGroupCommand}" ToolTip="Изменить группу" Grid.Column="2" VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
-                        <md:PackIcon Kind="Pen" Height="14"></md:PackIcon>
-                    </Button>
-                    <Button  Command="{Binding DeleteGroupCommand}" ToolTip="Удалить группу" Grid.Column="1"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
-                        <md:PackIcon Kind="Delete" Height="14"></md:PackIcon>
-                    </Button>
+                        </TextBlock>
+                        <Button Command="{Binding CreateGroupCommand}" ToolTip="Добавить группу" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5 5 0 5">
+                            <md:PackIcon Kind="Plus" Height="16"></md:PackIcon>
+                        </Button>
+                        <Button  Command="{Binding ViewGroupCommand}" ToolTip="Просмотр информации о группе" Grid.Column="3" VerticalAlignment="Bottom"  Padding="0" Height="22" Width="22" Margin="5">
+                            <md:PackIcon Kind="Eye" Height="14"></md:PackIcon>
+                        </Button>
+                        <Button  Command="{Binding EditGroupCommand}" ToolTip="Изменить группу" Grid.Column="2" VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                            <md:PackIcon Kind="Pen" Height="14"></md:PackIcon>
+                        </Button>
+                        <Button  Command="{Binding DeleteGroupCommand}" ToolTip="Удалить группу" Grid.Column="1"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                            <md:PackIcon Kind="Delete" Height="14"></md:PackIcon>
+                        </Button>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <DataGrid ItemsSource="{Binding Groups}" SelectedItem="{Binding SelectedGroup}" Margin="5 0 0 5"   FontSize="12" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Название группы" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Год начало" Binding="{Binding StartYear}" Width="auto"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Год окончание" Binding="{Binding FinishYear}" Width="auto"></DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
                 </Grid>
-                <Grid Grid.Row="1">
-                    <DataGrid ItemsSource="{Binding Groups}" SelectedItem="{Binding SelectedGroup}" Margin="5 0 0 5"   FontSize="12" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Название группы" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Год начало" Binding="{Binding StartYear}" Width="auto"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Год окончание" Binding="{Binding FinishYear}" Width="auto"></DataGridTextColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                <Grid Grid.Column="1">
+                    <Grid Margin="10 5 0 5" Background="#FFF5F3F7">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Background="#FFCFCBF5">
+                            <TextBlock Padding="10 5" FontSize="11">Информация о выбранной группе</TextBlock>
+                        </Grid>
+                        <Grid Grid.Row="1" Margin="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0"  FontSize="13" >группа:</TextBlock>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="1"  Margin="10 0" FontSize="13" Foreground="#FF4C28C7" Text="{Binding SelectedGroup.Name, FallbackValue='не выбрана', TargetNullValue='не выбрана'}"></TextBlock>
+                        </Grid>
+                        <Grid Grid.Row="2" Margin="10 0 10 10">
+                            <TabControl TabStripPlacement="Bottom">
+                                <TabItem>
+                                    <TabItem.Header >
+                                        <TextBlock FontSize="12">Фигуры</TextBlock>
+                                    </TabItem.Header>
+                                    <Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid Grid.Column="0">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="auto"></RowDefinition>
+                                                    <RowDefinition></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <Grid Grid.Row="0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition></ColumnDefinition>
+                                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock VerticalAlignment="Bottom" Grid.Column="0" Margin="5" FontSize="14" FontWeight="DemiBold">
+                            Фигуры
+                                                    </TextBlock>
+                                                    <Button Command="{Binding SelectFiguresCommand}" ToolTip="Добавить фигуры" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                                                        <md:PackIcon Kind="Plus" Height="14"></md:PackIcon>
+                                                    </Button>
+                                                    <Button ToolTip="Открепить фигуру" Command="{Binding UnsetFigureCommand}" Grid.Column="3" VerticalAlignment="Bottom"  Padding="0" Height="22" Width="22" Margin="5">
+                                                        <md:PackIcon Kind="BlockHelper" Height="14"></md:PackIcon>
+                                                    </Button>
+                                                </Grid>
+                                                <Grid Grid.Row="1">
+                                                    <DataGrid SelectedItem="{Binding SelectedGroupFigure}" Margin="5 0 5 5" ItemsSource="{Binding SelectedGroup.Figures}"  FontSize="11" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
+                                                        <DataGrid.Columns>
+                                                            <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
+                                                            <DataGridTextColumn Header="Сложность" Binding="{Binding Complexity}" Width="auto"></DataGridTextColumn>
+                                                        </DataGrid.Columns>
+                                                    </DataGrid>
+                                                </Grid>
+                                            </Grid>
+                                            <Grid Grid.Column="1" Width="5" Visibility="Collapsed"></Grid>
+                                            <Grid Grid.Column="2" Visibility="Collapsed">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="auto"></RowDefinition>
+                                                    <RowDefinition></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <Grid Grid.Row="0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition></ColumnDefinition>
+                                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock VerticalAlignment="Bottom" Grid.Column="0" Margin="5" FontSize="14" FontWeight="DemiBold">
+                            Судейская бригада
+                                                    </TextBlock>
+                                                    <Button ToolTip="Добавить судью" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                                                        <md:PackIcon Kind="Plus" Height="16"></md:PackIcon>
+                                                    </Button>
+                                                    <Button ToolTip="Открепить судью" Grid.Column="3" VerticalAlignment="Bottom"  Padding="0" Height="22" Width="22" Margin="5">
+                                                        <md:PackIcon Kind="BlockHelper" Height="14"></md:PackIcon>
+                                                    </Button>
+                                                </Grid>
+                                                <Grid Grid.Row="1">
+                                                    <DataGrid Margin="5 0 5 5" MinHeight="240"  FontSize="11" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
+                                                        <DataGrid.Columns>
+                                                            <DataGridTextColumn Header="Фамилия ИО" Width="*"></DataGridTextColumn>
+                                                            <DataGridTextColumn Header="Город" Width="auto"></DataGridTextColumn>
+                                                        </DataGrid.Columns>
+                                                    </DataGrid>
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                </TabItem>
+                                <TabItem>
+                                    <TabItem.Header>
+                                        <TextBlock>Участники</TextBlock>
+                                    </TabItem.Header>
+                                    <Grid>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="auto"></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <Grid Grid.Row="0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition></ColumnDefinition>
+                                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Margin="5" VerticalAlignment="Bottom" FontSize="14" FontWeight="DemiBold">
+                        Участники
+                                                </TextBlock>
+                                                <Button Command="{Binding SelectPatricipantsCommand}" ToolTip="Добавить участников" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                                                    <md:PackIcon Kind="Plus" Height="16"></md:PackIcon>
+                                                </Button>
+                                                <Button Command="{Binding UnsetPatricipantCommand}" ToolTip="Открепить участника" Grid.Column="3" VerticalAlignment="Bottom"  Padding="0" Height="22" Width="22" Margin="5">
+                                                    <md:PackIcon Kind="BlockHelper" Height="14"></md:PackIcon>
+                                                </Button>
+                                            </Grid>
+                                            <Grid Grid.Row="1">
+                                                <DataGrid Margin="5 0 5 5" ItemsSource="{Binding SelectedGroup.Patricipants}"  FontSize="11" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
+                                                    <DataGrid.Columns>
+                                                        <DataGridTextColumn Header="Фамилия ИО" Binding="{Binding Path=ShortFIO}" Width="auto"></DataGridTextColumn>
+                                                        <DataGridTextColumn Header="Год рождения" Width="auto" Binding="{Binding Path=Year}"></DataGridTextColumn>
+                                                        <DataGridTextColumn Header="Город" Width="auto" Binding="{Binding Path=City}"></DataGridTextColumn>
+                                                    </DataGrid.Columns>
+                                                </DataGrid>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                </TabItem>
+                                <TabItem>
+                                    <TabItem.Header>
+                                        Бригады судей и фигуры
+                                    </TabItem.Header>
+                                </TabItem>
+                                <TabItem>
+                                    <TabItem.Header>
+                                        Разбивка по подгруппам
+                                    </TabItem.Header>
+                                </TabItem>
+                            </TabControl>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Grid>
-            <Grid Grid.Column="1" Width="1" Margin="5 5 0 5"></Grid><!--Background="#FF5B25BB"--> 
-            <Grid Grid.Column="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition  SharedSizeGroup="TopTitleBlock" Height="auto"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0" FontSize="14" Style="{StaticResource HeaderPageCompetition}">группа:</TextBlock>
-                    <TextBlock  VerticalAlignment="Center" Grid.Column="1"  Margin="5 0" FontSize="14" Foreground="#FF831CE2" Style="{StaticResource HeaderPageCompetition}" Text="{Binding SelectedGroup.Name, FallbackValue='не выбрана', TargetNullValue='не выбрана'}"></TextBlock>
-                </Grid>
-                <TabControl Grid.Row="1">
-                    <TabItem>
-                        <TabItem.Header >
-                            <TextBlock FontSize="12">Фигуры</TextBlock>
-                        </TabItem.Header>
+            <Grid Grid.Row="1" Margin="5 7 0 5">
+                <TabControl Height="120" TextBlock.FontSize="11" Padding="0">
+                    <TabItem Header="Сообщения">
                         <Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="0">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="auto"></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <Grid Grid.Row="0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition></ColumnDefinition>
-                                            <ColumnDefinition Width="auto"></ColumnDefinition>
-                                            <ColumnDefinition Width="auto"></ColumnDefinition>
-                                            <ColumnDefinition Width="auto"></ColumnDefinition>
-                                            <ColumnDefinition Width="auto"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock VerticalAlignment="Bottom" Grid.Column="0" Margin="5" FontSize="14" FontWeight="DemiBold">
-                            Фигуры
-                                        </TextBlock>
-                                        <Button Command="{Binding SelectFiguresCommand}" ToolTip="Добавить фигуры" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
-                                            <md:PackIcon Kind="Plus" Height="14"></md:PackIcon>
-                                        </Button>
-                                        <Button ToolTip="Открепить фигуру" Command="{Binding UnsetFigureCommand}" Grid.Column="3" VerticalAlignment="Bottom"  Padding="0" Height="22" Width="22" Margin="5">
-                                            <md:PackIcon Kind="BlockHelper" Height="14"></md:PackIcon>
-                                        </Button>
-                                    </Grid>
-                                    <Grid Grid.Row="1">
-                                        <DataGrid SelectedItem="{Binding SelectedGroupFigure}" Margin="5 0 5 5" ItemsSource="{Binding SelectedGroup.Figures}"  FontSize="11" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
-                                            <DataGrid.Columns>
-                                                <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
-                                                <DataGridTextColumn Header="Сложность" Binding="{Binding Complexity}" Width="auto"></DataGridTextColumn>
-                                            </DataGrid.Columns>
-                                        </DataGrid>
-                                    </Grid>
-                                </Grid>
-                                <Grid Grid.Column="1" Width="5" Visibility="Collapsed"></Grid>
-                                <Grid Grid.Column="2" Visibility="Collapsed">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="auto"></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <Grid Grid.Row="0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition></ColumnDefinition>
-                                            <ColumnDefinition Width="auto"></ColumnDefinition>
-                                            <ColumnDefinition Width="auto"></ColumnDefinition>
-                                            <ColumnDefinition Width="auto"></ColumnDefinition>
-                                            <ColumnDefinition Width="auto"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock VerticalAlignment="Bottom" Grid.Column="0" Margin="5" FontSize="14" FontWeight="DemiBold">
-                            Судейская бригада
-                                        </TextBlock>
-                                        <Button ToolTip="Добавить судью" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
-                                            <md:PackIcon Kind="Plus" Height="16"></md:PackIcon>
-                                        </Button>
-                                        <Button ToolTip="Открепить судью" Grid.Column="3" VerticalAlignment="Bottom"  Padding="0" Height="22" Width="22" Margin="5">
-                                            <md:PackIcon Kind="BlockHelper" Height="14"></md:PackIcon>
-                                        </Button>
-                                    </Grid>
-                                    <Grid Grid.Row="1">
-                                        <DataGrid Margin="5 0 5 5" MinHeight="240"  FontSize="11" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
-                                            <DataGrid.Columns>
-                                                <DataGridTextColumn Header="Фамилия ИО" Width="*"></DataGridTextColumn>
-                                                <DataGridTextColumn Header="Город" Width="auto"></DataGridTextColumn>
-                                            </DataGrid.Columns>
-                                        </DataGrid>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                    </TabItem>
-                    <TabItem>
-                        <TabItem.Header>
-                            <TextBlock>Участники</TextBlock>
-                        </TabItem.Header>
-                        <Grid>
-                            <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="1">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto"></RowDefinition>
                                     <RowDefinition></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid Grid.Row="0">
+                                    <ListBox ItemsSource="{Binding MessageLogs}" ItemContainerStyle="{StaticResource ListBoxItemLogStyle}">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Margin="0" Padding="0" Focusable="False" TextWrapping="Wrap">
+                                                    <Run Text="{Binding Time, StringFormat=dd.MM - HH:mm:ss >>>}"></Run>
+                                                    <Run Name="txtMessage" Text="{Binding Message}"></Run>
+                                                </TextBlock>
+                                                <DataTemplate.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=Type}" Value="Successfull">
+                                                        <Setter TargetName="txtMessage" Property="TextBlock.Foreground" Value="#FF2E852E"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=Type}" Value="Error">
+                                                        <Setter TargetName="txtMessage" Property="TextBlock.Foreground" Value="#FFCD0C0C"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=Type}" Value="Warrning">
+                                                        <Setter TargetName="txtMessage" Property="TextBlock.Foreground" Value="#FFB6B63C"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=Type}" Value="Information">
+                                                        <Setter TargetName="txtMessage" Property="TextBlock.Foreground" Value="#FF6767BF"/>
+                                                    </DataTrigger>
+                                                </DataTemplate.Triggers>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </Grid>
+                                <Grid Grid.Row="1" Background="#FFF4EEFF" Height="28">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition></ColumnDefinition>
                                         <ColumnDefinition Width="auto"></ColumnDefinition>
-                                        <ColumnDefinition Width="auto"></ColumnDefinition>
-                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="300"></ColumnDefinition>
+                                        <ColumnDefinition Width="150"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
                                         <ColumnDefinition Width="auto"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" Margin="5" VerticalAlignment="Bottom" FontSize="14" FontWeight="DemiBold">
-                        Участники
+                                    <TextBlock Margin="5 0" VerticalAlignment="Center" Grid.Column="0">Cтатус:</TextBlock>
+                                    <TextBlock Margin="5 0" VerticalAlignment="Center" Grid.Column="1" Text="{Binding StatusText, TargetNullValue='...', FallbackValue='...'}"></TextBlock>
+                                    <ProgressBar Margin="5 0" VerticalAlignment="Center" Height="18" Grid.Column="2"></ProgressBar>
+                                    <TextBlock ToolTipService.Placement="Top" ToolTip="Очистить вывод" Margin="10 0" Grid.Column="4" VerticalAlignment="Center">
+                                        <md:PackIcon Kind="SortVariantRemove" Width="18" Height="18"></md:PackIcon>
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Foreground" Value="#FF9A65E4"></Setter>
+                                                        <Setter Property="Background" Value="#FFF4EFFF"></Setter>
+                                                        <Setter Property="Block.BorderBrush" Value="#FFC2C0F5"></Setter>
+                                                        <Setter Property="Block.BorderThickness" Value="2"></Setter>
+                                                        <Setter Property="Cursor" Value="Hand"></Setter>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                        <TextBlock.InputBindings>
+                                            <MouseBinding MouseAction="LeftClick" Command="{Binding ClearMessagesBlockCommand}"></MouseBinding>
+                                        </TextBlock.InputBindings>
                                     </TextBlock>
-                                    <Button Command="{Binding SelectPatricipantsCommand}" ToolTip="Добавить участников" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
-                                        <md:PackIcon Kind="Plus" Height="16"></md:PackIcon>
-                                    </Button>
-                                    <Button Command="{Binding UnsetPatricipantCommand}" ToolTip="Открепить участника" Grid.Column="3" VerticalAlignment="Bottom"  Padding="0" Height="22" Width="22" Margin="5">
-                                        <md:PackIcon Kind="BlockHelper" Height="14"></md:PackIcon>
-                                    </Button>
-                                </Grid>
-                                <Grid Grid.Row="1">
-                                    <DataGrid Margin="5 0 5 5" ItemsSource="{Binding SelectedGroup.Patricipants}"  FontSize="11" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
-                                        <DataGrid.Columns>
-                                            <DataGridTextColumn Header="Фамилия ИО" Binding="{Binding Path=ShortFIO}" Width="auto"></DataGridTextColumn>
-                                            <DataGridTextColumn Header="Год рождения" Width="auto" Binding="{Binding Path=Year}"></DataGridTextColumn>
-                                            <DataGridTextColumn Header="Город" Width="auto" Binding="{Binding Path=City}"></DataGridTextColumn>
-                                        </DataGrid.Columns>
-                                    </DataGrid>
                                 </Grid>
                             </Grid>
                         </Grid>
-                    </TabItem>
-                    <TabItem>
-                        <TabItem.Header>
-                            Бригады судей и фигуры
-                        </TabItem.Header>
-                    </TabItem>
-                    <TabItem>
-                        <TabItem.Header>
-                            Разбивка по подгруппам
-                        </TabItem.Header>
                     </TabItem>
                 </TabControl>
             </Grid>
         </Grid>
-        <Grid Grid.Row="3" Margin="5 12 0 5">
-            <TabControl Height="170" TextBlock.FontSize="11" Padding="0">
-                <TabItem Header="Сообщения">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition Height="auto"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Grid Grid.Row="0">
-                                <ListBox ItemsSource="{Binding MessageLogs}" ItemContainerStyle="{StaticResource ListBoxItemLogStyle}">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Margin="0" Padding="0" Focusable="False" TextWrapping="Wrap">
-                                                    <Run Text="{Binding Time, StringFormat=dd.MM - HH:mm:ss >>>}"></Run>
-                                                    <Run Name="txtMessage" Text="{Binding Message}"></Run>
-                                            </TextBlock>
-                                            <DataTemplate.Triggers>
-                                                <DataTrigger Binding="{Binding Path=Type}" Value="Successfull">
-                                                    <Setter TargetName="txtMessage" Property="TextBlock.Foreground" Value="#FF2E852E"/>
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding Path=Type}" Value="Error">
-                                                    <Setter TargetName="txtMessage" Property="TextBlock.Foreground" Value="#FFCD0C0C"/>
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding Path=Type}" Value="Warrning">
-                                                    <Setter TargetName="txtMessage" Property="TextBlock.Foreground" Value="#FFB6B63C"/>
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding Path=Type}" Value="Information">
-                                                    <Setter TargetName="txtMessage" Property="TextBlock.Foreground" Value="#FF6767BF"/>
-                                                </DataTrigger>
-                                            </DataTemplate.Triggers>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                            </Grid>
-                            <Grid Grid.Row="1" Background="#FFF4EEFF" Height="28">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                                    <ColumnDefinition Width="300"></ColumnDefinition>
-                                    <ColumnDefinition Width="150"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Margin="5 0" VerticalAlignment="Center" Grid.Column="0">Cтатус:</TextBlock>
-                                <TextBlock Margin="5 0" VerticalAlignment="Center" Grid.Column="1" Text="{Binding StatusText, TargetNullValue='...', FallbackValue='...'}"></TextBlock>
-                                <ProgressBar Margin="5 0" VerticalAlignment="Center" Height="18" Grid.Column="2"></ProgressBar>
-                                <TextBlock ToolTipService.Placement="Top" ToolTip="Очистить вывод" Margin="10 0" Grid.Column="4" VerticalAlignment="Center">
-                                        <md:PackIcon Kind="SortVariantRemove" Width="18" Height="18"></md:PackIcon>
-                                    <TextBlock.Style>
-                                        <Style TargetType="TextBlock">
-                                            <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Foreground" Value="#FF9A65E4"></Setter>
-                                                    <Setter Property="Background" Value="#FFF4EFFF"></Setter>
-                                                    <Setter Property="Block.BorderBrush" Value="#FFC2C0F5"></Setter>
-                                                    <Setter Property="Block.BorderThickness" Value="2"></Setter>
-                                                    <Setter Property="Cursor" Value="Hand"></Setter>
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </TextBlock.Style>
-                                    <TextBlock.InputBindings>
-                                        <MouseBinding MouseAction="LeftClick" Command="{Binding ClearMessagesBlockCommand}"></MouseBinding>
-                                    </TextBlock.InputBindings>
-                                </TextBlock>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </TabItem>
-            </TabControl>
+        <Grid Grid.Column="1" Background="#FF5B25BB" Width="1" Margin="5"></Grid>
+        <Grid Grid.Column="2" Margin="0 5 5 5" Style="{StaticResource CompetitionPageSidebar}">
         </Grid>
     </Grid>
 </Page>

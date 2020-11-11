@@ -10,6 +10,7 @@ using Shinkuro.Infrastracture.Commands;
 using System.Windows;
 using Shinkuro.Views.Windows;
 using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace Shinkuro.ViewModels
 {
@@ -20,7 +21,7 @@ namespace Shinkuro.ViewModels
         private Figure _selectedGroupFigure = null;
         public ApplicationCoreContext Context { get; set; }
         public ICollectionView Groups { get; set; }
-
+        public ObservableCollection<MessageLog> MessageLogs { get; set; } = new ObservableCollection<MessageLog>();
         public Group SelectedGroup 
         { 
             get { return _seletedGroup; } 
@@ -52,7 +53,7 @@ namespace Shinkuro.ViewModels
         public ICommand SelectPatricipantsCommand { get; set; }
 
         public ICommand UnsetPatricipantCommand { get; set; }
-
+        public ICommand ClearMessagesBlockCommand { get; set; }
         #endregion
 
         public GroupsPageViewModel()
@@ -65,6 +66,7 @@ namespace Shinkuro.ViewModels
             UnsetFigureCommand = new RelayCommand(UnsetFigureCommandExecute, UnsetFigureCommandCanExecute);
             SelectPatricipantsCommand = new RelayCommand(SelectPatricipantsCommandExecute, SelectPatricipantsCommandCanExecute);
             UnsetPatricipantCommand = new RelayCommand(UnsetPatricipantCommandExecute, UnsetPatricipantCommandCanExecute);
+            ClearMessagesBlockCommand = new RelayCommand(ClearMessagesBlockCommandExecute, ClearMessagesBlockCommandCanExecute);
         }
 
         public GroupsPageViewModel(ApplicationCoreContext context) : this()
@@ -86,12 +88,12 @@ namespace Shinkuro.ViewModels
                 {
                     String name = SelectedGroup.Name;
                     Context.RemoveGroup(SelectedGroup);
-                    MessageBox.Show($"Группа {name} удалена!");
+                    MessageLogs.Add(new MessageLog(LogType.Warrning,$"Группа {name} удалена!"));
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
+                MessageLogs.Add(new MessageLog(LogType.Error,ex.Message));
             }
         }
 
@@ -115,13 +117,13 @@ namespace Shinkuro.ViewModels
                 {
                     Group edit = editorWindow.GroupEdit;
                     Context.UpdateGroup(SelectedGroup, edit);
-                    MessageBox.Show("Грппа успешно изменена!", "Изменение группы");
+                    MessageLogs.Add(new MessageLog(LogType.Information, "Группа успешно изменена!"));
                     Groups.Refresh();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
+                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -142,13 +144,13 @@ namespace Shinkuro.ViewModels
                     if(groupNew!=null)
                     {
                         Context.AddGroup(groupNew);
-                        MessageBox.Show("Группа успешно создана!");
+                        MessageLogs.Add(new MessageLog(LogType.Successfull, $"Группа {groupNew.Name} успешно создана!"));
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
+                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -169,7 +171,7 @@ namespace Shinkuro.ViewModels
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
+                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -190,16 +192,18 @@ namespace Shinkuro.ViewModels
                 figuresSeletedWindow.ShowDialog();
                 if(figuresSeletedWindow.DialogResult == true)
                 {
+                    int countPrevCountFigures = SelectedGroup.Figures.Count;
                     List<Figure> selectedFigures = figureSelectedViewModel.SelectedFiguresGroup.ToList();
                     Context.SelectFiguresGroup(SelectedGroup, selectedFigures);
                     Group gr = SelectedGroup;
                     SelectedGroup = null;
                     SelectedGroup = gr;
+                    MessageLogs.Add(new MessageLog(LogType.Information, $"Список фигур для группы {SelectedGroup.Name} обновлен (число фигур {countPrevCountFigures} -> {selectedFigures.Count})!"));
                 }
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
+                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -215,16 +219,19 @@ namespace Shinkuro.ViewModels
                 if (SelectedGroupFigure == null)
                     throw new Exception("Фигура для открепления от группы не задана!");
 
+
+                String figureNameUnset = SelectedGroupFigure.Name;
                 if (!Context.UnsetGroupFigure(SelectedGroup, SelectedGroupFigure))
                     throw new Exception("Открепление фигуры не удалось!");
 
                 Group gr = SelectedGroup;
                 SelectedGroup = null;
                 SelectedGroup = gr;
+                MessageLogs.Add(new MessageLog(LogType.Information, $"Фигура {figureNameUnset} успешно откреплена от группы {SelectedGroup.Name}!"));
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
+                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -242,7 +249,7 @@ namespace Shinkuro.ViewModels
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
+                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -259,13 +266,30 @@ namespace Shinkuro.ViewModels
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
+                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
         private bool UnsetPatricipantCommandCanExecute(Object obj)
         {
             return SelectedGroup != null;
+        }
+
+        private bool ClearMessagesBlockCommandCanExecute(Object obj)
+        {
+            return MessageLogs.Count != 0;
+        }
+
+        private void ClearMessagesBlockCommandExecute(Object obj)
+        {
+            try
+            {
+                MessageLogs.Clear();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка!");
+            }
         }
     }
 }
