@@ -16,7 +16,12 @@ namespace Shinkuro.ViewModels
 {
     class GroupJudgesPageViewModel : ViewModelBase
     {
-        public GroupJudges SelectedGroupJudges { get; set; }
+        private GroupJudges _selectedGroupJudges;
+        public GroupJudges SelectedGroupJudges 
+        { 
+            get { return _selectedGroupJudges; }
+            set { Set<GroupJudges>(ref _selectedGroupJudges, value); }
+        }
 
         public ApplicationCoreContext Context { get; set; }
 
@@ -111,9 +116,9 @@ namespace Shinkuro.ViewModels
                 groupJudgesCreator.ShowDialog();
                 if (groupJudgesCreator.DialogResult == true)
                 {
-                    //Patricipant patricipantNew = patricipantCreatorWindow.PatricipantNew;
-                    //Context.AddPatricipant(patricipantNew);
-                    //MessageLogs.Add(new MessageLog(LogType.Successfull, $"Участник {patricipantNew.ShortFIO} (город: {patricipantNew.City}) успешно добавлен!"));
+                    GroupJudges groupNew = groupJudgesCreator.GroupJudgesNew;
+                    Context.AddGroupJudges(groupNew);
+                    MessageLogs.Add(new MessageLog(LogType.Successfull, $"Бригада судей {groupNew.Name} успешно добавлена!"));
                 }
             }
             catch (Exception ex)

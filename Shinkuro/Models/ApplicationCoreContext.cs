@@ -162,6 +162,14 @@ namespace Shinkuro.Models
             Figures.Add(figure);
         }
 
+        public void AddGroupJudges(GroupJudges g)
+        {
+            if (g == null)
+                throw new NullReferenceException("Добавление бригады невозможно, так как объект бригады судей не задан и равен null");
+
+            GroupJudges.Add(g);
+        }
+
         public bool RemovePatricipant(Patricipant patricipant)
         {
             if (patricipant == null)

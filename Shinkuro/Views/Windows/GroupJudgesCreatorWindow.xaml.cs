@@ -57,7 +57,14 @@ namespace Shinkuro.Views.Windows
         {
             try
             {
-                
+
+                List<Judge> judges = new List<Judge>();
+                for (int i = 0; i < SelectedJudgesList.Count; i++)
+                    judges.Add(SelectedJudgesList[i].Judge);
+                GroupJudges newGroup = new GroupJudges(GroupJudgesName, judges);
+                GroupJudgesNew = newGroup;
+                this.DialogResult = true;
+                this.Close();
             }
             catch (Exception ex)
             {

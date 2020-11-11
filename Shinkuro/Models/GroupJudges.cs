@@ -22,6 +22,8 @@ namespace Shinkuro.Models
             }
         }
 
+        public String JudgesListText => Judges.Count>0? String.Join(';', Judges.Select(j=>j.Judge.ShortFIO)) : "";
+
         public List<JudgeGroup> Judges { get; set; } = new List<JudgeGroup>();
 
         public GroupJudges(String name)

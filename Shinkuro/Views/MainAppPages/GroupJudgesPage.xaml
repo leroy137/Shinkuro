@@ -56,9 +56,8 @@
                         <Button Command="{Binding UpdateListGroupJudgesCommand}" Height="26" Margin="0 10" Grid.Column="2" ToolTip="Обновить список судейских бригад" FontSize="10" HorizontalAlignment="Right">обновить</Button>
                     </Grid>
                     <Grid Grid.Row="2" Margin="5 5 0 5">
-                        <DataGrid FontSize="11" EnableRowVirtualization="True" EnableColumnVirtualization="True" SelectedItem="{Binding SelectedGroupJudges}" ItemsSource="{Binding GroupsJudges}" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
+                        <DataGrid FontSize="11" EnableRowVirtualization="True" EnableColumnVirtualization="True" SelectedItem="{Binding SelectedGroupJudges, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ItemsSource="{Binding GroupsJudges}" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Width="auto" Header="Номер" Binding="{Binding Path=Number}"></DataGridTextColumn>
                                 <DataGridTextColumn Width="auto" Header="Название" Binding="{Binding Path=Name}"></DataGridTextColumn>
                                 <DataGridTextColumn Width="*" Header="Список судей" Binding="{Binding Path=JudgesListText}"></DataGridTextColumn>
                             </DataGrid.Columns>
@@ -158,7 +157,7 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0">Бригада:</TextBlock>
-                    <TextBlock Grid.Column="1" Foreground="#FF4C28C7" Margin="10 0 0 0" Text="{Binding SeletedGroupJudges.Name, FallbackValue='не выбрана'}"></TextBlock>
+                    <TextBlock Grid.Column="1" Foreground="#FF4C28C7" Margin="10 0 0 0" Text="{Binding SelectedGroupJudges.Name, FallbackValue='не выбрана'}"></TextBlock>
                 </Grid>
                 <Grid Grid.Row="2" Margin="10">
                     <Grid.RowDefinitions>
@@ -167,12 +166,13 @@
                     </Grid.RowDefinitions>
                     <TextBlock FontSize="13" Grid.Row="0">Список судей:</TextBlock>
                     <Grid Grid.Row="1" Margin="0 5 0 0">
-                        <DataGrid FontSize="11" EnableRowVirtualization="True" EnableColumnVirtualization="True" ItemsSource="{Binding Path=SeletedGroupJudges.Judges}" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
+                        <DataGrid FontSize="11" EnableRowVirtualization="True" EnableColumnVirtualization="True" ItemsSource="{Binding Path=SelectedGroupJudges.Judges}" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Width="auto" Header="Номер" Binding="{Binding Path=Number}"></DataGridTextColumn>
-                                <DataGridTextColumn Width="auto" Header="ФИО" Binding="{Binding Path=ShrotFIO}"></DataGridTextColumn>
-                                <DataGridTextColumn Width="auto" Header="Город" Binding="{Binding Path=City}"></DataGridTextColumn>
-                                <DataGridTextColumn Width="auto" Header="Категория" Binding="{Binding Path=Rank}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="auto" Header="ФИО" Binding="{Binding Path=Judge.ShortFIO}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="auto" Header="Город" Binding="{Binding Path=Judge.City}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="auto" Header="Категория" Binding="{Binding Path=Judge.Rank}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="*" Header="Должность" Binding="{Binding Path=Judge.Post}"></DataGridTextColumn>
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
