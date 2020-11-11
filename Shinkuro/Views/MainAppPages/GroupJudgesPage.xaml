@@ -8,13 +8,12 @@
       xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="GroupJudgesPage">
-
     <Grid>
         <Grid Style="{StaticResource CompetitionPagePanel}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
-                <ColumnDefinition Width="200"></ColumnDefinition>
+                <ColumnDefinition Width="520"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <Grid>
@@ -35,20 +34,35 @@
                         <TextBlock Grid.Column="0" Margin="5" Style="{StaticResource HeaderPageCompetition}">
                             Бригады судей
                         </TextBlock>
-                        <Button ToolTip="Добавить бригаду" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5 5 0 5">
+                        <Button ToolTip="Добавить бригаду" Command="{Binding CreateGroupJudgesCommand}" Grid.Column="4"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5 5 0 5">
                             <md:PackIcon Kind="Plus" Height="16"></md:PackIcon>
                         </Button>
-                        <Button ToolTip="Просмотр информации о бригаде" Grid.Column="3" VerticalAlignment="Bottom"  Padding="0" Height="22" Width="22" Margin="5">
+                        <Button Visibility="Collapsed" ToolTip="Просмотр информации о бригаде" Grid.Column="3" VerticalAlignment="Bottom"  Padding="0" Height="22" Width="22" Margin="5">
                             <md:PackIcon Kind="Eye" Height="14"></md:PackIcon>
                         </Button>
-                        <Button ToolTip="Изменить бригаду судей" Grid.Column="2" VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                        <Button Visibility="Collapsed" ToolTip="Изменить бригаду судей" Grid.Column="2" VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
                             <md:PackIcon Kind="Pen" Height="14"></md:PackIcon>
                         </Button>
-                        <Button ToolTip="Удалить бригаду" Grid.Column="1"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
+                        <Button ToolTip="Удалить бригаду" Grid.Column="1" Command="{Binding DeleteGroupJudgesCommand}"  VerticalAlignment="Bottom" Padding="0" Height="22" Width="22" Margin="5">
                             <md:PackIcon Kind="Delete" Height="14"></md:PackIcon>
                         </Button>
                     </Grid>
-
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button Command="{Binding UpdateListGroupJudgesCommand}" Height="26" Margin="0 10" Grid.Column="2" ToolTip="Обновить список судейских бригад" FontSize="10" HorizontalAlignment="Right">обновить</Button>
+                    </Grid>
+                    <Grid Grid.Row="2" Margin="5 5 0 5">
+                        <DataGrid FontSize="11" EnableRowVirtualization="True" EnableColumnVirtualization="True" SelectedItem="{Binding SelectedGroupJudges, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ItemsSource="{Binding GroupsJudges}" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="auto" Header="Название" Binding="{Binding Path=Name}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="*" Header="Список судей" Binding="{Binding Path=JudgesListText}"></DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
                     <Grid Grid.Row="3" Margin="5 12 0 5">
                         <TabControl Height="170" TextBlock.FontSize="11" Padding="0">
                             <TabItem Header="Сообщения">
@@ -130,10 +144,39 @@
             </Grid>
             <Grid Grid.Column="2" Margin="0 5 5 5" Style="{StaticResource CompetitionPageSidebar}">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="24"></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Background="#FFCFCBF5">
+                    <TextBlock FontSize="11" Margin="10 0" VerticalAlignment="Center">Информация о судейской бригаде</TextBlock>
+                </Grid>
+                <Grid Margin="10" Grid.Row="1" TextBlock.FontSize="13">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0">Бригада:</TextBlock>
+                    <TextBlock Grid.Column="1" Foreground="#FF4C28C7" Margin="10 0 0 0" Text="{Binding SelectedGroupJudges.Name, FallbackValue='не выбрана'}"></TextBlock>
+                </Grid>
+                <Grid Grid.Row="2" Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock FontSize="13" Grid.Row="0">Список судей:</TextBlock>
+                    <Grid Grid.Row="1" Margin="0 5 0 0">
+                        <DataGrid FontSize="11" EnableRowVirtualization="True" EnableColumnVirtualization="True" ItemsSource="{Binding Path=SelectedGroupJudges.Judges}" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="auto" Header="Номер" Binding="{Binding Path=Number}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="auto" Header="ФИО" Binding="{Binding Path=Judge.ShortFIO}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="auto" Header="Город" Binding="{Binding Path=Judge.City}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="auto" Header="Категория" Binding="{Binding Path=Judge.Rank}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="*" Header="Должность" Binding="{Binding Path=Judge.Post}"></DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </Grid>
             </Grid>
         </Grid>
     </Grid>

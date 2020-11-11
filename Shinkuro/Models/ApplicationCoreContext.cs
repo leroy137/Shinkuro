@@ -7,7 +7,7 @@ using Shinkuro.Services;
 
 namespace Shinkuro.Models
 {
-    internal class ApplicationCoreContext
+    public class ApplicationCoreContext
     {
         public Competition CurrentCompetition { get; set; }
 
@@ -15,18 +15,24 @@ namespace Shinkuro.Models
         public ObservableCollection<Patricipant> Patricipants { get; set; }
         public ObservableCollection<Judge> Judges { get; set; }
         public ObservableCollection<Group> Groups { get; set; }
+
+        public ObservableCollection<GroupJudges> GroupJudges { get; set; } = new ObservableCollection<GroupJudges>();
         public ApplicationCoreContext()
         {
             CurrentCompetition = null;
             Patricipants = new ObservableCollection<Patricipant>();
             Judges = new ObservableCollection<Judge>();
             Groups = new ObservableCollection<Group>();
+            GroupJudges = new ObservableCollection<GroupJudges>();
 
             for (int i = 0; i < 10; i += 2)
                 Groups.Add(new Group($"Группа {i + 1}", 2000 + i, 2001 + i, $"Описание группы {i + 1}"));
 
             for (int i = 0; i < 50; i++)
                 Patricipants.Add(Patricipant.CreateRandom());
+
+            for (int i = 0; i < 20; i++)
+                Judges.Add(Judge.CreateRandom());
 
 
             AutoFillGroups();
@@ -47,22 +53,25 @@ namespace Shinkuro.Models
         {
 
             String logopath = competition.LogoPath;
-            using (FileStream s = File.Open(logopath, FileMode.Open))
+            if (!String.IsNullOrEmpty(logopath)&&File.Exists(logopath))
             {
-
-                if (s.Length > FileManager.MaxSizeLogo)
+                using (FileStream s = File.Open(logopath, FileMode.Open))
                 {
-                    s.Dispose();
-                    throw new Exception($"Размер логотипа превышает {(FileManager.MaxSizeLogo / 1024.0 / 1024.0)}МБ.");
+
+                    if (s.Length > FileManager.MaxSizeLogo)
+                    {
+                        s.Dispose();
+                        throw new Exception($"Размер логотипа превышает {(FileManager.MaxSizeLogo / 1024.0 / 1024.0)}МБ.");
+                    }
                 }
+
+                String filelogoUploadPath = FileManager.UploadLogoCompetition(logopath);
+                if (String.IsNullOrEmpty(filelogoUploadPath))
+                    throw new Exception("Не удалось загрузить логотип!");
+
+                competition.LogoPath = filelogoUploadPath;
             }
 
-            String filelogoUploadPath = FileManager.UploadLogoCompetition(logopath);
-
-            if (String.IsNullOrEmpty(filelogoUploadPath))
-                throw new Exception("Не удалось загрузить логотип!");
-
-            competition.LogoPath = filelogoUploadPath;
             CurrentCompetition.UpdateCompetition(competition);
         }
 
@@ -153,6 +162,14 @@ namespace Shinkuro.Models
             Figures.Add(figure);
         }
 
+        public void AddGroupJudges(GroupJudges g)
+        {
+            if (g == null)
+                throw new NullReferenceException("Добавление бригады невозможно, так как объект бригады судей не задан и равен null");
+
+            GroupJudges.Add(g);
+        }
+
         public bool RemovePatricipant(Patricipant patricipant)
         {
             if (patricipant == null)
@@ -183,6 +200,14 @@ namespace Shinkuro.Models
                 throw new NullReferenceException("Удаление фигуры невозможно, так как обеъкт фигуры не задан и равен null");
 
             return Figures.Remove(figure);
+        }
+
+        public bool RemoveGroupJudges(GroupJudges group)
+        {
+            if (group == null)
+                throw new NullReferenceException("Удаление бригады судей невозможно, так как обеъкт бригады не задан и равен null");
+
+            return GroupJudges.Remove(group);
         }
 
 
