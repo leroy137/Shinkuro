@@ -16,6 +16,8 @@ namespace Shinkuro.Models
         private String _rank;
         private String _info;
 
+        private static Random rand = new Random();
+
         public Int32 Number 
         { 
             get { return _number; } 
@@ -144,6 +146,31 @@ namespace Shinkuro.Models
                 result += $"{j.Rank} -> {Rank}; ";
 
             return result;
+        }
+
+        public static Judge CreateRandom()
+        {
+
+            List<String> cities = new List<string> { "Оренбург", "Самара", "Салават", "Набережные Челны", "Уфа", "Казань" };
+            List<String> names = new List<string> { "Иван", "Алексей", "Петр", "Николай" };
+            List<String> surnames = new List<string> { "Иванов", "Алексеев", "Петров", "Николаев" };
+            List<String> patronimics = new List<string> { "Иванович", "Алексеевич", "Петрович", "Николаевич" };
+            List<String> ranks = new List<string> { "Ранк 1", "Ранк 2", "Ранк 3"};
+            List<String> posts = new List<string> { "Главный судья", "Просто судья", "Судья", "", "Технический судья" };
+
+            String surname = surnames[rand.Next(surnames.Count)];
+            String name = names[rand.Next(names.Count)];
+            String patronimic = patronimics[rand.Next(patronimics.Count)];
+            String city = cities[rand.Next(cities.Count)];
+            String rank = ranks[rand.Next(ranks.Count)];
+            String post = posts[rand.Next(posts.Count)];
+
+            return new Judge(surname, name, patronimic, rank, post, city, "");
+        }
+
+        public override string ToString()
+        {
+            return $"{FIO} (город {City}; категория {Rank}; должность {Post})";
         }
     }
 }

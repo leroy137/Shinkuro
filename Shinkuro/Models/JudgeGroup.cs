@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Shinkuro.Models
 {
-    class JudgeGroup : ModelBase
+    public class JudgeGroup : ModelBase
     {
         private int _number;
         private Judge _judge;

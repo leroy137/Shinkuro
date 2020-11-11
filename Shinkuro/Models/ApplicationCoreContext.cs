@@ -7,7 +7,7 @@ using Shinkuro.Services;
 
 namespace Shinkuro.Models
 {
-    internal class ApplicationCoreContext
+    public class ApplicationCoreContext
     {
         public Competition CurrentCompetition { get; set; }
 
@@ -30,6 +30,9 @@ namespace Shinkuro.Models
 
             for (int i = 0; i < 50; i++)
                 Patricipants.Add(Patricipant.CreateRandom());
+
+            for (int i = 0; i < 20; i++)
+                Judges.Add(Judge.CreateRandom());
 
 
             AutoFillGroups();

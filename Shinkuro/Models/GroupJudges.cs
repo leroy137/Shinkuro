@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Shinkuro.Models
 {
-    class GroupJudges : ModelBase
+    public class GroupJudges : ModelBase
     {
         private String _name;
 

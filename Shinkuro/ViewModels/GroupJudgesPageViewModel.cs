@@ -107,7 +107,7 @@ namespace Shinkuro.ViewModels
         {
             try
             {
-                GroupJudgesCreatorWindow groupJudgesCreator = new GroupJudgesCreatorWindow();
+                GroupJudgesCreatorWindow groupJudgesCreator = new GroupJudgesCreatorWindow(Context);
                 groupJudgesCreator.ShowDialog();
                 if (groupJudgesCreator.DialogResult == true)
                 {
