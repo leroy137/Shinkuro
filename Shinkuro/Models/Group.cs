@@ -46,15 +46,17 @@ namespace Shinkuro.Models
             get { return _description; } 
             set { Set<String>(ref _description, value); }
         }
-        public List<Figure> Figures { get; set; } = new List<Figure>();
-        public List<Judge> Judges { get; set; } = new List<Judge>();
-        public List<Patricipant> Patricipants { get; set; } = new List<Patricipant>();
+        public List<FigureGroup> Figures { get; set; } = new List<FigureGroup>();
+        public List<JudgeGroup> Judges { get; set; } = new List<JudgeGroup>();
+        public List<PatricipantGroup> Patricipants { get; set; } = new List<PatricipantGroup>();
+        public List<GroupJudgesFigure> GroupJudgesFiguresList { get; set; } = new List<GroupJudgesFigure>(); 
 
         public Group()
         {
-            Figures = new List<Figure>();
-            Judges = new List<Judge>();
-            Patricipants = new List<Patricipant>();
+            Figures = new List<FigureGroup>();
+            Judges = new List<JudgeGroup>();
+            Patricipants = new List<PatricipantGroup>();
+            GroupJudgesFiguresList = new List<GroupJudgesFigure>();
         }
 
         public Group(String name, Int32? startYear, Int32? finishYear, String description) : this()
@@ -65,7 +67,7 @@ namespace Shinkuro.Models
             Description = description;
         }
 
-        public Group(String name, Int32 startYear, Int32 finishYear, String description, List<Figure> figures, List<Judge> judges, List<Patricipant> patricipants) : this(name, startYear, finishYear, description)
+        public Group(String name, Int32 startYear, Int32 finishYear, String description, List<FigureGroup> figures, List<JudgeGroup> judges, List<PatricipantGroup> patricipants) : this(name, startYear, finishYear, description)
         {
             Figures = figures;
             Judges = judges;

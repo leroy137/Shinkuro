@@ -28,14 +28,36 @@ namespace Shinkuro.Models
             for (int i = 0; i < 10; i += 2)
                 Groups.Add(new Group($"Группа {i + 1}", 2000 + i, 2001 + i, $"Описание группы {i + 1}"));
 
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 150; i++)
                 Patricipants.Add(Patricipant.CreateRandom());
 
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i <25; i++)
                 Judges.Add(Judge.CreateRandom());
 
+            GenerateGroupJudges();
+        }
 
-            AutoFillGroups();
+        private void GenerateGroupJudges()
+        {
+            Random rand = new Random();
+
+            int maxCountJudgeInGroup = 6;
+            int maxCountGroupJudges = 4;
+            for(int i=0;i<maxCountGroupJudges;i++)
+            {
+                String name = $"Бригада {i + 1}";
+                List<Judge> judges = new List<Judge>();
+
+                while(judges.Count!= maxCountJudgeInGroup)
+                {
+                    Judge nextJudge = Judges[rand.Next(Judges.Count)];
+                    if (!judges.Contains(nextJudge))
+                        judges.Add(nextJudge);
+                }
+
+                GroupJudges groupJudges = new GroupJudges(name, judges);
+                GroupJudges.Add(groupJudges);
+            }
         }
 
         static ApplicationCoreContext()
@@ -217,16 +239,49 @@ namespace Shinkuro.Models
                 throw new NullReferenceException("Группа не задана для заполнения фигур, пожалуйста выберите группу или обновите список!");
 
             group.Figures.Clear();
+            int i = 1;
             foreach (var figure in selected)
-                group.Figures.Add(figure);
+                group.Figures.Add(new FigureGroup(i++,figure));
         }
 
-        public bool UnsetGroupFigure(Group group, Figure figure)
+        public bool UnsetGroupFigure(Group group, FigureGroup figure)
         {
             if (group == null)
                 throw new NullReferenceException("Группа не задана для открепления фигуры, пожалуйста выберите группу или обновите список!");
 
-            return group.Figures.Remove(figure);
+            int index = group.Figures.FindIndex(f => f == figure);
+            if (index < 0)
+                throw new Exception($"Фигура {figure.Figure.Name} для открепления не найдена в списке фигур группы!");
+
+            if(group.Figures.Remove(figure))
+            {
+                for(int i=index;i<group.Figures.Count;i++)
+                {
+                    group.Figures[i].Number -= 1;
+                }
+                return true;
+            }
+            return false;
+        }
+
+        public bool UnsetGroupPatricipant(Group group, PatricipantGroup p)
+        {
+            if (group == null)
+                throw new NullReferenceException("Группа не задана для открепления участника, пожалуйста выберите группу или обновите список!");
+
+            int index = group.Patricipants.FindIndex(item => item == p);
+            if (index < 0)
+                throw new Exception($"Участник {p.Patricipant.FIO} для открепления не найден в списке участников группы!"); ;
+
+            if (group.Patricipants.Remove(p))
+            {
+                for (int i = index; i < group.Patricipants.Count; i++)
+                {
+                    group.Patricipants[i].Number -= 1;
+                }
+                return true;
+            }
+            return false;
         }
 
 
@@ -236,6 +291,10 @@ namespace Shinkuro.Models
         public void AutoFillGroups()
         {
             List<Patricipant> patricipantsWithoutGroup = new List<Patricipant>();
+            foreach(Group g in Groups)
+            {
+                g.Patricipants = new List<PatricipantGroup>();
+            }
 
             foreach(Patricipant patricipant in Patricipants)
             {
@@ -245,7 +304,7 @@ namespace Shinkuro.Models
                     if (g.IsSatisfiedPatricipant(patricipant))
                     {
                         isDetermined = true;
-                        AddPatricipantGroup(g, patricipant);
+                        AddPatricipantGroup(g, new PatricipantGroup(1,patricipant));
                         break;
                     }
                 }
@@ -255,12 +314,46 @@ namespace Shinkuro.Models
                     patricipantsWithoutGroup.Add(patricipant);
                 }
             }
+
+            foreach (Group g in Groups)
+            {
+                g.Patricipants.Sort((p1,p2)=>p1.Patricipant.FIO.CompareTo(p2.Patricipant.FIO));
+            }
+
+            foreach(Group g in Groups)
+            {
+                for(int i=0;i<g.Patricipants.Count;i++)
+                {
+                    g.Patricipants[i].Number = i + 1;
+                }
+            }
         }
 
 
-        public void AddPatricipantGroup(Group group, Patricipant p)
+        public void AddPatricipantGroup(Group group, PatricipantGroup p)
         {
             group.Patricipants.Add(p);
+            for(int i=0;i<group.Patricipants.Count;i++)
+            {
+                group.Patricipants[i].Number = i + 1;
+            }
+        }
+
+        /// <summary>
+        /// Добавление в группу объекта фигура - список судей
+        /// </summary>
+        /// <param name="group">Группа участников куда прикрепляется фигура и список судей</param>
+        /// <param name="groupJudgesFigure">Объект фигура-судьи</param>
+        public void AddGroupJudgesFigure(Group group, GroupJudgesFigure groupJudgesFigure)
+        {
+            if (group == null)
+                throw new Exception("Группа для добавления фигуры и судей не выбрана и равна null!");
+
+            if (groupJudgesFigure == null)
+                throw new Exception("Объект фигура и судьи для оценивания не заданы и равен null!");
+
+            groupJudgesFigure.Number = group.GroupJudgesFiguresList.Count + 1;
+            group.GroupJudgesFiguresList.Add(groupJudgesFigure);
         }
     }
 }

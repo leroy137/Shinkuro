@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Shinkuro.Models
 {
-    public class Patricipant
+    public class Patricipant 
     {
 
         private String _name;

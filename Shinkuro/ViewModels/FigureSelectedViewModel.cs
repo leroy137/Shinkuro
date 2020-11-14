@@ -32,12 +32,12 @@ namespace Shinkuro.ViewModels
 
         }
 
-        public FigureSelectedViewModel(List<Figure> selectedFigures) : this()
+        public FigureSelectedViewModel(List<FigureGroup> selectedFigures) : this()
         {
-        
-            foreach(var figure in ApplicationCoreContext.Figures)
+            var selectedFiguresGroup = selectedFigures.Select(fg => fg.Figure);
+            foreach (var figure in ApplicationCoreContext.Figures)
             {
-                if(selectedFigures.Contains(figure))
+                if(selectedFiguresGroup.Contains(figure))
                 {
                     SelectedFiguresList.Add(new SelectedFigure(true, figure));
                 }
