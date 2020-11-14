@@ -20,30 +20,48 @@ namespace Shinkuro.ViewModels
         private String _yearPatricipantFilter;
         private bool _completePatricipants;
 
+        public CollectionViewSource CollectionView { get; set; } = new CollectionViewSource();
+
         public ApplicationCoreContext Context { get; set; }
 
         public String FIOPatricipantFilter 
         { 
             get { return _searchTextPatricipant; }
-            set { Set<String>(ref _searchTextPatricipant, value); Patricipants.Refresh(); }
+            set 
+            { 
+                Set<String>(ref _searchTextPatricipant, value);
+                Patricipants.Refresh();
+            }
         }
 
         public String CityPatricipantFilter 
         {
             get { return _cityPatricipatnFilter; }
-            set { Set<String>(ref _cityPatricipatnFilter, value); Patricipants.Refresh(); }
+            set 
+            { 
+                Set<String>(ref _cityPatricipatnFilter, value);
+                Patricipants.Refresh();
+            }
         }
 
         public String YearPatricipantFilter 
         { 
             get { return _yearPatricipantFilter; }
-            set { Set<String>(ref _yearPatricipantFilter, value); Patricipants.Refresh(); }
+            set 
+            { 
+                Set<String>(ref _yearPatricipantFilter, value);
+                Patricipants.Refresh();
+            }
         }
 
         public bool CompletePatricipant 
         { 
             get { return _completePatricipants; }
-            set { Set<Boolean>(ref _completePatricipants, value); Patricipants.Refresh(); }
+            set 
+            { 
+                Set<Boolean>(ref _completePatricipants, value);
+                Patricipants.Refresh();
+            }
         }
 
         public Patricipant SelectedPatricipant { get; set; }
@@ -74,7 +92,8 @@ namespace Shinkuro.ViewModels
         public PatricipantPageViewModel(ApplicationCoreContext context) : this()
         {
             Context = context;
-            Patricipants = CollectionViewSource.GetDefaultView(context.Patricipants);
+            CollectionView.Source = context.Patricipants;
+            Patricipants = CollectionView.View;
             Patricipants.Filter = FilterPatricipant;
         }
 

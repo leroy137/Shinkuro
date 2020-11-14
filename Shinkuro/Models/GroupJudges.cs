@@ -22,7 +22,9 @@ namespace Shinkuro.Models
             }
         }
 
-        public String JudgesListText => Judges.Count>0? String.Join(';', Judges.Select(j=>j.Judge.ShortFIO)) : "";
+        public String JudgesListText => Judges.Count>0? String.Join(";   ", Judges.Select(j=>j.Judge.ShortFIO)) : "";
+
+        public String JudgesNameListText => $"Название: {Name} - (" + (Judges.Count > 0 ? String.Join(";   ", Judges.Select(j => j.Judge.ShortFIO)) : "список судей пуст") + ")";
 
         public List<JudgeGroup> Judges { get; set; } = new List<JudgeGroup>();
 

@@ -8,7 +8,7 @@
     </Style>
 
     <Style TargetType="Grid" x:Key="CompetitionPageSidebar">
-        <Setter Property="Background" Value="#FFF4EEFF"></Setter>
+        <Setter Property="Background" Value="#FFF5F3F7"></Setter>
     </Style>
     
 </ResourceDictionary>

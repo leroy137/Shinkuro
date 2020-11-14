@@ -10,6 +10,7 @@ using Shinkuro.Infrastracture.Commands;
 using System.Windows;
 using Shinkuro.Views.Windows;
 using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace Shinkuro.ViewModels
 {
@@ -17,10 +18,13 @@ namespace Shinkuro.ViewModels
     {
 
         private Group _seletedGroup = null;
-        private Figure _selectedGroupFigure = null;
+        private FigureGroup _selectedGroupFigure = null;
+        private PatricipantGroup _selectedGroupPatricipant = null;
+        private GroupJudgesFigure _seletedGroupJudgesFigure = null;
+
         public ApplicationCoreContext Context { get; set; }
         public ICollectionView Groups { get; set; }
-
+        public ObservableCollection<MessageLog> MessageLogs { get; set; } = new ObservableCollection<MessageLog>();
         public Group SelectedGroup 
         { 
             get { return _seletedGroup; } 
@@ -30,13 +34,28 @@ namespace Shinkuro.ViewModels
             } 
         }
 
-        public Figure SelectedGroupFigure
+        public FigureGroup SelectedGroupFigure
         {
             get { return _selectedGroupFigure; }
             set
             {
-                Set<Figure>(ref _selectedGroupFigure, value);
+                Set<FigureGroup>(ref _selectedGroupFigure, value);
             }
+        }
+
+        public PatricipantGroup SelectedGroupPatricipant
+        {
+            get { return _selectedGroupPatricipant; }
+            set
+            {
+                Set<PatricipantGroup>(ref _selectedGroupPatricipant, value);
+            }
+        }
+
+        public GroupJudgesFigure SelectedGroupJudgesFigure 
+        { 
+            get { return _seletedGroupJudgesFigure; } 
+            set { Set<GroupJudgesFigure>(ref _seletedGroupJudgesFigure, value); } 
         }
 
         #region Команды
@@ -50,9 +69,11 @@ namespace Shinkuro.ViewModels
         public ICommand UnsetFigureCommand { get; set; }
 
         public ICommand SelectPatricipantsCommand { get; set; }
-
         public ICommand UnsetPatricipantCommand { get; set; }
-
+        public ICommand ClearMessagesBlockCommand { get; set; }
+        public ICommand AutofillGroupsCommand { get; set; }
+        public ICommand AppendFigureJudgesCommand { get; set; }
+        public ICommand UnsetFigureJudgesCommand { get; set; }
         #endregion
 
         public GroupsPageViewModel()
@@ -65,6 +86,10 @@ namespace Shinkuro.ViewModels
             UnsetFigureCommand = new RelayCommand(UnsetFigureCommandExecute, UnsetFigureCommandCanExecute);
             SelectPatricipantsCommand = new RelayCommand(SelectPatricipantsCommandExecute, SelectPatricipantsCommandCanExecute);
             UnsetPatricipantCommand = new RelayCommand(UnsetPatricipantCommandExecute, UnsetPatricipantCommandCanExecute);
+            ClearMessagesBlockCommand = new RelayCommand(ClearMessagesBlockCommandExecute, ClearMessagesBlockCommandCanExecute);
+            AutofillGroupsCommand = new RelayCommand(AutofillGroupsCommandExecute, AutofillGroupsCommandCanExecute);
+            AppendFigureJudgesCommand = new RelayCommand(AppendFigureJudgesCommandExecute, AppendFigureJudgesCommandCanExecute);
+            UnsetFigureJudgesCommand = new RelayCommand(UnsetFigureJudgesCommandExecute, UnsetFigureJudgesCommandCanExecute);
         }
 
         public GroupsPageViewModel(ApplicationCoreContext context) : this()
@@ -86,12 +111,12 @@ namespace Shinkuro.ViewModels
                 {
                     String name = SelectedGroup.Name;
                     Context.RemoveGroup(SelectedGroup);
-                    MessageBox.Show($"Группа {name} удалена!");
+                    MessageLogs.Add(new MessageLog(LogType.Warrning,$"Группа {name} удалена!"));
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
+                MessageLogs.Add(new MessageLog(LogType.Error,ex.Message));
             }
         }
 
@@ -115,13 +140,13 @@ namespace Shinkuro.ViewModels
                 {
                     Group edit = editorWindow.GroupEdit;
                     Context.UpdateGroup(SelectedGroup, edit);
-                    MessageBox.Show("Грппа успешно изменена!", "Изменение группы");
+                    MessageLogs.Add(new MessageLog(LogType.Information, "Группа успешно изменена!"));
                     Groups.Refresh();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
+                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -142,13 +167,13 @@ namespace Shinkuro.ViewModels
                     if(groupNew!=null)
                     {
                         Context.AddGroup(groupNew);
-                        MessageBox.Show("Группа успешно создана!");
+                        MessageLogs.Add(new MessageLog(LogType.Successfull, $"Группа {groupNew.Name} успешно создана!"));
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
+                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -169,7 +194,7 @@ namespace Shinkuro.ViewModels
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
+                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -190,16 +215,18 @@ namespace Shinkuro.ViewModels
                 figuresSeletedWindow.ShowDialog();
                 if(figuresSeletedWindow.DialogResult == true)
                 {
+                    int countPrevCountFigures = SelectedGroup.Figures.Count;
                     List<Figure> selectedFigures = figureSelectedViewModel.SelectedFiguresGroup.ToList();
                     Context.SelectFiguresGroup(SelectedGroup, selectedFigures);
                     Group gr = SelectedGroup;
                     SelectedGroup = null;
                     SelectedGroup = gr;
+                    MessageLogs.Add(new MessageLog(LogType.Information, $"Список фигур для группы {SelectedGroup.Name} обновлен (число фигур {countPrevCountFigures} -> {selectedFigures.Count})!"));
                 }
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
+                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -215,16 +242,19 @@ namespace Shinkuro.ViewModels
                 if (SelectedGroupFigure == null)
                     throw new Exception("Фигура для открепления от группы не задана!");
 
+
+                String figureNameUnset = SelectedGroupFigure.Figure.Name;
                 if (!Context.UnsetGroupFigure(SelectedGroup, SelectedGroupFigure))
                     throw new Exception("Открепление фигуры не удалось!");
 
                 Group gr = SelectedGroup;
                 SelectedGroup = null;
                 SelectedGroup = gr;
+                MessageLogs.Add(new MessageLog(LogType.Information, $"Фигура {figureNameUnset} успешно откреплена от группы {SelectedGroup.Name}!"));
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
+                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -242,7 +272,7 @@ namespace Shinkuro.ViewModels
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
+                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -255,7 +285,40 @@ namespace Shinkuro.ViewModels
         {
             try
             {
+                if (SelectedGroupPatricipant == null)
+                    throw new Exception("Участник для открепления от группы не задан!");
 
+                String fio = SelectedGroupPatricipant.Patricipant.FIO;
+                String logMessage = $"Участник {SelectedGroupPatricipant.Patricipant.FIO} (город {SelectedGroupPatricipant.Patricipant.City}) успешно откреплен от группы {SelectedGroup.Name}!";
+                if (!Context.UnsetGroupPatricipant(SelectedGroup, SelectedGroupPatricipant))
+                    throw new Exception($"Открепление участника {fio} не удалось!");
+
+                Group gr = SelectedGroup;
+                SelectedGroup = null;
+                SelectedGroup = gr;
+                MessageLogs.Add(new MessageLog(LogType.Information, logMessage));
+            }
+            catch (Exception ex)
+            {
+                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
+            }
+        }
+
+        private bool UnsetPatricipantCommandCanExecute(Object obj)
+        {
+            return SelectedGroupPatricipant != null;
+        }
+
+        private bool ClearMessagesBlockCommandCanExecute(Object obj)
+        {
+            return MessageLogs.Count != 0;
+        }
+
+        private void ClearMessagesBlockCommandExecute(Object obj)
+        {
+            try
+            {
+                MessageLogs.Clear();
             }
             catch (Exception ex)
             {
@@ -263,9 +326,76 @@ namespace Shinkuro.ViewModels
             }
         }
 
-        private bool UnsetPatricipantCommandCanExecute(Object obj)
+        private bool AutofillGroupsCommandCanExecute(Object obj)
         {
-            return SelectedGroup != null;
+            return true;
+        }
+
+        private void AutofillGroupsCommandExecute(Object obj)
+        {
+            try
+            {
+                Context.AutoFillGroups();
+                Group g = SelectedGroup;
+                SelectedGroup = null;
+                SelectedGroup = g;
+                MessageLogs.Add(new MessageLog(LogType.Successfull, "Участники успешно распределены по возрастным группам!"));
+            }
+            catch (Exception ex)
+            {
+                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
+            }
+        }
+
+        private bool AppendFigureJudgesCommandCanExecute(Object obj)
+        {
+            return SelectedGroup!=null;
+        }
+
+        private void AppendFigureJudgesCommandExecute(Object obj)
+        {
+            try
+            {
+                GroupJudgesFigureCreatorViewModel viewModel = new GroupJudgesFigureCreatorViewModel(Context);
+                GroupJudgesFigureCreatorWindow groupJudgesFigureCreator = new GroupJudgesFigureCreatorWindow();
+                groupJudgesFigureCreator.DataContext = viewModel;
+                groupJudgesFigureCreator.ShowDialog();
+                if(groupJudgesFigureCreator.DialogResult == true)
+                {
+                    GroupJudgesFigure groupJudgesFigure = viewModel.GroupJudgesFigureNew;
+                    Context.AddGroupJudgesFigure(SelectedGroup, groupJudgesFigure);
+                    Group g = SelectedGroup;
+                    SelectedGroup = null;
+                    SelectedGroup = g;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
+            }
+        }
+
+        private bool UnsetFigureJudgesCommandCanExecute(Object obj)
+        {
+            return SelectedGroupJudgesFigure!=null&&SelectedGroup!=null;
+        }
+
+        private void UnsetFigureJudgesCommandExecute(Object obj)
+        {
+            try
+            {
+
+                String logMessage = $"Фигура {SelectedGroupJudgesFigure.Figure.Name} успешно откреплена от группы {SelectedGroup.Name}";
+                Context.UnsetGroupJudgesFigure(SelectedGroup, SelectedGroupJudgesFigure);
+                Group gr = SelectedGroup;
+                SelectedGroup = null;
+                SelectedGroup = gr;
+                MessageLogs.Add(new MessageLog(LogType.Information, logMessage));
+            }
+            catch (Exception ex)
+            {
+                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
+            }
         }
     }
 }

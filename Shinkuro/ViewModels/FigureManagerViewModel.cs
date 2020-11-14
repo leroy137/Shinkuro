@@ -31,10 +31,11 @@ namespace Shinkuro.ViewModels
         public ICommand EditFigureCommand { get; set; }
         public ICommand ClearMessagesBlockCommand { get; set; }
         public ICommand UpdateListFiguresCommand { get; set; }
-
+        public CollectionViewSource CollectionView { get; set; } = new CollectionViewSource();
         public FigureManagerViewModel()
         {
-            Figures = CollectionViewSource.GetDefaultView(ApplicationCoreContext.Figures);
+            CollectionView.Source = ApplicationCoreContext.Figures;
+            Figures = CollectionView.View;
             Figures.Filter = FilterFigure;
 
             UpdateListFiguresCommand = new RelayCommand(UpdateListFiguresCommandExecute, UpdateListFiguresCommandCanExecute);
