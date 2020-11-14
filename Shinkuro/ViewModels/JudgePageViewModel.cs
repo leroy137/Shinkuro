@@ -55,7 +55,7 @@ namespace Shinkuro.ViewModels
         public ICommand ViewJudgeCommand { get; set; }
         public ICommand ClearMessagesBlockCommand { get; set; }
         public ICollectionView Judges { get; set; }
-
+        public CollectionViewSource CollectionView { get; set; } = new CollectionViewSource();
         public ObservableCollection<MessageLog> MessageLogs { get; set; } = new ObservableCollection<MessageLog>();
 
         public JudgePageViewModel()
@@ -72,7 +72,8 @@ namespace Shinkuro.ViewModels
         public JudgePageViewModel(ApplicationCoreContext context) : this()
         {
             Context = context;
-            Judges = CollectionViewSource.GetDefaultView(Context.Judges);
+            CollectionView.Source = Context.Judges;
+            Judges = CollectionView.View;
             Judges.Filter = FilterJudge;
         }
 

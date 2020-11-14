@@ -285,6 +285,28 @@ namespace Shinkuro.Models
         }
 
 
+        public bool UnsetGroupJudgesFigure(Group group, GroupJudgesFigure groupJudgesFigure)
+        {
+            if (group == null)
+                throw new Exception("Группа для открепления фигуры и судей не выбрана и равна null!");
+
+            if (groupJudgesFigure == null)
+                throw new Exception("Объект фигура и судьи для оценивания не заданы и равен null!");
+
+            bool res = group.GroupJudgesFiguresList.Remove(groupJudgesFigure);
+
+            if (res)
+            {
+                for (int i = 0; i < group.GroupJudgesFiguresList.Count; i++)
+                {
+                    group.GroupJudgesFiguresList[i].Number = i + 1;
+                }
+            }
+
+            return res;
+        }
+
+
         /// <summary>
         /// метод автоматического заполнения групп
         /// </summary>

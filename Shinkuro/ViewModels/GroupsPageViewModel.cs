@@ -377,14 +377,20 @@ namespace Shinkuro.ViewModels
 
         private bool UnsetFigureJudgesCommandCanExecute(Object obj)
         {
-            return SelectedGroupJudgesFigure!=null;
+            return SelectedGroupJudgesFigure!=null&&SelectedGroup!=null;
         }
 
         private void UnsetFigureJudgesCommandExecute(Object obj)
         {
             try
             {
-               
+
+                String logMessage = $"Фигура {SelectedGroupJudgesFigure.Figure.Name} успешно откреплена от группы {SelectedGroup.Name}";
+                Context.UnsetGroupJudgesFigure(SelectedGroup, SelectedGroupJudgesFigure);
+                Group gr = SelectedGroup;
+                SelectedGroup = null;
+                SelectedGroup = gr;
+                MessageLogs.Add(new MessageLog(LogType.Information, logMessage));
             }
             catch (Exception ex)
             {

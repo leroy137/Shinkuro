@@ -47,8 +47,10 @@ namespace Shinkuro.ViewModels
 
         public GroupJudgesFigureCreatorViewModel(ApplicationCoreContext context)
         {
+            CollectionViewSource collectionView = new CollectionViewSource();
+            collectionView.Source = ApplicationCoreContext.Figures;
             AppendGroupJudgesFigureCommand = new RelayCommand(AppendGroupJudgesFigureExecute, AppendGroupJudgesFigureCanExecute);
-            Figures = CollectionViewSource.GetDefaultView(ApplicationCoreContext.Figures);
+            Figures = collectionView.View;//collectionView.GetDefaultView(ApplicationCoreContext.Figures);
             Context = context;
             GroupJudgesList = CollectionViewSource.GetDefaultView(Context.GroupJudges);
         }
@@ -81,6 +83,5 @@ namespace Shinkuro.ViewModels
                 MessageBox.Show(ex.Message, "Ошибка!");
             }
         }
-
     }
 }
