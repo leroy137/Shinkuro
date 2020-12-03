@@ -103,15 +103,15 @@ namespace Shinkuro.ViewModels
             try
             {
                 if (SelectedGroup == null)
-                    throw new Exception("Группа для удаления не выбрана!");
+                    throw new Exception("Возрастная категория для удаления не выбрана!");
 
-                var result = MessageBox.Show($"Удалить группу {SelectedGroup.Name}?", "Удаление группы", MessageBoxButton.YesNo);
+                var result = MessageBox.Show($"Удалить возрастную группу {SelectedGroup.Name}?", "Удаление возрастной группы", MessageBoxButton.YesNo);
 
                 if (result == MessageBoxResult.Yes) // если да то удаляем
                 {
                     String name = SelectedGroup.Name;
                     Context.RemoveGroup(SelectedGroup);
-                    MessageLogs.Add(new MessageLog(LogType.Warrning,$"Группа {name} удалена!"));
+                    MessageLogs.Add(new MessageLog(LogType.Warrning,$"Возрастная категория {name} удалена!"));
                 }
             }
             catch (Exception ex)
@@ -131,7 +131,7 @@ namespace Shinkuro.ViewModels
             {
 
                 if (SelectedGroup == null)
-                    throw new Exception("Группа для изменения не выбрана!");
+                    throw new Exception("Возрастная категория для изменения не выбрана!");
 
 
                 GroupEditorWindow editorWindow = new GroupEditorWindow(SelectedGroup);
@@ -140,7 +140,7 @@ namespace Shinkuro.ViewModels
                 {
                     Group edit = editorWindow.GroupEdit;
                     Context.UpdateGroup(SelectedGroup, edit);
-                    MessageLogs.Add(new MessageLog(LogType.Information, "Группа успешно изменена!"));
+                    MessageLogs.Add(new MessageLog(LogType.Information, "Возрастная категория успешно изменена!"));
                     Groups.Refresh();
                 }
             }
@@ -167,7 +167,7 @@ namespace Shinkuro.ViewModels
                     if(groupNew!=null)
                     {
                         Context.AddGroup(groupNew);
-                        MessageLogs.Add(new MessageLog(LogType.Successfull, $"Группа {groupNew.Name} успешно создана!"));
+                        MessageLogs.Add(new MessageLog(LogType.Successfull, $"Возрастная категория {groupNew.Name} успешно создана!"));
                     }
                 }
             }
@@ -187,7 +187,7 @@ namespace Shinkuro.ViewModels
             try
             {
                 if (SelectedGroup == null)
-                    throw new Exception("Группа для просмотра не выбрана!");
+                    throw new Exception("Возрастная категория для просмотра не выбрана!");
 
                 GroupViewerWindow groupViewerWindow = new GroupViewerWindow(SelectedGroup);
                 groupViewerWindow.ShowDialog();
@@ -208,7 +208,7 @@ namespace Shinkuro.ViewModels
             try
             {
                 if (SelectedGroup == null)
-                    throw new Exception("Группа для заполенения списка фигур не выбрана!");
+                    throw new Exception("Возрастная категория для заполенения списка фигур не выбрана!");
 
                 FigureSelectedViewModel figureSelectedViewModel = new FigureSelectedViewModel(SelectedGroup.Figures);
                 FiguresSeletedWindow figuresSeletedWindow = new FiguresSeletedWindow(figureSelectedViewModel);
@@ -221,7 +221,7 @@ namespace Shinkuro.ViewModels
                     Group gr = SelectedGroup;
                     SelectedGroup = null;
                     SelectedGroup = gr;
-                    MessageLogs.Add(new MessageLog(LogType.Information, $"Список фигур для группы {SelectedGroup.Name} обновлен (число фигур {countPrevCountFigures} -> {selectedFigures.Count})!"));
+                    MessageLogs.Add(new MessageLog(LogType.Information, $"Список фигур для возрастной категории {SelectedGroup.Name} обновлен (число фигур {countPrevCountFigures} -> {selectedFigures.Count})!"));
                 }
             }
             catch(Exception ex)
@@ -240,7 +240,7 @@ namespace Shinkuro.ViewModels
             try
             {
                 if (SelectedGroupFigure == null)
-                    throw new Exception("Фигура для открепления от группы не задана!");
+                    throw new Exception("Фигура для открепления от возрастной категории не задана!");
 
 
                 String figureNameUnset = SelectedGroupFigure.Figure.Name;
@@ -250,7 +250,7 @@ namespace Shinkuro.ViewModels
                 Group gr = SelectedGroup;
                 SelectedGroup = null;
                 SelectedGroup = gr;
-                MessageLogs.Add(new MessageLog(LogType.Information, $"Фигура {figureNameUnset} успешно откреплена от группы {SelectedGroup.Name}!"));
+                MessageLogs.Add(new MessageLog(LogType.Information, $"Фигура {figureNameUnset} успешно откреплена от возрастной категории {SelectedGroup.Name}!"));
             }
             catch (Exception ex)
             {
@@ -286,10 +286,10 @@ namespace Shinkuro.ViewModels
             try
             {
                 if (SelectedGroupPatricipant == null)
-                    throw new Exception("Участник для открепления от группы не задан!");
+                    throw new Exception("Участник для открепления от возрастной категории не задан!");
 
                 String fio = SelectedGroupPatricipant.Patricipant.FIO;
-                String logMessage = $"Участник {SelectedGroupPatricipant.Patricipant.FIO} (город {SelectedGroupPatricipant.Patricipant.City}) успешно откреплен от группы {SelectedGroup.Name}!";
+                String logMessage = $"Участник {SelectedGroupPatricipant.Patricipant.FIO} (город {SelectedGroupPatricipant.Patricipant.City}) успешно откреплен от возрастной категории {SelectedGroup.Name}!";
                 if (!Context.UnsetGroupPatricipant(SelectedGroup, SelectedGroupPatricipant))
                     throw new Exception($"Открепление участника {fio} не удалось!");
 
@@ -339,7 +339,7 @@ namespace Shinkuro.ViewModels
                 Group g = SelectedGroup;
                 SelectedGroup = null;
                 SelectedGroup = g;
-                MessageLogs.Add(new MessageLog(LogType.Successfull, "Участники успешно распределены по возрастным группам!"));
+                MessageLogs.Add(new MessageLog(LogType.Successfull, "Участники успешно распределены по возрастным категориям!"));
             }
             catch (Exception ex)
             {
@@ -385,7 +385,7 @@ namespace Shinkuro.ViewModels
             try
             {
 
-                String logMessage = $"Фигура {SelectedGroupJudgesFigure.Figure.Name} успешно откреплена от группы {SelectedGroup.Name}";
+                String logMessage = $"Фигура {SelectedGroupJudgesFigure.Figure.Name} успешно откреплена от возрастной категории {SelectedGroup.Name}";
                 Context.UnsetGroupJudgesFigure(SelectedGroup, SelectedGroupJudgesFigure);
                 Group gr = SelectedGroup;
                 SelectedGroup = null;

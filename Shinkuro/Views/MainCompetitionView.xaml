@@ -56,7 +56,7 @@
                     <ColumnDefinition Width="90"></ColumnDefinition>
                     <ColumnDefinition Width="90"></ColumnDefinition>
                     <ColumnDefinition Width="90"></ColumnDefinition>
-                    <ColumnDefinition Width="90"></ColumnDefinition>
+                    <ColumnDefinition Width="110"></ColumnDefinition>
                     <ColumnDefinition Width="110"></ColumnDefinition>
                     <ColumnDefinition Width="90"></ColumnDefinition>
                     <ColumnDefinition Width="90"></ColumnDefinition>
@@ -97,12 +97,13 @@
                         <TextBlock  Style="{StaticResource MenuButtonStyle}">судей</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Height="58" Style="{StaticResource MaterialDesignFlatButton}" 
+                <Button Padding="0" Height="58" Style="{StaticResource MaterialDesignFlatButton}" 
                         Command="{Binding GoToGroupsPageCommand}"
                         Grid.Column="4" Cursor="Hand">
                     <StackPanel Orientation="Vertical">
                         <md:PackIcon Kind="AccountGroup" Style="{StaticResource MenuIcon}" />
-                        <TextBlock Style="{StaticResource MenuButtonStyle}">Группы</TextBlock>
+                        <TextBlock Style="{StaticResource MenuButtonStyle}">Возрастные</TextBlock>
+                        <TextBlock Style="{StaticResource MenuButtonStyle}">категории</TextBlock>
                     </StackPanel>
                 </Button>
                 <Button Padding="0" Height="58" Style="{StaticResource MaterialDesignFlatButton}" 
