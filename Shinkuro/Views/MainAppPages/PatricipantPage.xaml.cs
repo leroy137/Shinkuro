@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -21,6 +22,15 @@ namespace Shinkuro.Views.MainAppPages
         public PatricipantPage()
         {
             InitializeComponent();
+        }
+
+        private void BringSelectionIntoView(object sender, SelectionChangedEventArgs e)
+        {
+            Selector selector = sender as Selector;
+            if (selector is ListBox)
+            {
+                (selector as ListBox).ScrollIntoView(selector.SelectedItem);
+            }
         }
     }
 }

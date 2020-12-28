@@ -20,7 +20,8 @@ namespace Shinkuro.ViewModels
         private String _yearPatricipantFilter;
         private bool _completePatricipants;
 
-        public CollectionViewSource CollectionView { get; set; } = new CollectionViewSource();
+        public CollectionViewSource PatricipantsViewSource { get; set; } = new CollectionViewSource();
+        public CollectionViewSource MessageLogsViewSource { get; set; } = new CollectionViewSource();
 
         public ApplicationCoreContext Context { get; set; }
 
@@ -30,7 +31,7 @@ namespace Shinkuro.ViewModels
             set 
             { 
                 Set<String>(ref _searchTextPatricipant, value);
-                Patricipants.Refresh();
+                PatricipantsView.Refresh();
             }
         }
 
@@ -40,7 +41,7 @@ namespace Shinkuro.ViewModels
             set 
             { 
                 Set<String>(ref _cityPatricipatnFilter, value);
-                Patricipants.Refresh();
+                PatricipantsView.Refresh();
             }
         }
 
@@ -50,7 +51,7 @@ namespace Shinkuro.ViewModels
             set 
             { 
                 Set<String>(ref _yearPatricipantFilter, value);
-                Patricipants.Refresh();
+                PatricipantsView.Refresh();
             }
         }
 
@@ -60,7 +61,7 @@ namespace Shinkuro.ViewModels
             set 
             { 
                 Set<Boolean>(ref _completePatricipants, value);
-                Patricipants.Refresh();
+                PatricipantsView.Refresh();
             }
         }
 
@@ -73,8 +74,8 @@ namespace Shinkuro.ViewModels
         public ICommand ViewPatricipantCommand { get; set; }
         public ICommand ClearMessagesBlockCommand { get; set; }
 
-
-        public ICollectionView Patricipants { get; set; }
+        public ICollectionView PatricipantsView { get; set; }
+        public ICollectionView MessageLogsView { get; set; }
 
         public ObservableCollection<MessageLog> MessageLogs { get; set; } = new ObservableCollection<MessageLog>();
 
@@ -87,14 +88,16 @@ namespace Shinkuro.ViewModels
             ViewPatricipantCommand = new RelayCommand(ViewPatricipantCommandExecute, ViewPatricipantrCommandCanExecute);
             CreatePatricipantCommand = new RelayCommand(CreatePatricipantCommandExecute, CreatePatricipantrCommandCanExecute);
             ClearMessagesBlockCommand = new RelayCommand(ClearMessagesBlockCommandExecute, ClearMessagesBlockCommandCanExecute);
+            MessageLogsViewSource.Source = MessageLogs;
+            MessageLogsView = MessageLogsViewSource.View;
         }
 
         public PatricipantPageViewModel(ApplicationCoreContext context) : this()
         {
             Context = context;
-            CollectionView.Source = context.Patricipants;
-            Patricipants = CollectionView.View;
-            Patricipants.Filter = FilterPatricipant;
+            PatricipantsViewSource.Source = context.Patricipants;
+            PatricipantsView = PatricipantsViewSource.View;
+            PatricipantsView.Filter = FilterPatricipant;
         }
 
         private void ResetFilterCommandExecute(object obj)
@@ -105,10 +108,11 @@ namespace Shinkuro.ViewModels
                 CityPatricipantFilter = "";
                 YearPatricipantFilter = "";
                 CompletePatricipant = false;
+                MakeLog(new MessageLog(LogType.Information, "Фильтры сброшены"));
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
+                MakeLog(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -122,11 +126,12 @@ namespace Shinkuro.ViewModels
         {
             try
             {
-                Patricipants.Refresh();
+                PatricipantsView.Refresh();
+                MakeLog(new MessageLog(LogType.Information, "Список участников обновлен!"));
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
+                MakeLog(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -150,12 +155,12 @@ namespace Shinkuro.ViewModels
                     String surname = SelectedPatricipant.Surname;
                     String name = SelectedPatricipant.Name;
                     Context.RemovePatricipant(SelectedPatricipant);
-                    MessageLogs.Add(new MessageLog(LogType.Warrning, $"Участник {surname} {name} (город {city}) успешно удален!"));
+                    MakeLog(new MessageLog(LogType.Warrning, $"Участник {surname} {name} (город {city}) успешно удален!"));
                 }
             }
             catch (Exception ex)
             {
-                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
+                MakeLog(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -178,13 +183,13 @@ namespace Shinkuro.ViewModels
                     Patricipant edit = patricipantEditorWindow.PatricipantEdit;
                     String changes = edit.GetChanges(SelectedPatricipant);
                     Context.UpdatePatricipant(SelectedPatricipant, edit);
-                    Patricipants.Refresh();
-                    MessageLogs.Add(new MessageLog(LogType.Information, $"Изменение участника {SelectedPatricipant.ShortFIO}: {changes}!"));
+                    PatricipantsView.Refresh();
+                    MakeLog(new MessageLog(LogType.Information, $"Изменение участника {SelectedPatricipant.ShortFIO}: {changes}!"));
                 }
             }
             catch (Exception ex)
             {
-                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
+                MakeLog(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -203,12 +208,12 @@ namespace Shinkuro.ViewModels
                 {
                     Patricipant patricipantNew = patricipantCreatorWindow.PatricipantNew;
                     Context.AddPatricipant(patricipantNew);
-                    MessageLogs.Add(new MessageLog(LogType.Successfull, $"Участник {patricipantNew.ShortFIO} (город: {patricipantNew.City}) успешно добавлен!"));
+                    MakeLog(new MessageLog(LogType.Successfull, $"Участник {patricipantNew.ShortFIO} (город: {patricipantNew.City}) успешно добавлен!"));
                 }
             }
             catch (Exception ex)
             {
-                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
+                MakeLog(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -229,7 +234,7 @@ namespace Shinkuro.ViewModels
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
+                MakeLog(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -254,7 +259,7 @@ namespace Shinkuro.ViewModels
                     result = result && current.Year.ToString().Contains(YearPatricipantFilter);
 
                 if (CompletePatricipant)
-                    result = result && (String.IsNullOrWhiteSpace(current.Surname) || String.IsNullOrWhiteSpace(current.Name) || String.IsNullOrWhiteSpace(current.City) || String.IsNullOrWhiteSpace(current.Year.ToString()));
+                    result = result && (String.IsNullOrWhiteSpace(current.Surname) || String.IsNullOrWhiteSpace(current.Name) || String.IsNullOrWhiteSpace(current.Coach) || String.IsNullOrWhiteSpace(current.City) || String.IsNullOrWhiteSpace(current.Year.ToString()));
 
                 return result;
             }
@@ -279,6 +284,12 @@ namespace Shinkuro.ViewModels
             {
                 MessageBox.Show(ex.Message, "Ошибка!");
             }
+        }
+
+        private void MakeLog(MessageLog log)
+        {
+            MessageLogs.Add(log);
+            MessageLogsView.MoveCurrentToLast();
         }
     }
 }

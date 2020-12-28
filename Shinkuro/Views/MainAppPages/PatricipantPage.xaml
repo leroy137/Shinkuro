@@ -112,7 +112,7 @@
                 </Grid>
             </Grid>
             <Grid Grid.Row="2">
-                <DataGrid EnableRowVirtualization="True" EnableColumnVirtualization="True" SelectedItem="{Binding SelectedPatricipant}" ItemsSource="{Binding Patricipants}" FontSize="12" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" Margin="5 5 0 5" AutoGenerateColumns="False">
+                <DataGrid EnableRowVirtualization="True" EnableColumnVirtualization="True" SelectedItem="{Binding SelectedPatricipant}" ItemsSource="{Binding PatricipantsView}" FontSize="12" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" Margin="5 5 0 5" AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Width="auto" Header="Фамилия" Binding="{Binding Path=Surname}"></DataGridTextColumn>
                         <DataGridTextColumn Width="auto" Header="Имя" Binding="{Binding Path=Name}"></DataGridTextColumn>
@@ -138,7 +138,7 @@
                                     <RowDefinition Height="auto"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid Grid.Row="0">
-                                    <ListBox ItemsSource="{Binding MessageLogs}" ItemContainerStyle="{StaticResource ListBoxItemLogStyle}">
+                                    <ListBox ItemsSource="{Binding MessageLogsView}" IsSynchronizedWithCurrentItem="True" SelectionChanged="BringSelectionIntoView" ItemContainerStyle="{StaticResource ListBoxItemLogStyle}">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
                                                 <TextBlock Margin="0" Padding="0" Focusable="False" TextWrapping="Wrap">

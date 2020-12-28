@@ -84,10 +84,11 @@ namespace Shinkuro.ViewModels
                 FIOJudgeFilter = "";
                 CityJudgeFilter = "";
                 CompleteJudge = false;
+                MessageLogs.Add(new MessageLog(LogType.Information, "Фильтры сброшены"));
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
+                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -102,10 +103,11 @@ namespace Shinkuro.ViewModels
             try
             {
                 Judges.Refresh();
+                MessageLogs.Add(new MessageLog(LogType.Information, "Список судей обновлен!"));
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
+                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
