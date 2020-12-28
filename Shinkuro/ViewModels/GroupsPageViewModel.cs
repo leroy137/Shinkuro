@@ -17,29 +17,29 @@ namespace Shinkuro.ViewModels
     class GroupsPageViewModel : ViewModelBase 
     {
 
-        private Group _seletedGroup = null;
-        private FigureGroup _selectedGroupFigure = null;
+        private AgeCategory _seletedGroup = null;
+        private FigureAgeCategory _selectedGroupFigure = null;
         private PatricipantGroup _selectedGroupPatricipant = null;
         private GroupJudgesFigure _seletedGroupJudgesFigure = null;
 
         public ApplicationCoreContext Context { get; set; }
         public ICollectionView Groups { get; set; }
         public ObservableCollection<MessageLog> MessageLogs { get; set; } = new ObservableCollection<MessageLog>();
-        public Group SelectedGroup 
+        public AgeCategory SelectedGroup 
         { 
             get { return _seletedGroup; } 
             set 
             { 
-                Set<Group>(ref _seletedGroup, value);
+                Set<AgeCategory>(ref _seletedGroup, value);
             } 
         }
 
-        public FigureGroup SelectedGroupFigure
+        public FigureAgeCategory SelectedGroupFigure
         {
             get { return _selectedGroupFigure; }
             set
             {
-                Set<FigureGroup>(ref _selectedGroupFigure, value);
+                Set<FigureAgeCategory>(ref _selectedGroupFigure, value);
             }
         }
 
@@ -138,7 +138,7 @@ namespace Shinkuro.ViewModels
                 editorWindow.ShowDialog();
                 if (editorWindow.DialogResult == true)
                 {
-                    Group edit = editorWindow.GroupEdit;
+                    AgeCategory edit = editorWindow.GroupEdit;
                     Context.UpdateGroup(SelectedGroup, edit);
                     MessageLogs.Add(new MessageLog(LogType.Information, "Возрастная категория успешно изменена!"));
                     Groups.Refresh();
@@ -163,7 +163,7 @@ namespace Shinkuro.ViewModels
                 groupCreatorWindow.ShowDialog();
                 if(groupCreatorWindow.DialogResult == true)
                 {
-                    Group groupNew = groupCreatorWindow.GroupNew;
+                    AgeCategory groupNew = groupCreatorWindow.GroupNew;
                     if(groupNew!=null)
                     {
                         Context.AddGroup(groupNew);
@@ -218,7 +218,7 @@ namespace Shinkuro.ViewModels
                     int countPrevCountFigures = SelectedGroup.Figures.Count;
                     List<Figure> selectedFigures = figureSelectedViewModel.SelectedFiguresGroup.ToList();
                     Context.SelectFiguresGroup(SelectedGroup, selectedFigures);
-                    Group gr = SelectedGroup;
+                    AgeCategory gr = SelectedGroup;
                     SelectedGroup = null;
                     SelectedGroup = gr;
                     MessageLogs.Add(new MessageLog(LogType.Information, $"Список фигур для возрастной категории {SelectedGroup.Name} обновлен (число фигур {countPrevCountFigures} -> {selectedFigures.Count})!"));
@@ -247,7 +247,7 @@ namespace Shinkuro.ViewModels
                 if (!Context.UnsetGroupFigure(SelectedGroup, SelectedGroupFigure))
                     throw new Exception("Открепление фигуры не удалось!");
 
-                Group gr = SelectedGroup;
+                AgeCategory gr = SelectedGroup;
                 SelectedGroup = null;
                 SelectedGroup = gr;
                 MessageLogs.Add(new MessageLog(LogType.Information, $"Фигура {figureNameUnset} успешно откреплена от возрастной категории {SelectedGroup.Name}!"));
@@ -293,7 +293,7 @@ namespace Shinkuro.ViewModels
                 if (!Context.UnsetGroupPatricipant(SelectedGroup, SelectedGroupPatricipant))
                     throw new Exception($"Открепление участника {fio} не удалось!");
 
-                Group gr = SelectedGroup;
+                AgeCategory gr = SelectedGroup;
                 SelectedGroup = null;
                 SelectedGroup = gr;
                 MessageLogs.Add(new MessageLog(LogType.Information, logMessage));
@@ -336,7 +336,7 @@ namespace Shinkuro.ViewModels
             try
             {
                 Context.AutoFillGroups();
-                Group g = SelectedGroup;
+                AgeCategory g = SelectedGroup;
                 SelectedGroup = null;
                 SelectedGroup = g;
                 MessageLogs.Add(new MessageLog(LogType.Successfull, "Участники успешно распределены по возрастным категориям!"));
@@ -364,7 +364,7 @@ namespace Shinkuro.ViewModels
                 {
                     GroupJudgesFigure groupJudgesFigure = viewModel.GroupJudgesFigureNew;
                     Context.AddGroupJudgesFigure(SelectedGroup, groupJudgesFigure);
-                    Group g = SelectedGroup;
+                    AgeCategory g = SelectedGroup;
                     SelectedGroup = null;
                     SelectedGroup = g;
                 }
@@ -387,7 +387,7 @@ namespace Shinkuro.ViewModels
 
                 String logMessage = $"Фигура {SelectedGroupJudgesFigure.Figure.Name} успешно откреплена от возрастной категории {SelectedGroup.Name}";
                 Context.UnsetGroupJudgesFigure(SelectedGroup, SelectedGroupJudgesFigure);
-                Group gr = SelectedGroup;
+                AgeCategory gr = SelectedGroup;
                 SelectedGroup = null;
                 SelectedGroup = gr;
                 MessageLogs.Add(new MessageLog(LogType.Information, logMessage));

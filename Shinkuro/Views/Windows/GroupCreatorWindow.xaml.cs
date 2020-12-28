@@ -20,7 +20,7 @@ namespace Shinkuro.Views.Windows
     /// </summary>
     public partial class GroupCreatorWindow : Window
     {
-        public Group GroupNew { get; set; }
+        public AgeCategory GroupNew { get; set; }
 
         public String GroupName { get; set; }
 
@@ -61,7 +61,7 @@ namespace Shinkuro.Views.Windows
                 if (Int32.TryParse(EndYear, out int ey))
                     endYear = ey;
 
-                Group group = new Group(GroupName, startYear, endYear, GroupDescription);
+                AgeCategory group = new AgeCategory(GroupName, startYear, endYear, GroupDescription);
                 GroupNew = group;
                 this.DialogResult = true;
                 this.Close();

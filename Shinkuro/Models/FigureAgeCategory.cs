@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Shinkuro.Models
 {
-    public class FigureGroup : ModelBase
+    public class FigureAgeCategory : ModelBase
     {
         private int _number;
         private Figure _figure;
@@ -22,7 +22,7 @@ namespace Shinkuro.Models
             set { Set<Figure>(ref _figure, value); }
         }
 
-        public FigureGroup(int number, Figure figure)
+        public FigureAgeCategory(int number, Figure figure)
         {
             Number = number;
             Figure = figure;

@@ -6,18 +6,31 @@ namespace Shinkuro.Models
 {
     public class Patricipant 
     {
-
+        private int _number;
         private String _name;
         private String _surname;
         private String _patronymic;
 
-
+        private String _coach;
 
         private int _year;
         private string _city;
         private string _rank;
 
         private static Random rand = new Random();
+
+        public Int32 Number 
+        { 
+            get { return _number; } 
+            set
+            {
+                /*
+                if (_number <= 0)
+                    throw new Exception("Внутренний номер участника не может быть меньше либо равен 0!");
+                */
+                _number = value;
+            }
+        }
 
         /// <summary>
         /// Фамилия
@@ -101,6 +114,15 @@ namespace Shinkuro.Models
             }
         }
 
+        public String Coach 
+        {
+            get => _coach; 
+            set
+            {
+                _coach = value;
+            }
+        }
+
         public String SportSchool { get; set; }
 
         public String FIO => $"{Surname} {Name} {Patronymic}";
@@ -114,6 +136,18 @@ namespace Shinkuro.Models
 
         public Patricipant(String surname, String name, String patronymic, int year, string city, string rank, string sportSchool)
         {
+            Surname = surname;
+            Name = name;
+            Patronymic = patronymic;
+            Year = year;
+            City = city;
+            Rank = rank;
+            SportSchool = sportSchool;
+        }
+
+        public Patricipant(Int32 number, String surname, String name, String patronymic, int year, string city, string rank, string sportSchool)
+        {
+            Number = number;
             Surname = surname;
             Name = name;
             Patronymic = patronymic;

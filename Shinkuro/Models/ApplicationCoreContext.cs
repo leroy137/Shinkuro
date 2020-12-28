@@ -14,7 +14,7 @@ namespace Shinkuro.Models
         public static ObservableCollection<Figure> Figures { get; set; }
         public ObservableCollection<Patricipant> Patricipants { get; set; }
         public ObservableCollection<Judge> Judges { get; set; }
-        public ObservableCollection<Group> Groups { get; set; }
+        public ObservableCollection<AgeCategory> Groups { get; set; }
 
         public ObservableCollection<GroupJudges> GroupJudges { get; set; } = new ObservableCollection<GroupJudges>();
         public ApplicationCoreContext()
@@ -22,11 +22,11 @@ namespace Shinkuro.Models
             CurrentCompetition = null;
             Patricipants = new ObservableCollection<Patricipant>();
             Judges = new ObservableCollection<Judge>();
-            Groups = new ObservableCollection<Group>();
+            Groups = new ObservableCollection<AgeCategory>();
             GroupJudges = new ObservableCollection<GroupJudges>();
 
             for (int i = 0; i < 10; i += 2)
-                Groups.Add(new Group($"Группа {i + 1}", 2000 + i, 2001 + i, $"Описание группы {i + 1}"));
+                Groups.Add(new AgeCategory($"Группа {i + 1}", 2000 + i, 2001 + i, $"Описание группы {i + 1}"));
 
             for (int i = 0; i < 150; i++)
                 Patricipants.Add(Patricipant.CreateRandom());
@@ -131,7 +131,7 @@ namespace Shinkuro.Models
             destination.Info = source.Info;
         }
 
-        public void UpdateGroup(Group destination, Group source)
+        public void UpdateGroup(AgeCategory destination, AgeCategory source)
         {
             if (destination == null)
                 throw new Exception("Изменение группы невозможно, так как она не выбрана и равна null!");
@@ -168,7 +168,7 @@ namespace Shinkuro.Models
             Judges.Add(judge);
         }
 
-        public void AddGroup(Group group)
+        public void AddGroup(AgeCategory group)
         {
             if (group == null)
                 throw new NullReferenceException("Группа не задан!");
@@ -208,7 +208,7 @@ namespace Shinkuro.Models
             return Judges.Remove(judge);
         }
 
-        public bool RemoveGroup(Group group)
+        public bool RemoveGroup(AgeCategory group)
         {
             if (group == null)
                 throw new NullReferenceException("Группа для удаления не задана!");
@@ -233,7 +233,7 @@ namespace Shinkuro.Models
         }
 
 
-        public void SelectFiguresGroup(Group group, List<Figure> selected)
+        public void SelectFiguresGroup(AgeCategory group, List<Figure> selected)
         {
             if (group == null)
                 throw new NullReferenceException("Группа не задана для заполнения фигур, пожалуйста выберите группу или обновите список!");
@@ -241,10 +241,10 @@ namespace Shinkuro.Models
             group.Figures.Clear();
             int i = 1;
             foreach (var figure in selected)
-                group.Figures.Add(new FigureGroup(i++,figure));
+                group.Figures.Add(new FigureAgeCategory(i++,figure));
         }
 
-        public bool UnsetGroupFigure(Group group, FigureGroup figure)
+        public bool UnsetGroupFigure(AgeCategory group, FigureAgeCategory figure)
         {
             if (group == null)
                 throw new NullReferenceException("Группа не задана для открепления фигуры, пожалуйста выберите группу или обновите список!");
@@ -264,7 +264,7 @@ namespace Shinkuro.Models
             return false;
         }
 
-        public bool UnsetGroupPatricipant(Group group, PatricipantGroup p)
+        public bool UnsetGroupPatricipant(AgeCategory group, PatricipantGroup p)
         {
             if (group == null)
                 throw new NullReferenceException("Группа не задана для открепления участника, пожалуйста выберите группу или обновите список!");
@@ -285,7 +285,7 @@ namespace Shinkuro.Models
         }
 
 
-        public bool UnsetGroupJudgesFigure(Group group, GroupJudgesFigure groupJudgesFigure)
+        public bool UnsetGroupJudgesFigure(AgeCategory group, GroupJudgesFigure groupJudgesFigure)
         {
             if (group == null)
                 throw new Exception("Группа для открепления фигуры и судей не выбрана и равна null!");
@@ -313,7 +313,7 @@ namespace Shinkuro.Models
         public void AutoFillGroups()
         {
             List<Patricipant> patricipantsWithoutGroup = new List<Patricipant>();
-            foreach(Group g in Groups)
+            foreach(AgeCategory g in Groups)
             {
                 g.Patricipants = new List<PatricipantGroup>();
             }
@@ -321,7 +321,7 @@ namespace Shinkuro.Models
             foreach(Patricipant patricipant in Patricipants)
             {
                 bool isDetermined = false;
-                foreach(Group g in Groups)
+                foreach(AgeCategory g in Groups)
                 {
                     if (g.IsSatisfiedPatricipant(patricipant))
                     {
@@ -337,12 +337,12 @@ namespace Shinkuro.Models
                 }
             }
 
-            foreach (Group g in Groups)
+            foreach (AgeCategory g in Groups)
             {
                 g.Patricipants.Sort((p1,p2)=>p1.Patricipant.FIO.CompareTo(p2.Patricipant.FIO));
             }
 
-            foreach(Group g in Groups)
+            foreach(AgeCategory g in Groups)
             {
                 for(int i=0;i<g.Patricipants.Count;i++)
                 {
@@ -352,7 +352,7 @@ namespace Shinkuro.Models
         }
 
 
-        public void AddPatricipantGroup(Group group, PatricipantGroup p)
+        public void AddPatricipantGroup(AgeCategory group, PatricipantGroup p)
         {
             group.Patricipants.Add(p);
             for(int i=0;i<group.Patricipants.Count;i++)
@@ -366,7 +366,7 @@ namespace Shinkuro.Models
         /// </summary>
         /// <param name="group">Группа участников куда прикрепляется фигура и список судей</param>
         /// <param name="groupJudgesFigure">Объект фигура-судьи</param>
-        public void AddGroupJudgesFigure(Group group, GroupJudgesFigure groupJudgesFigure)
+        public void AddGroupJudgesFigure(AgeCategory group, GroupJudgesFigure groupJudgesFigure)
         {
             if (group == null)
                 throw new Exception("Группа для добавления фигуры и судей не выбрана и равна null!");

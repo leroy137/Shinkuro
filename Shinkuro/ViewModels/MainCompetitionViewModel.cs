@@ -67,8 +67,8 @@ namespace Shinkuro.ViewModels
             JudgePageViewModel = new JudgePageViewModel(MainContext);
             GroupJudgesPageViewModel = new GroupJudgesPageViewModel(MainContext);
             GroupsPageViewModel = new GroupsPageViewModel(MainContext);
-            CompetitionCommandPageViewModel = new CompetitionCommandPageViewModel();
-            CompetitionFigurePageViewModel = new CompetitionFigurePageViewModel();
+            CompetitionCommandPageViewModel = new CompetitionCommandPageViewModel(MainContext);
+            CompetitionFigurePageViewModel = new CompetitionFigurePageViewModel(MainContext);
             PatricipantsPageViewModel = new PatricipantPageViewModel(MainContext);
         }
 

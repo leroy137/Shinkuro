@@ -33,7 +33,7 @@ namespace Shinkuro.Views.Windows
             windowGroupViewer.DataContext = this;
         }
 
-        public GroupViewerWindow(Group group) : this()
+        public GroupViewerWindow(AgeCategory group) : this()
         {
             GroupName = group.Name;
             StartYear = group?.StartYear.ToString() ?? "";

@@ -8,7 +8,7 @@ namespace Shinkuro.Models
     /// <summary>
     /// класс соревнования по фигурам
     /// </summary>
-    public class Group : ModelBase
+    public class AgeCategory : ModelBase
     {
         private string _name;
         private int? _startYear;
@@ -46,20 +46,20 @@ namespace Shinkuro.Models
             get { return _description; } 
             set { Set<String>(ref _description, value); }
         }
-        public List<FigureGroup> Figures { get; set; } = new List<FigureGroup>();
+        public List<FigureAgeCategory> Figures { get; set; } = new List<FigureAgeCategory>();
         public List<JudgeGroup> Judges { get; set; } = new List<JudgeGroup>();
         public List<PatricipantGroup> Patricipants { get; set; } = new List<PatricipantGroup>();
         public List<GroupJudgesFigure> GroupJudgesFiguresList { get; set; } = new List<GroupJudgesFigure>(); 
 
-        public Group()
+        public AgeCategory()
         {
-            Figures = new List<FigureGroup>();
+            Figures = new List<FigureAgeCategory>();
             Judges = new List<JudgeGroup>();
             Patricipants = new List<PatricipantGroup>();
             GroupJudgesFiguresList = new List<GroupJudgesFigure>();
         }
 
-        public Group(String name, Int32? startYear, Int32? finishYear, String description) : this()
+        public AgeCategory(String name, Int32? startYear, Int32? finishYear, String description) : this()
         {
             Name = name;
             StartYear = startYear;
@@ -67,7 +67,7 @@ namespace Shinkuro.Models
             Description = description;
         }
 
-        public Group(String name, Int32 startYear, Int32 finishYear, String description, List<FigureGroup> figures, List<JudgeGroup> judges, List<PatricipantGroup> patricipants) : this(name, startYear, finishYear, description)
+        public AgeCategory(String name, Int32 startYear, Int32 finishYear, String description, List<FigureAgeCategory> figures, List<JudgeGroup> judges, List<PatricipantGroup> patricipants) : this(name, startYear, finishYear, description)
         {
             Figures = figures;
             Judges = judges;

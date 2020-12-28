@@ -32,7 +32,7 @@ namespace Shinkuro.ViewModels
 
         }
 
-        public FigureSelectedViewModel(List<FigureGroup> selectedFigures) : this()
+        public FigureSelectedViewModel(List<FigureAgeCategory> selectedFigures) : this()
         {
             var selectedFiguresGroup = selectedFigures.Select(fg => fg.Figure);
             foreach (var figure in ApplicationCoreContext.Figures)

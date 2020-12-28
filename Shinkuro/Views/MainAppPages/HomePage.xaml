@@ -13,10 +13,10 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
-                <ColumnDefinition Width="200"></ColumnDefinition>
+                <ColumnDefinition Width="140"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
-                <Grid>
+                <Grid Grid.Row="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
@@ -31,13 +31,15 @@
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Margin="5" Style="{StaticResource HeaderPageCompetition}">
+                    <TextBlock Grid.Column="0" Margin="5" Style="{StaticResource HeaderPageCompetition}">
                             Главная
-                        </TextBlock>
-                    </Grid>
-
+                    </TextBlock>
+                </Grid>
+                <Grid Grid.Row="2" Margin="5 5 0 0">
+                    
+                </Grid>
                 <Grid Grid.Row="3" Margin="5 12 0 5">
-                    <TabControl Height="170" TextBlock.FontSize="11" Padding="0">
+                    <TabControl Height="150" TextBlock.FontSize="11" Padding="0">
                         <TabItem Header="Сообщения">
                             <Grid>
                                 <Grid.RowDefinitions>

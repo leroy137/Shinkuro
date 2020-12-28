@@ -18,7 +18,7 @@ namespace Shinkuro.Views.Windows
     /// </summary>
     public partial class GroupEditorWindow : Window
     {
-        public Group GroupEdit { get; set; }
+        public AgeCategory GroupEdit { get; set; }
 
         public String GroupName { get; set; }
 
@@ -34,7 +34,7 @@ namespace Shinkuro.Views.Windows
             windowGroupEditor.DataContext = this;
         }
 
-        public GroupEditorWindow(Group group) : this()
+        public GroupEditorWindow(AgeCategory group) : this()
         {
             GroupName = group.Name;
             StartYear = group?.StartYear.ToString() ?? "";
@@ -55,7 +55,7 @@ namespace Shinkuro.Views.Windows
                 if (Int32.TryParse(EndYear, out int ey))
                     endYear = ey;
 
-                Group group = new Group(GroupName, startYear, endYear, GroupDescription);
+                AgeCategory group = new AgeCategory(GroupName, startYear, endYear, GroupDescription);
                 GroupEdit = group;
                 this.DialogResult = true;
                 this.Close();
