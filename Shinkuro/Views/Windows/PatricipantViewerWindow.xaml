@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Shinkuro.Views.Windows"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Участник" ResizeMode="NoResize" Height="550" Width="450" WindowStartupLocation="CenterScreen" Name="windowView">
+        Title="{Binding Path=Patricipant.ShortFIO, StringFormat={}Участник - {0}}" ResizeMode="NoResize" Height="550" Width="450" WindowStartupLocation="CenterScreen" Name="windowView">
     <Grid TextBlock.FontSize="14">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -63,7 +63,7 @@
                 <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
                 <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Place" />
                 </TextBlock>
-                <TextBox Width="180" IsReadOnly="True" Text="{Binding Path=Patricipant.City}" md:HintAssist.Hint="Город" Grid.Column="1" Padding="5 0" ></TextBox>
+                <TextBox ToolTip="Город" Width="180" IsReadOnly="True" Text="{Binding Path=Patricipant.City}" md:HintAssist.Hint="Город" Grid.Column="1" Padding="5 0" ></TextBox>
             </Grid>
             <Grid Grid.Column="2">
                 <Grid.ColumnDefinitions>
@@ -73,7 +73,7 @@
                 <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
                     <md:PackIcon Grid.Column="0" Kind="Calendar" />
                 </TextBlock>
-                <TextBox IsReadOnly="True" Text="{Binding Path=Patricipant.Year}" Grid.Column="1" md:HintAssist.Hint="Год рождения" Grid.Row="3" Padding="5 0" ></TextBox>
+                <TextBox ToolTip="Год рождения" IsReadOnly="True" Text="{Binding Path=Patricipant.Year}" Grid.Column="1" md:HintAssist.Hint="Год рождения" Grid.Row="3" Padding="5 0" ></TextBox>
             </Grid>
         </Grid>
         <Grid Grid.Row="4" Margin="5 10">
@@ -84,7 +84,7 @@
             <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
                     <md:PackIcon Grid.Column="0" Kind="Warehouse" />
             </TextBlock>
-            <TextBox  Text="{Binding Path=Patricipant.SportSchool}" md:HintAssist.Hint="Спортивная школа" Grid.Column="1" Padding="5 0" ></TextBox>
+            <TextBox ToolTip="Спортивная школа" Text="{Binding Path=Patricipant.SportSchool}" md:HintAssist.Hint="Спортивная школа" Grid.Column="1" Padding="5 0" ></TextBox>
         </Grid>
         <Grid Grid.Row="5" Margin="5 10">
             <Grid.ColumnDefinitions>
@@ -94,7 +94,7 @@
             <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
                     <md:PackIcon Grid.Column="0" Kind="AccountSupervisorOutline" />
             </TextBlock>
-            <TextBox ToolTip="Тренер" Text="{Binding Patricipant.Coach}" md:HintAssist.Hint="Тренер" Grid.Column="1" Padding="5 0" ></TextBox>
+            <TextBox IsReadOnly="True" ToolTip="Тренер" Text="{Binding Patricipant.Coach}" md:HintAssist.Hint="Тренер" Grid.Column="1" Padding="5 0" ></TextBox>
         </Grid>
         <Grid Grid.Row="6" Margin="5 10">
             <Grid.ColumnDefinitions>
