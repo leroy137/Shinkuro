@@ -15,6 +15,7 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
@@ -91,11 +92,21 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
+                    <md:PackIcon Grid.Column="0" Kind="AccountSupervisorOutline" />
+            </TextBlock>
+            <TextBox ToolTip="Тренер" Text="{Binding Patricipant.Coach}" md:HintAssist.Hint="Тренер" Grid.Column="1" Padding="5 0" ></TextBox>
+        </Grid>
+        <Grid Grid.Row="6" Margin="5 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
                     <md:PackIcon Grid.Column="0" Kind="Rank" />
             </TextBlock>
             <TextBox ToolTip="Разряд" IsReadOnly="True" Text="{Binding Path=Patricipant.Rank}" md:HintAssist.Hint="Разряд" Grid.Column="1" Padding="5 0" ></TextBox>
         </Grid>
-        <Grid Grid.Row="7" Margin="5 10">
+        <Grid Grid.Row="8" Margin="5 10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
