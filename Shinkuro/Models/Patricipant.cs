@@ -145,6 +145,18 @@ namespace Shinkuro.Models
             SportSchool = sportSchool;
         }
 
+        public Patricipant(String surname, String name, String patronymic, int year, string city, string rank, string sportSchool, String coach)
+        {
+            Surname = surname;
+            Name = name;
+            Patronymic = patronymic;
+            Year = year;
+            City = city;
+            Rank = rank;
+            SportSchool = sportSchool;
+            Coach = coach;
+        }
+
         public Patricipant(Int32 number, String surname, String name, String patronymic, int year, string city, string rank, string sportSchool)
         {
             Number = number;

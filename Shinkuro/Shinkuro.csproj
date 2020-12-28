@@ -10,6 +10,7 @@
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Resources\Images\Logotips\" />
+    <Folder Include="Resources\DocumentTemplates\" />
   </ItemGroup>
 
   <ItemGroup>

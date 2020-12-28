@@ -119,7 +119,8 @@
                         <DataGridTextColumn Width="auto" Header="Отчество" Binding="{Binding Path=Patronymic}"></DataGridTextColumn>
                         <DataGridTextColumn Width="auto" Header="Год рождения" Binding="{Binding Path=Year}"></DataGridTextColumn>
                         <DataGridTextColumn Width="auto" Header="Город" Binding="{Binding Path=City}"></DataGridTextColumn>
-                        <DataGridTextColumn Width="*" Header="Спортивная школа" Binding="{Binding Path=SportSchool}"></DataGridTextColumn>
+                        <DataGridTextColumn Width="auto" Header="Спортивная школа" Binding="{Binding Path=SportSchool}"></DataGridTextColumn>
+                        <DataGridTextColumn Width="*" Header="Тренер" Binding="{Binding Path=Coach}"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
