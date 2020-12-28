@@ -112,6 +112,7 @@ namespace Shinkuro.Models
             destination.Rank = source.Rank;
             destination.Year = source.Year;
             destination.SportSchool = source.SportSchool;
+            destination.Coach = source.Coach;
         }
 
         public void UpdateJudge(Judge destination, Judge source)

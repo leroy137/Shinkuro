@@ -214,6 +214,9 @@ namespace Shinkuro.Models
             if (SportSchool != p.SportSchool)
                 result += $"{p.SportSchool} -> {SportSchool}; ";
 
+            if (Coach != p.Coach)
+                result += $"{p.Coach} -> {Coach}; ";
+
             if (Rank != p.Rank)
                 result += $"{p.Rank} -> {Rank}; ";
 

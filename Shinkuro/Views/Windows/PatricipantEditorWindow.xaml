@@ -94,7 +94,7 @@
             <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
                     <md:PackIcon Grid.Column="0" Kind="AccountSupervisorOutline" />
             </TextBlock>
-            <TextBox ToolTip="Тренер" Text="{Binding SportSchool, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" md:HintAssist.Hint="Тренер" Grid.Column="1" Padding="5 0" ></TextBox>
+            <TextBox ToolTip="Тренер" Text="{Binding Coach, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" md:HintAssist.Hint="Тренер" Grid.Column="1" Padding="5 0" ></TextBox>
         </Grid>
         <Grid Grid.Row="6" Margin="5 10">
             <Grid.ColumnDefinitions>
