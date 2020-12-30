@@ -26,19 +26,19 @@ namespace Shinkuro.ViewModels
         public String FIOJudgeFilter
         {
             get { return _searchTextJudge; }
-            set { Set<String>(ref _searchTextJudge, value); Judges.Refresh(); }
+            set { Set<String>(ref _searchTextJudge, value); JudgesView.Refresh(); }
         }
 
         public String CityJudgeFilter
         {
             get { return _cityJudgeFilter; }
-            set { Set<String>(ref _cityJudgeFilter, value); Judges.Refresh(); }
+            set { Set<String>(ref _cityJudgeFilter, value); JudgesView.Refresh(); }
         }
 
         public bool CompleteJudge
         {
             get { return _completeJudges; }
-            set { Set<Boolean>(ref _completeJudges, value); Judges.Refresh(); }
+            set { Set<Boolean>(ref _completeJudges, value); JudgesView.Refresh(); }
         }
 
         public Judge SelectedJudge 
@@ -54,8 +54,10 @@ namespace Shinkuro.ViewModels
         public ICommand EditJudgeCommand { get; set; }
         public ICommand ViewJudgeCommand { get; set; }
         public ICommand ClearMessagesBlockCommand { get; set; }
-        public ICollectionView Judges { get; set; }
-        public CollectionViewSource CollectionView { get; set; } = new CollectionViewSource();
+        public ICollectionView JudgesView { get; set; }
+        public ICollectionView MessageLogsView { get; set; }
+        public CollectionViewSource JudgesViewSource { get; set; } = new CollectionViewSource();
+        public CollectionViewSource MessageLogsViewSource { get; set; } = new CollectionViewSource();
         public ObservableCollection<MessageLog> MessageLogs { get; set; } = new ObservableCollection<MessageLog>();
 
         public JudgePageViewModel()
@@ -72,9 +74,12 @@ namespace Shinkuro.ViewModels
         public JudgePageViewModel(ApplicationCoreContext context) : this()
         {
             Context = context;
-            CollectionView.Source = Context.Judges;
-            Judges = CollectionView.View;
-            Judges.Filter = FilterJudge;
+            JudgesViewSource.Source = Context.Judges;
+            MessageLogsViewSource.Source = MessageLogs;
+            JudgesView = JudgesViewSource.View;
+            MessageLogsView = MessageLogsViewSource.View;
+
+            JudgesView.Filter = FilterJudge;
         }
 
         private void ResetFilterCommandExecute(object obj)
@@ -88,7 +93,7 @@ namespace Shinkuro.ViewModels
             }
             catch (Exception ex)
             {
-                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
+                MakeLog(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -97,17 +102,16 @@ namespace Shinkuro.ViewModels
             return !String.IsNullOrEmpty(FIOJudgeFilter) || !String.IsNullOrEmpty(CityJudgeFilter)  || CompleteJudge != false;
         }
 
-
         private void UpdateListJudgesCommandExecute(object obj)
         {
             try
             {
-                Judges.Refresh();
-                MessageLogs.Add(new MessageLog(LogType.Information, "Список судей обновлен!"));
+                JudgesView.Refresh();
+                MakeLog(new MessageLog(LogType.Information, "Список судей обновлен!"));
             }
             catch (Exception ex)
             {
-                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
+                MakeLog(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -131,12 +135,12 @@ namespace Shinkuro.ViewModels
                     String surname = SelectedJudge.Surname;
                     String name = SelectedJudge.Name;
                     Context.RemoveJudge(SelectedJudge);
-                    MessageLogs.Add(new MessageLog(LogType.Warrning, $"Судья { surname } { name} (город { city}) удален!"));
+                    MakeLog(new MessageLog(LogType.Warrning, $"Судья {surname} {name} (город {city}) удален!"));
                 }
             }
             catch (Exception ex)
             {
-                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
+                MakeLog(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -159,13 +163,13 @@ namespace Shinkuro.ViewModels
                     Judge edit = editorWindow.JudgeEdit;
                     String changes = edit.GetChanges(SelectedJudge);
                     Context.UpdateJudge(SelectedJudge, edit);
-                    Judges.Refresh();
-                    MessageLogs.Add(new MessageLog(LogType.Information, $"Изменение судьи {SelectedJudge.ShortFIO}: {changes}!"));
+                    JudgesView.Refresh();
+                    MakeLog(new MessageLog(LogType.Information, $"Изменение судьи {SelectedJudge.ShortFIO}: {changes}!"));
                 }
             }
             catch (Exception ex)
             {
-                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
+                MakeLog(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -184,12 +188,12 @@ namespace Shinkuro.ViewModels
                 {
                     Judge judgeNew = judgeCreatorWindow.JudgeNew;
                     Context.AddJudge(judgeNew);
-                    MessageLogs.Add(new MessageLog(LogType.Successfull, $"Судья {judgeNew.ShortFIO} успешно добавлен!"));
+                    MakeLog(new MessageLog(LogType.Successfull, $"Судья {judgeNew.ShortFIO} успешно добавлен!"));
                 }
             }
             catch (Exception ex)
             {
-                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
+                MakeLog(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -210,7 +214,7 @@ namespace Shinkuro.ViewModels
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
+                MakeLog(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -255,8 +259,14 @@ namespace Shinkuro.ViewModels
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
+                MakeLog(new MessageLog(LogType.Error, ex.Message));
             }
+        }
+
+        private void MakeLog(MessageLog log)
+        {
+            MessageLogs.Add(log);
+            MessageLogsView.MoveCurrentToLast();
         }
     }
 }

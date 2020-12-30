@@ -121,7 +121,6 @@ namespace Shinkuro.ViewModels
             return !String.IsNullOrEmpty(FIOPatricipantFilter) || !String.IsNullOrEmpty(CityPatricipantFilter) || !String.IsNullOrEmpty(YearPatricipantFilter) || CompletePatricipant != false;
         }
 
-
         private void UpdateListPatricipantCommandExecute(object obj)
         {
             try
