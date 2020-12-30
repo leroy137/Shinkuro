@@ -67,7 +67,7 @@
                         <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5 0">
                         <md:PackIcon Grid.Row="1" Grid.Column="0" Kind="Search" />
                         </TextBlock>
-                        <TextBox Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalContentAlignment="Center" md:HintAssist.Hint="Введите название фигуры" md:TextFieldAssist.HasClearButton="True" Padding="5 0" Grid.Column="1" FontSize="12"></TextBox>
+                        <TextBox Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalContentAlignment="Center" md:HintAssist.Hint="Введите название фигуры" md:TextFieldAssist.HasClearButton="True" Padding="5 0" Grid.Column="1" FontSize="14"></TextBox>
                     </Grid>
                     <Grid Grid.Row="4">
                         <Grid.ColumnDefinitions>
@@ -79,7 +79,7 @@
                     </Grid>
                 </Grid>
                 <Grid Grid.Row="2" Margin="5 5 0 5">
-                    <DataGrid SelectedItem="{Binding SelectedFigure}" ItemsSource="{Binding Figures}" CanUserAddRows="False" CanUserDeleteRows="False" FontSize="12" CanUserReorderColumns="False" IsReadOnly="True"  AutoGenerateColumns="False">
+                    <DataGrid SelectedItem="{Binding SelectedFigure}" ItemsSource="{Binding FiguresView}" CanUserAddRows="False" CanUserDeleteRows="False" FontSize="12" CanUserReorderColumns="False" IsReadOnly="True"  AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="auto" Header="Название" Binding="{Binding Path=Name}"></DataGridTextColumn>
                             <DataGridTextColumn Width="auto" Header="Коэффициент" Binding="{Binding Path=Complexity}"></DataGridTextColumn>
@@ -101,7 +101,7 @@
                                         <RowDefinition Height="auto"></RowDefinition>
                                     </Grid.RowDefinitions>
                                     <Grid Grid.Row="0">
-                                        <ListBox ItemsSource="{Binding MessageLogs}" ItemContainerStyle="{StaticResource ListBoxItemLogStyle}">
+                                        <ListBox ItemsSource="{Binding MessageLogsView}" IsSynchronizedWithCurrentItem="True" SelectionChanged="BringSelectionIntoView" ItemContainerStyle="{StaticResource ListBoxItemLogStyle}">
                                             <ListBox.ItemTemplate>
                                                 <DataTemplate>
                                                     <TextBlock Margin="0" Padding="0" Focusable="False" TextWrapping="Wrap">

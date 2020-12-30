@@ -19,9 +19,10 @@ namespace Shinkuro.ViewModels
         public String FilterText
         {
             get { return _filterText; }
-            set { Set<String>(ref _filterText, value); Figures.Refresh(); }
+            set { Set<String>(ref _filterText, value); FiguresView.Refresh(); }
         }
-        public ICollectionView Figures { get; set; }
+        public ICollectionView FiguresView { get; set; }
+        public ICollectionView MessageLogsView { get; set; }
         public Figure SelectedFigure { get; set; }
         public ObservableCollection<MessageLog> MessageLogs { get; set; } = new ObservableCollection<MessageLog>();
 
@@ -31,12 +32,16 @@ namespace Shinkuro.ViewModels
         public ICommand EditFigureCommand { get; set; }
         public ICommand ClearMessagesBlockCommand { get; set; }
         public ICommand UpdateListFiguresCommand { get; set; }
-        public CollectionViewSource CollectionView { get; set; } = new CollectionViewSource();
+        public CollectionViewSource FiguresViewSource { get; set; } = new CollectionViewSource();
+        public CollectionViewSource MessageLogsViewSource { get; set; } = new CollectionViewSource();
         public FigureManagerViewModel()
         {
-            CollectionView.Source = ApplicationCoreContext.Figures;
-            Figures = CollectionView.View;
-            Figures.Filter = FilterFigure;
+            FiguresViewSource.Source = ApplicationCoreContext.Figures;
+            FiguresView = FiguresViewSource.View;
+            MessageLogsViewSource.Source = MessageLogs;
+            MessageLogsView = MessageLogsViewSource.View;
+
+            FiguresView.Filter = FilterFigure;
 
             UpdateListFiguresCommand = new RelayCommand(UpdateListFiguresCommandExecute, UpdateListFiguresCommandCanExecute);
             // инициализируем команды менеджера фигур
@@ -74,12 +79,12 @@ namespace Shinkuro.ViewModels
                 {
                     Figure figureNew = figureCreatorWindow.FigureNew;
                     ApplicationCoreContext.AddFigure(figureNew);
-                    MessageLogs.Add(new MessageLog(LogType.Successfull, $"Фигура {figureNew.Name} успешно добавлена!"));
+                    MakeLog(new MessageLog(LogType.Successfull, $"Фигура {figureNew.Name} успешно добавлена!"));
                 }
             }
             catch (Exception ex)
             {
-                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
+                MakeLog(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -102,14 +107,14 @@ namespace Shinkuro.ViewModels
 
                     String name = SelectedFigure.Name;
                     if (ApplicationCoreContext.RemoveFigure(SelectedFigure))
-                        MessageLogs.Add(new MessageLog(LogType.Successfull, $"Фигура {name} удалена!"));
+                        MakeLog(new MessageLog(LogType.Successfull, $"Фигура {name} удалена!"));
                     else
                         throw new Exception("Ошибка операции удаления фигуры!");
                 }
             }
             catch (Exception ex)
             {
-                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
+                MakeLog(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -130,7 +135,7 @@ namespace Shinkuro.ViewModels
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
+                MakeLog(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -152,13 +157,13 @@ namespace Shinkuro.ViewModels
                 {
                     Figure edit = editorWindow.FigureEdit;
                     ApplicationCoreContext.UpdateFigure(SelectedFigure, edit);
-                    Figures.Refresh();
-                    MessageLogs.Add(new MessageLog(LogType.Information, $"Фигура {edit.Name} успешно изменена!"));
+                    FiguresView.Refresh();
+                    MakeLog(new MessageLog(LogType.Information, $"Фигура {edit.Name} успешно изменена!"));
                 }
             }
             catch (Exception ex)
             {
-                MessageLogs.Add(new MessageLog(LogType.Error, ex.Message));
+                MakeLog(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -180,7 +185,7 @@ namespace Shinkuro.ViewModels
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
+                MakeLog(new MessageLog(LogType.Error, ex.Message));
             }
         }
 
@@ -188,17 +193,24 @@ namespace Shinkuro.ViewModels
         {
             try
             {
-                Figures.Refresh();
+                FiguresView.Refresh();
+                MakeLog(new MessageLog(LogType.Information, "Список фигур обновлен"));
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
-            }
+                MakeLog(new MessageLog(LogType.Error, ex.Message));
+            } 
         }
 
         private bool UpdateListFiguresCommandCanExecute(object obj)
         {
             return true;
+        }
+
+        private void MakeLog(MessageLog log)
+        {
+            MessageLogs.Add(log);
+            MessageLogsView.MoveCurrentToLast();
         }
     }
 }
